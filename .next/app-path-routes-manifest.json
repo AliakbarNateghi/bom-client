@@ -1,0 +1,7 @@
+{
+  "/page": "/",
+  "/icon/route": "/icon",
+  "/user/profile/page": "/user/profile",
+  "/user/login/page": "/user/login",
+  "/user/qrcode/page": "/user/qrcode"
+}

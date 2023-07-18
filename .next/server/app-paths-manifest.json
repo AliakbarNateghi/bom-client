@@ -1,0 +1,7 @@
+{
+  "/page": "app/page.js",
+  "/icon/route": "app/icon/route.js",
+  "/user/profile/page": "app/user/profile/page.js",
+  "/user/login/page": "app/user/login/page.js",
+  "/user/qrcode/page": "app/user/qrcode/page.js"
+}

@@ -1,45 +1,72 @@
 'use client';
+
+import '@/app/globals.css'
 import Link from "next/link";
+import Image from "next/image";
 import {useSelector} from 'react-redux'
+import logo from '/public/logos/white-logo.png'
+import React, { useState } from 'react'
+import Navbar from "./navbar";
+import { FiMenu, FiX } from 'react-icons/fi';
+import Logout from '@/app/services/logout';
+
+// const Font = dynamic(() => import('../../public/fonts/digikala.ttf'));
 
 export default function Header() {
-    const user = useSelector((state) => state.user.user);
-    console.log('user', user)
-    return (
-        <header>
-            <nav>
-                <div className='flex h-10 bg-white text-black'>
-                    <ul className='w-3/12 my-auto'>
-                        <li className='mx-2'>
-                            {
-                                localStorage.getItem('user') ? <Link
-                                    className='transition ease-in-out delay-0  hover:-translate-y-1  hover:scale-100 hover:bg-violet-950 hover:text-white duration-300 p-2 rounded '
-                                    href="/user/profile">
-                                    Profile
-                                </Link> : <Link
-                                    className='transition ease-in-out delay-0  hover:-translate-y-1  hover:scale-100 hover:bg-violet-950 hover:text-white duration-300 p-2 rounded '
-                                    href="/user/login">
-                                    Login
-                                </Link>
-                            }
-                        </li>
-                    </ul>
-                    <ul className='flex justify-center flex-row w-6/12 my-auto'>
-                        <li className='mx-2'>
-                            <Link href="/orders"
-                                className='transition ease-in-out delay-0  hover:-translate-y-1  hover:scale-100 hover:bg-violet-950 hover:text-white duration-300 p-2 rounded '>Orders</Link>
-                        </li>
-                    </ul>
-                    <ul className='w-3/12 my-auto '>
-                        <li className='mx-2'>
-                            <Link className='float-right' href="/">logo</Link>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
 
-    )
+    const [isOpen, setIsOpen] = useState(false);
+
+    return (
+        <header className="bg-gray-400">
+        <nav className="flex items-center justify-between px-4 py-3">
+            <Link href="/">
+                <div className="text-white font-bold text-xl">
+                    <Image 
+                        src={logo}
+                        alt="BOM"
+                        width={64}
+                        height={64}
+                    />
+                </div>
+            </Link>
+
+            <button
+            className="text-white focus:outline-none md:hidden"
+            onClick={() => setIsOpen(!isOpen)}
+            >
+            {isOpen ? <FiX className="text-2xl" /> : <FiMenu className="text-2xl" />}
+            </button>
+
+            <ul className={`md:flex ${isOpen ? 'block' : 'hidden'}`}>
+                <li className="mt-3 md:mt-0 md:ml-4">
+                    {
+                        localStorage.getItem('user') 
+                            ? 
+                                <Link className='digikala' href="/user/profile">
+                                    پروفایل
+                                </Link> 
+                            : 
+                                <Link className='digikala' href="/user/login">
+                                    ورود
+                                </Link>
+                    }
+                </li>
+                
+                <li className="mt-3 md:mt-0 md:ml-4">
+                    {
+                        localStorage.getItem('user') 
+                        ?
+                            <Link onClick={Logout} className='digikala' href="/user/login">
+                                خروج
+                            </Link>
+                        :
+                         <div></div>
+                    }
+                </li>
+            </ul>
+        </nav>
+        </header>
+    );
 }
 
 

@@ -1,7 +1,6 @@
 {
   "/page": "app/page.js",
-  "/icon/route": "app/icon/route.js",
+  "/icon/[[...__metadata_id__]]/route": "app/icon/[[...__metadata_id__]]/route.js",
   "/user/profile/page": "app/user/profile/page.js",
-  "/user/login/page": "app/user/login/page.js",
-  "/user/qrcode/page": "app/user/qrcode/page.js"
+  "/user/login/page": "app/user/login/page.js"
 }

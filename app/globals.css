@@ -3,3 +3,22 @@
 @tailwind utilities;
 
 
+@font-face {
+    font-family: 'digikala';
+    src: url('../public/fonts/digikala.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap; /* 'swap' ensures that text is rendered using fallback fonts until custom font is loaded */
+}
+
+p {
+    font-family: 'MyFont'; 
+}
+
+body {
+    font-family: 'digikala' sans-serif;
+}
+
+.digikala {
+    font-family: 'digikala';
+}

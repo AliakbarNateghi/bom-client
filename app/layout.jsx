@@ -6,8 +6,8 @@ const inter = Inter({subsets: ['latin']})
 import {ClientLayout} from "@/components/layout/clientLayout";
 
 export const metadata = {
-    title: 'QAHVE',
-    description: 'qahve testing',
+    title: 'BOM',
+    description: 'bom testing',
 }
 
 export default function RootLayout({children}) {

@@ -29,6 +29,15 @@ class Api {
     }
   }
 
+  static async patch(resource, slug, params) {
+    try {
+      return await axios.patch(this.constructUrl(resource, slug), params);
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
+  }
+
   static async get(resource, slug, params) {
     try {
       return await axios.get(this.constructUrl(resource, slug, {

@@ -1,15 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { login } from "@/app/redux/slices/user";
-import { redirect, useRouter } from "next/navigation";
+import { useDispatch, Provider } from "react-redux";
+import { login } from "@/pages/redux/slices/user";
+// import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { errorToast } from "@/app/services/toast";
-import { store } from "@/app/redux/store";
-import { clearCookie, setCookie, getCookie } from "@/app/services/cookie";
-import "@/app/globals.css";
+import { errorToast } from "@/pages/services/toast";
+import { store } from "@/pages/redux/store";
+import { clearCookie, setCookie, getCookie } from "@/pages/services/cookie";
 
 export default function Login() {
   const [loginForm, setLoginForm] = useState({ username: "", password: "" });
@@ -28,7 +28,7 @@ export default function Login() {
       errorToast("نام کاربری یا رمز عبور نادرست");
     }
   };
-  localStorage.getItem("user") ? redirect("/") : "";
+
   return (
     <div className="bg-white ">
       <div className="  max-w-sm mx-auto mt-28 sm:mt-52">

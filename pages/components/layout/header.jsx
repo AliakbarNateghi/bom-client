@@ -1,19 +1,20 @@
 "use client";
 
-import "@/app/globals.css";
+// import "@/styles/globals.css";
 import Link from "next/link";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import logo from "/public/logos/white-logo.png";
-import React, { useState } from "react";
-import Navbar from "./navbar";
+import React, { useState, useEffect } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
-import Logout from "@/app/services/logout";
+import Logout from "@/pages/services/logout";
 
-// const Font = dynamic(() => import('../../public/fonts/digikala.ttf'));
-
-export default function Header() {
+export default function Header({ loggedin }) {
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    // This will run whenever loggedIn changes
+  }, [loggedin]);
 
   return (
     <header className="bg-gray-400 sticky top-0 z-50">
@@ -37,7 +38,7 @@ export default function Header() {
 
         <ul className={`md:flex ${isOpen ? "block" : "hidden"}`}>
           <li className="mt-3 md:mt-0 md:ml-4">
-            {localStorage.getItem("user") ? (
+            {loggedin ? (
               <Link className="digikala" href="/user/profile">
                 پروفایل
               </Link>
@@ -49,7 +50,7 @@ export default function Header() {
           </li>
 
           <li className="mt-3 md:mt-0 md:ml-4">
-            {localStorage.getItem("user") ? (
+            {loggedin ? (
               <Link onClick={Logout} className="digikala" href="/user/login">
                 خروج
               </Link>

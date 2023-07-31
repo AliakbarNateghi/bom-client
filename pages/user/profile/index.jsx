@@ -63,12 +63,14 @@ export default function Profile() {
 
   useEffect(() => {
     const localstorage = JSON.parse(localStorage.getItem("user"));
-    dispatch(userInfo(localstorage.username));
+    dispatch(userInfo(localstorage ? localstorage.username : ""));
     setUser({
-      first_name: data?.first_name || localstorage.first_name,
-      last_name: data?.last_name || localstorage.last_name,
-      email: data?.email || localstorage.email,
-      phone_number: data?.phone_number || localstorage.phone_number,
+      first_name:
+        data?.first_name || localstorage ? localstorage.first_name : "",
+      last_name: data?.last_name || localstorage ? localstorage.last_name : "",
+      email: data?.email || localstorage ? localstorage.email : "",
+      phone_number:
+        data?.phone_number || localstorage ? localstorage.phone_number : "",
     });
   }, [dispatch]);
 
@@ -131,7 +133,7 @@ export default function Profile() {
                   </tr>
                   <tr>
                     <td className="px-2 py-2 digikala">
-                      {data && data.groups.length > 0
+                      {data
                         ? data.groups.map((group) => group.name).join(", ")
                         : "شما به هیچ گروهی دسترسی ندارید"}
                     </td>

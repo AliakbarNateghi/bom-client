@@ -1,16 +1,33 @@
-export default function Home() {
+import Api from "./services/api";
+import Cookies from "universal-cookie";
+import DataTable from "./components/layout/table";
+
+export async function getServerSideProps(context) {
+  const { req } = context;
+  const cookies = new Cookies(req.headers.cookie);
+
+  Api.init(cookies);
+  const response = await Api.get("components");
+  const components = response.data;
+  console.log("components :", components);
+
+  return {
+    props: {
+      components,
+    },
+  };
+}
+
+export default function Home({ components }) {
   return (
     <div>
-      <p className="text-3xl">Home</p>
-      <p className="text-gray-300 mt-4">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto,
-      </p>
+      {/* {components && Array.isArray(components)
+        ? components.map((component) => (
+            <p key={component.id}>{component.revision}</p>
+          ))
+        : "no data"}
+      <br /> */}
+      <DataTable components={components} />
     </div>
   );
 }
-
-// export async function getServerSideProps() {
-//   const user = await getUser();
-
-//   return { props: { user } };
-// }

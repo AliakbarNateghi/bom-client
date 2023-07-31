@@ -14,18 +14,23 @@ import { clearCookie, setCookie, getCookie } from "@/pages/services/cookie";
 export default function Login() {
   const [loginForm, setLoginForm] = useState({ username: "", password: "" });
   const dispatch = useDispatch();
-  const { push } = useRouter();
-  useEffect(() => {}, [loginForm]);
+  const router = useRouter();
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    user ? router.push("/") : "";
+  }, [loginForm]);
+  // useEffect(() => {}, [loginForm]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await dispatch(login(loginForm));
       unwrapResult(res);
-      push("/");
+      router.push("/");
     } catch (err) {
-      console.log(err);
       errorToast("نام کاربری یا رمز عبور نادرست");
+      // console.log(err);
+      throw err;
     }
   };
 

@@ -43,7 +43,7 @@ export const userInfoSlice = createSlice({
       })
       .addCase(userInfo.rejected, (state, action) => {
         state.loading = "idle";
-        state.error = action.payload.error;
+        state.error = action.payload.error ? action.payload.error : "";
       });
   },
 });

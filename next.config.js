@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-    experimental: {
+  experimental: {
     serverActions: true,
   },
-  credentials: 'include',
-}
+  credentials: "include",
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

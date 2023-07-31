@@ -8,13 +8,16 @@ import logo from "/public/logos/white-logo.png";
 import React, { useState, useEffect } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import Logout from "@/pages/services/logout";
+import { useRouter } from "next/router";
 
 export default function Header({ loggedin }) {
+  // console.log("loggedin", loggedin);
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
-  useEffect(() => {
-    // This will run whenever loggedIn changes
-  }, [loggedin]);
+  // useEffect(() => {
+  //   // This will run whenever loggedIn changes
+  // }, [router]);
 
   return (
     <header className="bg-gray-400 sticky top-0 z-50">

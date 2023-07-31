@@ -6,10 +6,10 @@ import { store } from "./redux/store";
 import { useRouter } from "next/router";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
-import Login from "./user/login";
 
 export default function App({ Component, pageProps }) {
   const [loggedin, setLoggedin] = useState(false);
+  //   console.log("loggedin :", loggedin);
   const router = useRouter();
   useEffect(() => {
     const user = localStorage.getItem("user");
@@ -17,7 +17,7 @@ export default function App({ Component, pageProps }) {
     !user && router.pathname !== "user/login"
       ? router.push("/user/login")
       : setLoggedin(true);
-  }, []);
+  }, [router.pathname]);
 
   return (
     <Provider store={store}>

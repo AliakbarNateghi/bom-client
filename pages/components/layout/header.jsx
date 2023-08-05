@@ -15,9 +15,9 @@ export default function Header({ loggedin }) {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
-  // useEffect(() => {
-  //   // This will run whenever loggedIn changes
-  // }, [router]);
+  useEffect(() => {
+    // This will run whenever loggedIn changes
+  }, [router.pathname]);
 
   return (
     <header className="bg-gray-400 sticky top-0 z-50">

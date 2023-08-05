@@ -9,7 +9,7 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { errorToast } from "@/pages/services/toast";
 import { store } from "@/pages/redux/store";
-import { clearCookie, setCookie, getCookie } from "@/pages/services/cookie";
+// import { getCookie } from "@/pages/services/cookie";
 
 export default function Login() {
   const [loginForm, setLoginForm] = useState({ username: "", password: "" });
@@ -19,6 +19,7 @@ export default function Login() {
     const user = localStorage.getItem("user");
     user ? router.push("/") : "";
   }, [loginForm]);
+  
   // useEffect(() => {}, [loginForm]);
 
   const onSubmit = async (e) => {
@@ -36,7 +37,7 @@ export default function Login() {
 
   return (
     <div className="bg-white ">
-      <div className="  max-w-sm mx-auto mt-28 sm:mt-52">
+      <div className="max-w-sm mx-auto mt-28 sm:mt-52">
         <h2 className="text-center mb-5 text-xl digikala">ورود</h2>
         <hr className="w-6/12 mx-auto" />
         <form
@@ -81,7 +82,7 @@ export default function Login() {
                 }
                 type="password"
                 required
-                className=" outline-0 rounded p-1.5 w-full  border-2 border-gray-400"
+                className="outline-0 rounded p-1.5 w-full  border-2 border-gray-400"
               />
             </div>
             <div className="mt-5">

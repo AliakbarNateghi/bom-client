@@ -6,8 +6,9 @@ export const setCookie = (name, value, options) => {
   cookies().set(name, value, options);
 };
 
-export const getCookie = (name) => {
-  return cookies().get(name).value;
+export const getCookie = (name = null) => {
+  // return name ? cookies().get(name) : cookies().getAll();
+  return cookies().get(name) ? name : cookies().getAll();
 };
 
 export const clearCookie = (name) => {

@@ -32,7 +32,7 @@ const columns = [
   {
     field: "mfg_complexity_level",
     headerName: "Mfg. Complexity Level",
-    width: 130,
+    width: 260,
   },
   { field: "disassembled", headerName: "Disassembled", width: 130 },
   {
@@ -143,12 +143,11 @@ const columns = [
   // },
 ];
 
-
 export default function DataTable({ components }) {
   const rows = components;
 
   return (
-    <div style={{ height: 400, width: "100%" }}>
+    <div style={{ height: 900, width: "100%" }}>
       <DataGrid
         rows={rows}
         columns={columns}

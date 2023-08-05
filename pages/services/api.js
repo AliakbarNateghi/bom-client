@@ -9,10 +9,10 @@ class Api {
     //   "access_token"
     // )}`;
     if (typeof window !== "undefined") {
-      // We are on the server
+      // We are on the client
       // No need to set cookies or access token
     } else {
-      // We are on the client
+      // We are on the server
       axios.defaults.headers.common["Cookie"] = `access_token=${cookies.get(
         "access_token"
       )}`;

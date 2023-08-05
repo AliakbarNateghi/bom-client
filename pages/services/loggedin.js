@@ -2,7 +2,7 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useCookies } from "react-cookie";
-import { getCookie } from "./cookie";
+// import { getCookie } from "./cookie";
 import { redirect } from "next/navigation";
 
 const useAuth = () => {

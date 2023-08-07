@@ -6,7 +6,12 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import Cookies from "universal-cookie";
 import { getCookies } from "@/pages/services/cookie";
 import componentslice from "@/pages/redux/slices/componentslice";
-import { infoToast, successToast } from "@/pages/services/toast";
+import {
+  infoToast,
+  successToast,
+  errorToast,
+  warningToast,
+} from "@/pages/services/toast";
 
 const columns = [
   { field: "id", headerName: "id", width: 70, editable: false },
@@ -287,27 +292,16 @@ export default function DataTable({ components }) {
       Api.init();
       const response = await Api.patch("components", `${newRow.id}/`, newRow);
       console.log("response : ", response.data.message);
-      // if (newRow != response.data.data) {
-      //   successToast("آپدیت شد");
-      // } else {
-      //   infoToast("عدم دسترسی ادیت سلول");
-      // }
-      infoToast(response.data.message);
+      if (response.data.message === "success") {
+        successToast("آپدیت شد");
+      } else if (response.data.message === "type") {
+        errorToast("لطفا عدد وارد نمایید");
+      } else {
+        warningToast("عدم دسترسی ادیت سلول");
+      }
       console.log("newRow :", newRow);
       console.log("response.data[0] :", response.data[0]);
       return response.data.data[0];
-
-      // const res = await dispatch(
-      //   componentslice({
-      //     payload: newRow,
-      //     slug: newRow.id,
-      //   })
-      // );
-      // unwrapResult(res);
-      // // Make the HTTP request to save in the backend
-      // const response = await mutateRow(newRow);
-      // setSnackbar({ children: "User successfully saved", severity: "success" });
-      // return res;
     },
     [Api]
   );

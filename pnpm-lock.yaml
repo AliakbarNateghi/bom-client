@@ -35,6 +35,9 @@ dependencies:
   cookies:
     specifier: ^0.8.0
     version: 0.8.0
+  js-cookie:
+    specifier: ^3.0.5
+    version: 3.0.5
   js-cookies:
     specifier: ^1.0.4
     version: 1.0.4
@@ -44,6 +47,9 @@ dependencies:
   next-cookies:
     specifier: ^2.0.3
     version: 2.0.3
+  next-redux-wrapper:
+    specifier: ^8.1.0
+    version: 8.1.0(next@13.4.2)(react-redux@8.0.7)(react@18.2.0)
   nookies:
     specifier: ^2.5.2
     version: 2.5.2
@@ -1102,6 +1108,11 @@ packages:
     hasBin: true
     dev: false
 
+  /js-cookie@3.0.5:
+    resolution: {integrity: sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw==}
+    engines: {node: '>=14'}
+    dev: false
+
   /js-cookies@1.0.4:
     resolution: {integrity: sha512-cO1SHDH7zJsi8FihHmDtcWx90mWmrfGOrcLKPeaEX6tLyuTK2wnzgdmNa34Q6rNAd6VhQUgjDt5Eyl90VI/Fpg==}
     dev: false
@@ -1186,6 +1197,18 @@ packages:
     resolution: {integrity: sha512-YVCQzwZx+sz+KqLO4y9niHH9jjz6jajlEQbAKfsYVT6DOfngb/0k5l6vFK4rmpExVug96pGag8OBsdSRL9FZhQ==}
     dependencies:
       universal-cookie: 4.0.4
+    dev: false
+
+  /next-redux-wrapper@8.1.0(next@13.4.2)(react-redux@8.0.7)(react@18.2.0):
+    resolution: {integrity: sha512-2hIau0hcI6uQszOtrvAFqgc0NkZegKYhBB7ZAKiG3jk7zfuQb4E7OV9jfxViqqojh3SEHdnFfPkN9KErttUKuw==}
+    peerDependencies:
+      next: '>=9'
+      react: '*'
+      react-redux: '*'
+    dependencies:
+      next: 13.4.2(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      react-redux: 8.0.7(@reduxjs/toolkit@1.9.5)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1)
     dev: false
 
   /next@13.4.2(react-dom@18.2.0)(react@18.2.0):

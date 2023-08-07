@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { errorToast } from "@/pages/services/toast";
-import { store } from "@/pages/redux/store";
+import { store } from "@/pages/redux/store/clientStore";
 // import { getCookie } from "@/pages/services/cookie";
 
 export default function Login() {
@@ -30,7 +30,6 @@ export default function Login() {
       router.push("/");
     } catch (err) {
       errorToast("نام کاربری یا رمز عبور نادرست");
-      // console.log(err);
       throw err;
     }
   };

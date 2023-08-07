@@ -2,7 +2,7 @@
 import {toast} from "react-toastify";
 
 const options = {
-    autoClose: 5000,
+    autoClose: 3000,
     hideProgressBar: true,
     closeOnClick: true,
     pauseOnHover: true,

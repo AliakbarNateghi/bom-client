@@ -5,9 +5,6 @@ class Api {
     axios.defaults.baseURL = "http://localhost:8000/api/";
     axios.defaults.withCredentials = true;
     axios.defaults.headers.common["Accept"] = "application/json";
-    // axios.defaults.headers.common["Cookie"] = `access_token=${cookies.get(
-    //   "access_token"
-    // )}`;
     if (typeof window !== "undefined") {
       // We are on the client
       // No need to set cookies or access token
@@ -23,8 +20,16 @@ class Api {
     return `${resource}/${slug}`;
   }
 
+  static async put(resource, slug, params) {
+    try {
+      return await axios.put(this.constructUrl(resource, slug), params);
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
+  }
+
   static async get(resource, slug) {
-    // console.log("shitttttttttttttttttttttttttttttttttttttttttt");
     try {
       const response = await axios.get(this.constructUrl(resource, slug));
       console.log("response-test :", response);
@@ -38,15 +43,6 @@ class Api {
   static async post(resource, params) {
     try {
       return await axios.post(this.constructUrl(resource), params);
-    } catch (err) {
-      console.error(err);
-      throw err;
-    }
-  }
-
-  static async put(resource, slug, params) {
-    try {
-      return await axios.put(this.constructUrl(resource, slug), params);
     } catch (err) {
       console.error(err);
       throw err;

@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import Api from "@/pages/services/api";
 import { setUser } from "@/pages/services/localStorage";
+
 export const login = createAsyncThunk("login", async (payload, thunkAPI) => {
   Api.init();
   const { data } = await Api.post("login", payload);

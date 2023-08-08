@@ -3,6 +3,7 @@ import Cookies from "universal-cookie";
 import DataTable from "./components/layout/table";
 
 export async function getServerSideProps(context) {
+  console.log("context :", context);
   const { req } = context;
   const cookies = new Cookies(req.headers.cookie);
   if (!cookies.get("access_token")) {
@@ -14,7 +15,9 @@ export async function getServerSideProps(context) {
     };
   }
   Api.init(cookies);
-  const response = await Api.get("components");
+  // const page = context.query.page || context.params.page;
+  // const response = await Api.get(`components/?page=${page}`);
+  const response = await Api.get(`components`);
   const components = response.data;
   return {
     props: {

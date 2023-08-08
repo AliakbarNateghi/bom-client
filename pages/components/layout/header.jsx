@@ -22,7 +22,7 @@ export default function Header({ loggedin }) {
   return (
     <header className="bg-gray-400 sticky top-0 z-50">
       <nav className="flex items-center justify-between px-4 py-3">
-        <Link href="/">
+        <Link href="/?page=1">
           <div className="text-white font-bold text-xl">
             <Image src={logo} alt="BOM" width={64} height={64} />
           </div>

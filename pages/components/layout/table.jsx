@@ -6,12 +6,7 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import Cookies from "universal-cookie";
 import { getCookies } from "@/pages/services/cookie";
 import componentslice from "@/pages/redux/slices/componentslice";
-import {
-  infoToast,
-  successToast,
-  errorToast,
-  warningToast,
-} from "@/pages/services/toast";
+import { successToast, errorToast, warningToast } from "@/pages/services/toast";
 
 const columns = [
   { field: "id", headerName: "id", width: 70, editable: false },
@@ -261,31 +256,13 @@ export default function DataTable({ components }) {
   console.log("updatedCell-test:", updatedCell);
   const dispatch = useDispatch();
   let rows;
-  if (components) {
+  if (components.length > 0) {
     const sortedComponents = [...components];
     sortedComponents.sort((a, b) => a.id - b.id);
     rows = sortedComponents;
   } else {
     rows = components;
   }
-
-  const save = async (updatedRow, originalRow) => {
-    console.log("originalRow :", originalRow.id);
-    console.log("updatedRow :", updatedRow);
-    const payload = JSON.stringify(updatedRow);
-    try {
-      const res = await dispatch(
-        componentslice({
-          payload: payload,
-          slug: originalRow.id,
-        })
-      );
-      unwrapResult(res);
-    } catch (err) {
-      throw err;
-    }
-    return updatedRow;
-  };
 
   const saveOnServer = React.useCallback(
     async (newRow) => {
@@ -296,11 +273,12 @@ export default function DataTable({ components }) {
         successToast("آپدیت شد");
       } else if (response.data.message === "type") {
         errorToast("لطفا عدد وارد نمایید");
-      } else {
+      } else if (response.data.message === "permission") {
         warningToast("عدم دسترسی ادیت سلول");
+      } else if (response.data.message === "anyAccess") {
+        warningToast("شما دسترسی ادیت سلول های این ردیف را ندارید");
+        window.location.reload();
       }
-      console.log("newRow :", newRow);
-      console.log("response.data[0] :", response.data[0]);
       return response.data.data[0];
     },
     [Api]
@@ -311,7 +289,7 @@ export default function DataTable({ components }) {
   }, []);
 
   return (
-    <div style={{ height: 900, width: "100%" }}>
+    <div style={{ height: "100%", width: "100%" }}>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -320,7 +298,7 @@ export default function DataTable({ components }) {
             paginationModel: { page: 0, pageSize: 5 },
           },
         }}
-        pageSizeOptions={[5, 10]}
+        pageSizeOptions={[5,10, 15]}
         // checkboxSelection
         processRowUpdate={(updatedRow, originalRow) =>
           saveOnServer(updatedRow, originalRow)

@@ -32,7 +32,7 @@ class Api {
   static async get(resource, slug) {
     try {
       const response = await axios.get(this.constructUrl(resource, slug));
-      console.log("response-test :", response);
+      // console.log("response-test :", response);
       return response;
     } catch (err) {
       console.log("err-test :", err);

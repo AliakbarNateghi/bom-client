@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }) {
   const router = useRouter();
   useEffect(() => {
     const user = localStorage.getItem("user");
-    console.log("user-test:", JSON.parse(user));
+    // console.log("user-test:", JSON.parse(user));
     if (!user && router.pathname !== "user/login") {
       setLoggedin(false);
       router.push("/user/login");

@@ -6,7 +6,7 @@ export const userUpdate = createAsyncThunk(
   async (payload, thunkAPI) => {
     Api.init();
     const response = await Api.patch("user-info", payload);
-    console.log("response : ", response.data);
+    // console.log("response : ", response.data);
     return response.data;
   }
 );

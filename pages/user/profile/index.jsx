@@ -39,7 +39,7 @@ export default function Profile() {
     { label: "شماره تلفن", name: "phone_number" },
   ];
 
-  console.log("data :", data);
+  // console.log("data :", data);
   const [user, setUser] = useState({
     first_name: data?.first_name || "",
     last_name: data?.last_name || "",
@@ -47,7 +47,7 @@ export default function Profile() {
     phone_number: data?.phone_number || "",
   });
 
-  console.log("user :", user);
+  // console.log("user :", user);
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);

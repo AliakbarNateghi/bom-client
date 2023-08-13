@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 const useAuth = () => {
   useEffect(() => {
     const user = localStorage.getItem("user");
-    console.log("user-test:", JSON.parse(user));
+    // console.log("user-test:", JSON.parse(user));
     return JSON.parse(user);
   }, []);
 };

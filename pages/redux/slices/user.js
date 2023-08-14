@@ -19,7 +19,6 @@ export const userSlice = createSlice({
   extraReducers: {
     [login.fulfilled]: (state, { payload }) => {
       setUser(payload["user"]);
-      // console.log(payload["user"]);
       state.user = payload["user"];
     },
   },

@@ -11,7 +11,6 @@ import Logout from "@/pages/services/logout";
 import { useRouter } from "next/router";
 
 export default function Header({ loggedin }) {
-  // console.log("loggedin", loggedin);
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 

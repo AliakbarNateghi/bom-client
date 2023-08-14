@@ -7,7 +7,6 @@ export const userInfo = createAsyncThunk(
     Api.init();
     // const response1 = await Api.patch('user-info', payload)
     const response = await Api.get("user-info", slug);
-    // console.log("response : ", response.data);
     return response.data;
   }
 );

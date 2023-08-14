@@ -13,7 +13,14 @@ import TablePagination from "@mui/material/TablePagination";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { colors } from "@mui/material";
+import {
+  MenuItem,
+  Select,
+  colors,
+  FormControl,
+  InputLabel,
+  Input,
+} from "@mui/material";
 
 const useFakeMutation = () => {
   return React.useCallback(
@@ -31,29 +38,37 @@ const useFakeMutation = () => {
   );
 };
 
-export default function DataTable({ components }) {
+export default function PermissionTable({ permissions, groups, page, group }) {
   const [updatedCell, setUpdatedCell] = useState({});
   const [snackbar, setSnackbar] = React.useState(null);
   const mutateRow = useFakeMutation();
   const dispatch = useDispatch();
 
-  const editables = components["editables"];
-  const querysets = components["querysets"];
-  const rows = querysets;
+  const [pageNumber, setPageNumber] = useState(page);
+  const [groupName, setGroupName] = useState(group);
+  console.log("page :", pageNumber);
+  console.log("group :", groupName);
 
-  function getColor(params, field) {
-    let bool;
-    for (let i = 0; i < querysets.length; i++) {
-      if (querysets[i].id === params.id) {
-        bool = editables[i][`${field}`];
-      }
+  //   const [editables, setEditables] = useState(permissions);
+  const editables = permissions;
+  console.log("editables :", editables);
+
+  function getValue(params, field) {
+    if (params.row[`${field}`] === undefined) {
+      return null;
+    } else if (params.row[`${field}`] === true) {
+      return (
+        <div className="item-center" style={{ color: "green" }}>
+          {params.formattedValue}
+        </div>
+      );
+    } else if (params.row[`${field}`] === false) {
+      return (
+        <div className="item-center" style={{ color: "red" }}>
+          {params.formattedValue}
+        </div>
+      );
     }
-    const cellColor = bool ? "green" : "red";
-    return (
-      <div className="item-center" style={{ color: cellColor }}>
-        {params.value}
-      </div>
-    );
   }
 
   const columns = [
@@ -67,171 +82,190 @@ export default function DataTable({ components }) {
       field: "revision",
       headerName: "REVISION",
       width: 130,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "revision");
+        return getValue(params, "revision");
       },
     },
     {
       field: "ID",
       headerName: "ID",
       width: 130,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "ID");
+        return getValue(params, "ID");
       },
     },
     {
       field: "P_on_N_status_code",
       headerName: "P/N Status Code",
       width: 130,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "P_on_N_status_code");
+        return getValue(params, "P_on_N_status_code");
       },
     },
     {
       field: "fig_no",
       headerName: "Fig. No.",
       width: 130,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "fig_no");
+        return getValue(params, "fig_no");
       },
     },
     {
       field: "item_no",
       headerName: "Item No.",
       width: 130,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "item_no");
+        return getValue(params, "item_no");
       },
     },
     {
       field: "module",
       headerName: "Module",
       width: 130,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "module");
+        return getValue(params, "module");
       },
     },
     {
       field: "level",
       headerName: "Level",
       width: 130,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "level");
+        return getValue(params, "level");
       },
     },
     {
       field: "code",
       headerName: "Code",
       width: 130,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "code");
+        return getValue(params, "code");
       },
     },
     {
       field: "parent_code",
       headerName: "Parent Code",
       width: 130,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "parent_code");
+        return getValue(params, "parent_code");
       },
     },
     {
       field: "part_number",
       headerName: "Part Number",
       width: 130,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "part_number");
+        return getValue(params, "part_number");
       },
     },
     {
       field: "description",
       headerName: "Description",
       width: 130,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "description");
+        return getValue(params, "description");
       },
     },
     {
       field: "comment",
       headerName: "Comment",
       width: 220,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "comment");
+        return getValue(params, "comment");
       },
     },
     {
       field: "sap_name",
       headerName: "SAP NAME",
       width: 130,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "sap_name");
+        return getValue(params, "sap_name");
       },
     },
     {
       field: "unit_per_assy",
       headerName: "Units Per Assy",
       width: 130,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "unit_per_assy");
+        return getValue(params, "unit_per_assy");
       },
     },
     {
       field: "unit_per_end_item",
       headerName: "Units Per End Item",
       width: 150,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "unit_per_end_item");
+        return getValue(params, "unit_per_end_item");
       },
     },
     {
       field: "corrected_units_per_end_item",
       headerName: "Corrected Units Per End Item",
       width: 220,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "corrected_units_per_end_item");
+        return getValue(params, "corrected_units_per_end_item");
       },
     },
     {
       field: "gg_qty",
       headerName: "GG QTY",
       width: 130,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "gg_qty");
+        return getValue(params, "gg_qty");
       },
     },
     {
       field: "srp",
       headerName: "SRP",
       width: 130,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "srp");
+        return getValue(params, "srp");
       },
     },
     {
       field: "store_comment",
       headerName: "Store Comment",
       width: 130,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "store_comment");
+        return getValue(params, "store_comment");
       },
     },
     {
@@ -240,9 +274,9 @@ export default function DataTable({ components }) {
       width: 130,
       type: "boolean",
       editable: true,
-      // renderCell: (params) => {
-      //   return getColor(params, "assembly");
-      // },
+      renderCell: (params) => {
+        return getValue(params, "assembly");
+      },
     },
     {
       field: "standard_part",
@@ -250,170 +284,188 @@ export default function DataTable({ components }) {
       width: 130,
       type: "boolean",
       editable: true,
-      // renderCell: (params) => {
-      //   return getColor(params, "standard_part");
-      // },
+      renderCell: (params) => {
+        return getValue(params, "standard_part");
+      },
     },
     {
       field: "material",
       headerName: "Material",
       width: 130,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "material");
+        return getValue(params, "material");
       },
     },
     {
       field: "mfg_complexity_level",
       headerName: "Mfg. Complexity Level",
       width: 220,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "mfg_complexity_level");
+        return getValue(params, "mfg_complexity_level");
       },
     },
     {
       field: "disassembled",
       headerName: "Disassembled",
       width: 130,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "disassembled");
+        return getValue(params, "disassembled");
       },
     },
     {
       field: "supplying_or_manufacturing",
       headerName: "Supplying / Manufacturing ",
       width: 220,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "supplying_or_manufacturing");
+        return getValue(params, "supplying_or_manufacturing");
       },
     },
     {
       field: "internal_or_external_outsourcing",
       headerName: "Internal / External outsourcing",
       width: 220,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "internal_or_external_outsourcing");
+        return getValue(params, "internal_or_external_outsourcing");
       },
     },
     {
       field: "vendor",
       headerName: "Vendor",
       width: 130,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "vendor");
+        return getValue(params, "vendor");
       },
     },
     {
       field: "joining",
       headerName: "Joining",
       width: 130,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "joining");
+        return getValue(params, "joining");
       },
     },
     {
       field: "manufacturing_process",
       headerName: "Manufacturing Process",
       width: 220,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "manufacturing_process");
+        return getValue(params, "manufacturing_process");
       },
     },
     {
       field: "raw_material_form",
       headerName: "Raw Material Form",
       width: 150,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "raw_material_form");
+        return getValue(params, "raw_material_form");
       },
     },
     {
       field: "function",
       headerName: "Function",
       width: 130,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "function");
+        return getValue(params, "function");
       },
     },
     {
       field: "qc_criteria",
       headerName: "QC Criteria",
       width: 130,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "qc_criteria");
+        return getValue(params, "qc_criteria");
       },
     },
     {
       field: "manufacturing_priority",
       headerName: "Manufacturing Priority ",
       width: 180,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "manufacturing_priority");
+        return getValue(params, "manufacturing_priority");
       },
     },
     {
       field: "manufacturing_responsible_department",
       headerName: "Manufacturing Responsible Department",
       width: 300,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "manufacturing_responsible_department");
+        return getValue(params, "manufacturing_responsible_department");
       },
     },
     {
       field: "designing_responsible_department",
       headerName: "Designing Responsible Department",
       width: 300,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "designing_responsible_department");
+        return getValue(params, "designing_responsible_department");
       },
     },
     {
       field: "usage_on_other_engines",
       headerName: "USAGE ON OTHER ENGINES",
       width: 220,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "usage_on_other_engines");
+        return getValue(params, "usage_on_other_engines");
       },
     },
     {
       field: "manufacturing_parts_category",
       headerName: "MANUFACTURING PARTS Category",
       width: 280,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "manufacturing_parts_category");
+        return getValue(params, "manufacturing_parts_category");
       },
     },
     {
       field: "scope_matrix_category",
       headerName: "Scope Matrix Category",
       width: 220,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "scope_matrix_category");
+        return getValue(params, "scope_matrix_category");
       },
     },
     {
       field: "requires_manufacturing_or_supplying_for_reassembly",
       headerName: "Requires Manufacturing/Supplying For Re-Assembly",
       width: 360,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(
+        return getValue(
           params,
           "requires_manufacturing_or_supplying_for_reassembly"
         );
@@ -423,45 +475,50 @@ export default function DataTable({ components }) {
       field: "system_D_requirements",
       headerName: "System D. Requirement",
       width: 200,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "system_D_requirements");
+        return getValue(params, "system_D_requirements");
       },
     },
     {
       field: "percurment_state",
       headerName: "PERCURMENT STATE",
       width: 200,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "percurment_state");
+        return getValue(params, "percurment_state");
       },
     },
     {
       field: "details",
       headerName: "DETAILS",
       width: 130,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "details");
+        return getValue(params, "details");
       },
     },
     {
       field: "joint_type",
       headerName: "Joint Type",
       width: 130,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "joint_type");
+        return getValue(params, "joint_type");
       },
     },
     {
       field: "discarded_during_disassembly",
       headerName: "DISCARDED DURING DISSASSEMBLY",
       width: 300,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "discarded_during_disassembly");
+        return getValue(params, "discarded_during_disassembly");
       },
     },
     {
@@ -470,77 +527,90 @@ export default function DataTable({ components }) {
       width: 130,
       type: "boolean",
       editable: true,
-      // renderCell: (params) => {
-      //   return getColor(params, "expendables");
-      // },
+      renderCell: (params) => {
+        return getValue(params, "expendables");
+      },
     },
     {
       field: "discarded_or_unusable_according_to_docs",
       headerName: "Discarded/Unusable According To Docs",
       width: 300,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "discarded_or_unusable_according_to_docs");
+        return getValue(params, "discarded_or_unusable_according_to_docs");
       },
     },
     {
       field: "destroyed_for_analysis",
       headerName: "Destroyed For Analysis",
       width: 220,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "destroyed_for_analysis");
+        return getValue(params, "destroyed_for_analysis");
       },
     },
     {
       field: "rejected_by_qc_or_inspection",
       headerName: "Rejected by QC/Inspection",
       width: 220,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "rejected_by_qc_or_inspection");
+        return getValue(params, "rejected_by_qc_or_inspection");
       },
     },
     {
       field: "class_size_or_weight_as_required",
       headerName: "Class Size/Weight As Required",
       width: 220,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "class_size_or_weight_as_required");
+        return getValue(params, "class_size_or_weight_as_required");
       },
     },
     {
       field: "EBOM",
       headerName: "EBOM",
       width: 130,
+      type: "boolean",
       editable: true,
       renderCell: (params) => {
-        return getColor(params, "EBOM");
+        return getValue(params, "EBOM");
       },
     },
   ];
 
-  const saveOnServer = React.useCallback(
-    async (newRow) => {
-      Api.init();
-      const response = await Api.patch("components", `${newRow.id}/`, newRow);
-      if (response.data.message === "success") {
-        successToast("آپدیت شد");
-      } else if (response.data.message === "type") {
-        errorToast("لطفا عدد وارد نمایید");
-      } else if (response.data.message === "permission") {
-        warningToast("عدم دسترسی ادیت سلول");
-      } else if (response.data.message === "anyAccess") {
-        warningToast("شما دسترسی ادیت سلول های این ردیف را ندارید");
-        window.location.reload();
+  function findDifferentKey(obj1, obj2) {
+    for (let key in obj1) {
+      if (obj1.hasOwnProperty(key) && obj2.hasOwnProperty(key)) {
+        if (obj1[key] !== obj2[key]) {
+          return key;
+        }
       }
+    }
+    return null;
+  }
+
+  const saveOnServer = React.useCallback(
+    async (updatedRow, originalRow) => {
+      Api.init();
+      const diff_key = findDifferentKey(updatedRow, originalRow);
+      const updatedObj = {
+        [diff_key]: updatedRow[diff_key],
+      };
+      const response = await Api.put(
+        "field-permission",
+        `${updatedRow.id}/`,
+        updatedObj
+      );
+      console.log("response : ", response);
       return response.data.data[0];
     },
     [Api]
   );
-
-  const [page, setPage] = useState(1);
 
   const handleProcessRowUpdateError = React.useCallback((error) => {
     setSnackbar({ children: error.message, severity: "error" });
@@ -549,23 +619,28 @@ export default function DataTable({ components }) {
   const [textFieldValue, setTextFieldValue] = useState("");
 
   const handleTextFieldChange = (event) => {
+    // console.log("test:", event);
     setTextFieldValue(event.target.value);
-  };
-
-  const handleInputClick = (e) => {
-    const newPage = setPage(e); // calculate the new page value
-    window.history.pushState(null, "", `?page=${e}`);
-    window.location.reload();
   };
 
   const getCellClassName = (e) => {
     return "item-center";
   };
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    window.history.pushState(
+      null,
+      "",
+      `?page=${pageNumber}&group=${groupName}`
+    );
+    window.location.reload();
+  };
+
   return (
     <div style={{ height: "100%", width: "100%" }}>
       <DataGrid
-        rows={rows}
+        rows={editables}
         columns={columns}
         processRowUpdate={(updatedRow, originalRow) =>
           saveOnServer(updatedRow, originalRow)
@@ -580,23 +655,95 @@ export default function DataTable({ components }) {
       <br />
 
       <div className="flex items-center">
-        {/* <Pagination count={1001} shape="rounded" onClick={onInput} /> */}
-        {/* <Button variant="contained">1</Button> */}
-        <TextField
-          id="outlined-number"
-          label="page"
-          type="number"
-          size="small"
-          value={textFieldValue}
-          onChange={handleTextFieldChange}
-        />
-        <Button
-          variant="outlined"
-          onClick={() => handleInputClick(textFieldValue)}
-        >
-          search
-        </Button>
-        {/* <Button variant="contained">{length}</Button> */}
+        <form className="w-full max-w-lg" onSubmit={onSubmit}>
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+              <label
+                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                htmlFor="grid-group"
+              >
+                Group
+              </label>
+              <div className="relative">
+                <select
+                  className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:bg-white focus:border-gray-500"
+                  id="grid-group"
+                  onChange={(e) => {
+                    setGroupName(e.target.value);
+                  }}
+                  value={groupName}
+                >
+                  {groups.map((group) => (
+                    <option key={group.id} value={group.name}>
+                      {group.name}
+                    </option>
+                  ))}
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"></div>
+              </div>
+            </div>
+
+            <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+              <label
+                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                htmlFor="grid-page"
+              >
+                Page
+              </label>
+              <input
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:bg-white focus:border-gray-500"
+                id="grid-page"
+                type="number"
+                placeholder={pageNumber}
+                value={pageNumber}
+                onChange={(e) => setPageNumber(e.target.value)}
+              />
+            </div>
+
+            <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+              <br />
+              <button
+                className="appearance-none block w-full bg-gray-400 text-gray-800 border border-gray-400 rounded py-3 px-4 leading-tight focus:bg-white focus:border-gray-500"
+                type="submit"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </form>
+
+        {/* <FormControl className="flex items-center">
+          <TextField
+            className="mr-1"
+            id="outlined-number"
+            label="page"
+            type="number"
+            value={textFieldValue}
+            onChange={handleTextFieldChange}
+          />
+          <InputLabel id="page-label">Page</InputLabel>
+          <Input labelId="page-label" />
+          <InputLabel id="group-select-label">Groups</InputLabel>
+          <Select
+            labelId="group-select-label"
+            id="group-select"
+            value={groupName}
+            label="groups"
+            onChange={handleChange}
+          >
+            {groups.map((group) => (
+              <MenuItem value={group}>{group.name}</MenuItem>
+            ))}
+          </Select>
+          <Button
+            className="mr-5"
+            variant="outlined"
+            size="large"
+            onClick={() => handleInputClick(textFieldValue)}
+          >
+            search
+          </Button>
+        </FormControl> */}
       </div>
     </div>
   );

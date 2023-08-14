@@ -4,10 +4,8 @@ import Api from "@/pages/services/api";
 export const componentslice = createAsyncThunk(
   "saveOnServer",
   async ({ payload, slug }, thunkAPI) => {
-    // console.log("okkk");
     Api.init();
     const response = await Api.patch("components", slug, payload);
-    // console.log("response : ", response.data);
     return response.data;
   }
 );

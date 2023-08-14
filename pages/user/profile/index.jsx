@@ -39,15 +39,12 @@ export default function Profile() {
     { label: "شماره تلفن", name: "phone_number" },
   ];
 
-  // console.log("data :", data);
   const [user, setUser] = useState({
     first_name: data?.first_name || "",
     last_name: data?.last_name || "",
     email: data?.email || "",
     phone_number: data?.phone_number || "",
   });
-
-  // console.log("user :", user);
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -81,7 +78,6 @@ export default function Profile() {
       unwrapResult(res);
       push("/user/profile");
     } catch (err) {
-      console.log(err);
       errorToast("خطای سامانه");
     }
   };

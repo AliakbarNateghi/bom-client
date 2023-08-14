@@ -6,9 +6,7 @@ import { parseCookies } from "nookies";
 import cookie from 'js-cookie';
 
 export function getCookies(name) {
-  // console.log("access_token :", cookie.get('access_token'));
   const cookies = parseCookies();
-  // console.log("cookies :", cookies);
   if (name) {
     return cookies[name] || null;
   }

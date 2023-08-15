@@ -1,12 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import Api from "@/pages/services/api";
 import { setUser } from "@/pages/services/localStorage";
+
 export const userInfo = createAsyncThunk(
   "user-info",
   async (slug, thunkAPI) => {
     Api.init();
-    // const response1 = await Api.patch('user-info', payload)
     const response = await Api.get("user-info", slug);
+    // thunkAPI.dispatch(setUser(response.data));
     return response.data;
   }
 );
@@ -17,14 +18,7 @@ const initialState = {
 
 export const userInfoSlice = createSlice({
   name: "userinfo",
-  initialState: {
-    // phoneNumber: localStorage.getItem("user").phone_number
-    //   ? localStorage.getItem("user").phone_number
-    //   : "",
-    // email: localStorage.getItem("user").email
-    //   ? localStorage.getItem("user").email
-    //   : "",
-  },
+  initialState: initialState,
   reducers: {
     setUser: (state, action) => {
       state.data = action.payload;
@@ -42,7 +36,8 @@ export const userInfoSlice = createSlice({
       })
       .addCase(userInfo.rejected, (state, action) => {
         state.loading = "idle";
-        state.error = action.payload && action.payload.error ? action.payload.error : "";
+        state.error =
+          action.payload && action.payload.error ? action.payload.error : "";
       });
   },
 });

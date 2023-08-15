@@ -1,6 +1,6 @@
 import { DataGrid, GridRow } from "@mui/x-data-grid";
 import Api from "@/pages/services/api";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, Provider } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import Cookies from "universal-cookie";
@@ -521,7 +521,7 @@ export default function DataTable({ components }) {
     },
   ];
 
-  const saveOnServer = React.useCallback(
+  const saveOnServer = useCallback(
     async (newRow) => {
       Api.init();
       const response = await Api.patch("components", `${newRow.id}/`, newRow);

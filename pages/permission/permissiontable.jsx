@@ -46,12 +46,8 @@ export default function PermissionTable({ permissions, groups, page, group }) {
 
   const [pageNumber, setPageNumber] = useState(page);
   const [groupName, setGroupName] = useState(group);
-  console.log("page :", pageNumber);
-  console.log("group :", groupName);
 
-  //   const [editables, setEditables] = useState(permissions);
   const editables = permissions;
-  console.log("editables :", editables);
 
   function getValue(params, field) {
     if (params.row[`${field}`] === undefined) {
@@ -606,7 +602,6 @@ export default function PermissionTable({ permissions, groups, page, group }) {
         `${updatedRow.id}/`,
         updatedObj
       );
-      console.log("response : ", response);
       return response.data.data[0];
     },
     [Api]
@@ -619,7 +614,6 @@ export default function PermissionTable({ permissions, groups, page, group }) {
   const [textFieldValue, setTextFieldValue] = useState("");
 
   const handleTextFieldChange = (event) => {
-    // console.log("test:", event);
     setTextFieldValue(event.target.value);
   };
 

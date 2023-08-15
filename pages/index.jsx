@@ -3,7 +3,6 @@ import Cookies from "universal-cookie";
 import DataTable from "./components/layout/table";
 
 export async function getServerSideProps(context) {
-  // console.log("context :", context);
   const { req } = context;
   const cookies = new Cookies(req.headers.cookie);
   if (!cookies.get("access_token")) {

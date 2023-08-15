@@ -17,14 +17,10 @@ export async function getServerSideProps(context) {
   Api.init(cookies);
   const page = context.query.page || context.params?.page;
   const group = context.query.group || context.params?.group;
-  console.log("page :", page);
-  console.log("group :", group);
-  //   const response = await Api.get(`components/?page=${page}`);
   const response = await Api.get(
     `field-permission/?page=${page}&group=${group}`
   );
   const permissions = response.data;
-  console.log("permissions :", permissions);
   const groupsResponse = await Api.get(`groups`);
   const groups = groupsResponse.data;
   return {

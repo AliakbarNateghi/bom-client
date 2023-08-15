@@ -1,7 +1,10 @@
 import Api from "./api";
+import { clearCookie } from "./cookie";
 
-export default function Logout() {
+export default async function Logout() {
   window.localStorage.removeItem("user");
   Api.init();
-  Api.post("logout");
+  await Api.post("logout");
+  // clearCookie("access_token");
+  // clearCookie("refresh_token");
 }

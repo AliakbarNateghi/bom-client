@@ -3,7 +3,8 @@
 // import "@/styles/globals.css";
 import Link from "next/link";
 import Image from "next/image";
-import { useSelector } from "react-redux";
+import { userInfo } from "@/pages/redux/slices/userinfo";
+import { useSelector, useDispatch } from "react-redux";
 import logo from "/public/logos/white-logo.png";
 import React, { useState, useEffect } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
@@ -13,11 +14,23 @@ import { useRouter } from "next/router";
 export default function Header({ loggedin }) {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+  const dispatch = useDispatch();
+  const push = useRouter();
+  const { data, loading, error } = useSelector((state) => state.userInfo);
+
+  const userGroups = [];
+  for (let i = 0; i < data?.groups?.length; i++) {
+    userGroups.push(data.groups[i].name);
+  }
+  console.log("userGroups :", userGroups);
 
   useEffect(() => {
+    const localstorage = JSON.parse(localStorage.getItem("user"));
+    dispatch(userInfo(localstorage ? localstorage.username : ""));
     // This will run whenever loggedIn changes
   }, [router.pathname]);
 
+  
   return (
     <header className="bg-gray-400 sticky top-0 z-50">
       <nav className="flex items-center justify-between px-4 py-3">
@@ -40,25 +53,27 @@ export default function Header({ loggedin }) {
 
         <ul className={`md:flex ${isOpen ? "block" : "hidden"}`}>
           <li className="mt-3 md:mt-0 md:ml-4">
-            {loggedin ? (
-              <Link className="digikala" href="/user/profile">
-                پروفایل
-              </Link>
-            ) : (
-              <Link className="digikala" href="/user/login">
-                ورود
-              </Link>
-            )}
+            {userGroups.map((group) => {
+              return group == "god" ? (
+                <Link className="digikala" href="/permission?page=1&group=god">
+                  دسترسی
+                </Link>
+              ) : (
+                <div></div>
+              );
+            })}
           </li>
 
           <li className="mt-3 md:mt-0 md:ml-4">
-            {loggedin ? (
-              <Link onClick={Logout} className="digikala" href="/user/login">
-                خروج
-              </Link>
-            ) : (
-              <div></div>
-            )}
+            <Link className="digikala" href="/user/profile">
+              پروفایل
+            </Link>
+          </li>
+
+          <li className="mt-3 md:mt-0 md:ml-4">
+            <Link onClick={Logout} className="digikala" href="/user/login">
+              خروج
+            </Link>
           </li>
         </ul>
       </nav>

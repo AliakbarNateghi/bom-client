@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Logout from "./services/logout";
 
 export default function App({ Component, pageProps }) {
   const [loggedin, setLoggedin] = useState(false);
@@ -18,6 +19,7 @@ export default function App({ Component, pageProps }) {
     // console.log("user-test:", JSON.parse(user));
     if (!user && router.pathname !== "user/login") {
       setLoggedin(false);
+      // Logout()
       router.push("/user/login");
     } else {
       setLoggedin(true);

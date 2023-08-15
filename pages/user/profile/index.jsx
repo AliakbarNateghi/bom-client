@@ -1,7 +1,6 @@
 "use client";
 
 import { useDispatch, useSelector, Provider } from "react-redux";
-// import { userinfo } from "@/pages/redux/slices/userinfo";
 import { userInfo } from "@/pages/redux/slices/userinfo";
 import userupdate from "@/pages/redux/slices/userupdate";
 import { unwrapResult } from "@reduxjs/toolkit";

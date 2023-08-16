@@ -46,7 +46,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
   const [groupID, setgroupID] = useState(group);
 
   const rows = [];
-  for (let i = 15; i > -1; i--) {
+  for (let i = 15; i > 0; i--) {
     rows.push({
       id: page * 15 - i + 1,
       revision: null,
@@ -672,10 +672,6 @@ export default function PermissionTable({ permissions, groups, page, group }) {
   }, []);
 
   const [textFieldValue, setTextFieldValue] = useState("");
-
-  const handleTextFieldChange = (event) => {
-    setTextFieldValue(event.target.value);
-  };
 
   const getCellClassName = (e) => {
     return "item-center";

@@ -17,17 +17,20 @@ export async function getServerSideProps(context) {
   const page = context.query.page || context.params?.page
   const response = await Api.get(`components/?page=${page}`);
   const components = response.data;
+  const responsecols = await Api.get(`hidden-columns`);
+  const hiddencols = responsecols.data;
   return {
     props: {
       components,
+      hiddencols,
     },
   };
 }
 
-export default function Home({ components }) {
+export default function Home({ components, hiddencols }) {
   return (
     <div>
-      <DataTable components={components} />
+      <DataTable components={components} hiddencols={hiddencols[0]} />
     </div>
   );
 }

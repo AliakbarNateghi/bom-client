@@ -1,7 +1,8 @@
 import { DataGrid, GridRow } from "@mui/x-data-grid";
 import Api from "@/pages/services/api";
 import React, { useState, useEffect, useCallback } from "react";
-import { useDispatch, Provider } from "react-redux";
+import { useDispatch, Provider, useSelector } from "react-redux";
+import { userInfo } from "@/pages/redux/slices/userinfo";
 import { unwrapResult } from "@reduxjs/toolkit";
 import Cookies from "universal-cookie";
 import { getCookies } from "@/pages/services/cookie";
@@ -31,11 +32,17 @@ const useFakeMutation = () => {
   );
 };
 
-export default function DataTable({ components }) {
+export default function DataTable({ components, hiddencols }) {
   const [updatedCell, setUpdatedCell] = useState({});
   const [snackbar, setSnackbar] = useState(null);
   const mutateRow = useFakeMutation();
   const dispatch = useDispatch();
+  const { data, loading, error } = useSelector((state) => state.userInfo);
+
+  useEffect(() => {
+    const localstorage = JSON.parse(localStorage.getItem("user"));
+    dispatch(userInfo(localstorage ? localstorage.username : ""));
+  }, [dispatch]);
 
   const editables = components["editables"];
   const querysets = components["querysets"];
@@ -562,6 +569,18 @@ export default function DataTable({ components }) {
     return "item-center";
   };
 
+  const columnVisibility = async (e) => {
+    if (e && e.preventDefault) {
+      e.preventDefault();
+    }
+    const payload = {
+      hidden_cols: e,
+    };
+    Api.init();
+    const response = await Api.post(`hidden-columns`, payload);
+    return response.data;
+  };
+
   return (
     <div style={{ height: "100%", width: "100%" }}>
       <DataGrid
@@ -576,6 +595,12 @@ export default function DataTable({ components }) {
         showColumnVerticalBorder
         getCellClassName={getCellClassName}
         autoHeight
+        onColumnVisibilityModelChange={columnVisibility}
+        initialState={{
+          columns: {
+            columnVisibilityModel: hiddencols["hidden_cols"],
+          },
+        }}
       />
       <br />
 

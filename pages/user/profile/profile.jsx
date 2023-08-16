@@ -10,7 +10,7 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import { redirect, useRouter } from "next/navigation";
 import Loggedin from "@/pages/services/loggedin";
 import React, { useState, useEffect, useCallback } from "react";
-import { errorToast } from "@/pages/services/toast";
+import { errorToast, successToast, warningToast } from "@/pages/services/toast";
 import { Modal, Button, Box, Typography } from "@mui/material";
 import Api from "@/pages/services/api";
 
@@ -27,11 +27,6 @@ const style = {
 };
 
 export default function Profile({ user }) {
-  // if (typeof window === "undefined") {
-  //   useRouter("/user/login");
-  // }
-  console.log("user :", user);
-
   const [userName, setUserName] = useState();
   const [groups, setGroups] = useState();
   const [firstName, setFirstName] = useState();
@@ -64,26 +59,56 @@ export default function Profile({ user }) {
 
   const onSubmit = useCallback(
     async (e) => {
+      console.log("e :", e);
       e.preventDefault();
       Api.init();
       const response = await Api.put(`user-info`, `${userName}/`, payload);
-      setUserName(response.data.username);
-      setGroups(response.data.groups);
-      setFirstName(response.data.first_name);
-      setLastName(response.data.last_name);
-      setEmail(response.data.email);
-      setPhoneNumber(response.data.phone_number);
       setOpen(false);
       return response.data;
     },
     [Api, payload]
   );
 
+  const passPayload = {
+    old_password: currentPass,
+    new_password: firstNewPass,
+    confirm_password: secondNewPass,
+  };
+
   const onChangePass = useCallback(
     async (e) => {
       e.preventDefault();
+      Api.init();
+      if (firstNewPass !== secondNewPass) {
+        return warningToast("رمز ها تطابق ندارند");
+      }
+      try {
+        const response = await Api.post(
+          `user-info/${userName}/change_password`,
+          passPayload
+        );
+        console.log("message :", response.data.error);
+        if (response.data.message == "success") {
+          successToast("رمز عبور با موفقیت تغییر کرد");
+        } else errorToast("خطای سیستم");
+        setShowPass(false);
+        setPassModal(false);
+        setCurrentPass("");
+        setFirstNewPass("");
+        setSecondNewPass("");
+        return response.data;
+      } catch (err) {
+        const errorMsg = err.response.data["error"];
+        if (errorMsg == "Invalid old pass") {
+          warningToast("رمز عبور فعلی نادرست است");
+        } else if (errorMsg == "not match") {
+          warningToast("رمز ها تطابق ندارند");
+        } else if (errorMsg == "wrong") {
+          errorToast("رمز های عبور خود را بازبینی کنید");
+        }
+      }
     },
-    [Api]
+    [Api, passPayload]
   );
 
   return (

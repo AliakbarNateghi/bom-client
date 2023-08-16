@@ -24,9 +24,6 @@ class Api {
   }
 
   static async put(resource, slug, params) {
-    console.log("resource :", resource);
-    console.log("slug :", slug);
-    console.log("params :", params);
     try {
       return await axios.put(this.constructUrl(resource, slug), params);
     } catch (err) {

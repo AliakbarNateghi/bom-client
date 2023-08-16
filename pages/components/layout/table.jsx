@@ -33,7 +33,7 @@ const useFakeMutation = () => {
 
 export default function DataTable({ components }) {
   const [updatedCell, setUpdatedCell] = useState({});
-  const [snackbar, setSnackbar] = React.useState(null);
+  const [snackbar, setSnackbar] = useState(null);
   const mutateRow = useFakeMutation();
   const dispatch = useDispatch();
 
@@ -542,7 +542,7 @@ export default function DataTable({ components }) {
 
   const [page, setPage] = useState(1);
 
-  const handleProcessRowUpdateError = React.useCallback((error) => {
+  const handleProcessRowUpdateError = useCallback((error) => {
     setSnackbar({ children: error.message, severity: "error" });
   }, []);
 
@@ -580,8 +580,6 @@ export default function DataTable({ components }) {
       <br />
 
       <div className="flex items-center">
-        {/* <Pagination count={1001} shape="rounded" onClick={onInput} /> */}
-        {/* <Button variant="contained">1</Button> */}
         <TextField
           id="outlined-number"
           label="page"
@@ -596,7 +594,6 @@ export default function DataTable({ components }) {
         >
           search
         </Button>
-        {/* <Button variant="contained">{length}</Button> */}
       </div>
     </div>
   );

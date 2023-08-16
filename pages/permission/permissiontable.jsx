@@ -1,6 +1,6 @@
 import { DataGrid, GridRow } from "@mui/x-data-grid";
 import Api from "@/pages/services/api";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, Provider } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import Cookies from "universal-cookie";
@@ -23,7 +23,7 @@ import {
 } from "@mui/material";
 
 const useFakeMutation = () => {
-  return React.useCallback(
+  return useCallback(
     (user) =>
       new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -40,19 +40,76 @@ const useFakeMutation = () => {
 
 export default function PermissionTable({ permissions, groups, page, group }) {
   const [updatedCell, setUpdatedCell] = useState({});
-  const [snackbar, setSnackbar] = React.useState(null);
-  const mutateRow = useFakeMutation();
-  const dispatch = useDispatch();
+  const [snackbar, setSnackbar] = useState(null);
 
   const [pageNumber, setPageNumber] = useState(page);
-  const [groupName, setGroupName] = useState(group);
+  const [groupID, setgroupID] = useState(group);
+
+  const rows = [];
+  for (let i = 15; i > -1; i--) {
+    rows.push({
+      id: page * 15 - i + 1,
+      revision: null,
+      ID: null,
+      P_on_N_status_code: null,
+      fig_no: null,
+      item_no: null,
+      module: null,
+      level: null,
+      code: null,
+      parent_code: null,
+      part_number: null,
+      description: null,
+      comment: null,
+      sap_name: null,
+      unit_per_assy: null,
+      unit_per_end_item: null,
+      corrected_units_per_end_item: null,
+      gg_qty: null,
+      srp: null,
+      store_comment: null,
+      assembly: null,
+      standard_part: null,
+      material: null,
+      mfg_complexity_level: null,
+      disassembled: null,
+      supplying_or_manufacturing: null,
+      internal_or_external_outsourcing: null,
+      vendor: null,
+      joining: null,
+      manufacturing_process: null,
+      raw_material_form: null,
+      function: null,
+      qc_criteria: null,
+      manufacturing_priority: null,
+      manufacturing_responsible_department: null,
+      designing_responsible_department: null,
+      usage_on_other_engines: null,
+      manufacturing_parts_category: null,
+      scope_matrix_category: null,
+      requires_manufacturing_or_supplying_for_reassembly: null,
+      system_D_requirements: null,
+      percurment_state: null,
+      details: null,
+      joint_type: null,
+      discarded_during_disassembly: null,
+      expendables: null,
+      discarded_or_unusable_according_to_docs: null,
+      destroyed_for_analysis: null,
+      rejected_by_qc_or_inspection: null,
+      class_size_or_weight_as_required: null,
+      EBOM: null,
+    });
+  }
 
   const editables = permissions;
+  const merged = rows.map((o1) => {
+    const o2 = editables.find((o2) => o2.id === o1.id);
+    return o2 ? { ...o1, ...o2 } : o1;
+  });
 
   function getValue(params, field) {
-    if (params.row[`${field}`] === undefined) {
-      return null;
-    } else if (params.row[`${field}`] === true) {
+    if (params.row[`${field}`] === true) {
       return (
         <div className="item-center" style={{ color: "green" }}>
           {params.formattedValue}
@@ -64,6 +121,8 @@ export default function PermissionTable({ permissions, groups, page, group }) {
           {params.formattedValue}
         </div>
       );
+    } else {
+      return null;
     }
   }
 
@@ -585,24 +644,25 @@ export default function PermissionTable({ permissions, groups, page, group }) {
         if (obj1[key] !== obj2[key]) {
           return key;
         }
+      } else if (obj1.hasOwnProperty(key) && !obj2.hasOwnProperty(key)) {
+        return key;
       }
     }
     return null;
   }
 
-  const saveOnServer = React.useCallback(
+  const saveOnServer = useCallback(
     async (updatedRow, originalRow) => {
       Api.init();
       const diff_key = findDifferentKey(updatedRow, originalRow);
-      const updatedObj = {
-        [diff_key]: updatedRow[diff_key],
+      const payload = {
+        group: groupID,
+        field: diff_key,
+        instance_id: updatedRow.id,
+        editable: updatedRow[diff_key],
       };
-      const response = await Api.put(
-        "field-permission",
-        `${updatedRow.id}/`,
-        updatedObj
-      );
-      return response.data.data[0];
+      const response = await Api.post("field-permission/", payload);
+      return response.data[0];
     },
     [Api]
   );
@@ -623,18 +683,14 @@ export default function PermissionTable({ permissions, groups, page, group }) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    window.history.pushState(
-      null,
-      "",
-      `?page=${pageNumber}&group=${groupName}`
-    );
+    window.history.pushState(null, "", `?page=${pageNumber}&group=${groupID}`);
     window.location.reload();
   };
 
   return (
     <div style={{ height: "100%", width: "100%" }}>
       <DataGrid
-        rows={editables}
+        rows={merged}
         columns={columns}
         processRowUpdate={(updatedRow, originalRow) =>
           saveOnServer(updatedRow, originalRow)
@@ -663,12 +719,12 @@ export default function PermissionTable({ permissions, groups, page, group }) {
                   className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:bg-white focus:border-gray-500"
                   id="grid-group"
                   onChange={(e) => {
-                    setGroupName(e.target.value);
+                    setgroupID(e.target.value);
                   }}
-                  value={groupName}
+                  value={groupID}
                 >
                   {groups.map((group) => (
-                    <option key={group.id} value={group.name}>
+                    <option key={group.id} value={group.id}>
                       {group.name}
                     </option>
                   ))}
@@ -705,39 +761,6 @@ export default function PermissionTable({ permissions, groups, page, group }) {
             </div>
           </div>
         </form>
-
-        {/* <FormControl className="flex items-center">
-          <TextField
-            className="mr-1"
-            id="outlined-number"
-            label="page"
-            type="number"
-            value={textFieldValue}
-            onChange={handleTextFieldChange}
-          />
-          <InputLabel id="page-label">Page</InputLabel>
-          <Input labelId="page-label" />
-          <InputLabel id="group-select-label">Groups</InputLabel>
-          <Select
-            labelId="group-select-label"
-            id="group-select"
-            value={groupName}
-            label="groups"
-            onChange={handleChange}
-          >
-            {groups.map((group) => (
-              <MenuItem value={group}>{group.name}</MenuItem>
-            ))}
-          </Select>
-          <Button
-            className="mr-5"
-            variant="outlined"
-            size="large"
-            onClick={() => handleInputClick(textFieldValue)}
-          >
-            search
-          </Button>
-        </FormControl> */}
       </div>
     </div>
   );

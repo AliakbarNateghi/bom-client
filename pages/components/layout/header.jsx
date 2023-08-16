@@ -56,7 +56,7 @@ export default function Header({ loggedin }) {
                   return group == "god" ? (
                     <Link
                       className="digikala"
-                      href="/permission?page=1&group=god"
+                      href="/permission?page=1&group=1"
                     >
                       دسترسی
                     </Link>

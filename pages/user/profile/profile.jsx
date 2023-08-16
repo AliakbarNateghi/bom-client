@@ -59,7 +59,6 @@ export default function Profile({ user }) {
 
   const onSubmit = useCallback(
     async (e) => {
-      console.log("e :", e);
       e.preventDefault();
       Api.init();
       const response = await Api.put(`user-info`, `${userName}/`, payload);
@@ -87,7 +86,6 @@ export default function Profile({ user }) {
           `user-info/${userName}/change_password`,
           passPayload
         );
-        console.log("message :", response.data.error);
         if (response.data.message == "success") {
           successToast("رمز عبور با موفقیت تغییر کرد");
         } else errorToast("خطای سیستم");

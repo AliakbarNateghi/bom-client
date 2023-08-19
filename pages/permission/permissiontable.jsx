@@ -1,26 +1,9 @@
 import { DataGrid, GridRow } from "@mui/x-data-grid";
 import Api from "@/pages/services/api";
 import React, { useState, useEffect, useCallback } from "react";
-import { useDispatch, Provider } from "react-redux";
-import { unwrapResult } from "@reduxjs/toolkit";
-import Cookies from "universal-cookie";
-import { getCookies } from "@/pages/services/cookie";
-import componentslice from "@/pages/redux/slices/componentslice";
-import { successToast, errorToast, warningToast } from "@/pages/services/toast";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
-import TablePagination from "@mui/material/TablePagination";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import {
-  MenuItem,
-  Select,
-  colors,
-  FormControl,
-  InputLabel,
-  Input,
-} from "@mui/material";
+import Image from "next/image";
+import deletelogo from "@/public/logos/delete.png";
+import { Opacity } from "@mui/icons-material";
 
 const useFakeMutation = () => {
   return useCallback(
@@ -44,6 +27,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
 
   const [pageNumber, setPageNumber] = useState(page);
   const [groupID, setgroupID] = useState(group);
+  const [cell, setCell] = useState();
 
   const rows = [];
   for (let i = 15; i > 0; i--) {
@@ -108,19 +92,37 @@ export default function PermissionTable({ permissions, groups, page, group }) {
     return o2 ? { ...o1, ...o2 } : o1;
   });
 
+  async function onDeletePermission(params) {
+    console.log("params :", params);
+    const response = await Api.delete(
+      "field-permission",
+      `${params.id}/?field=${params.field}&group=${groupID}`
+    );
+  }
+
+  function ValueComponent({ color, params }) {
+    return (
+      <div className="flex space-x-10 items-center">
+        <div style={{ color }}>{params.formattedValue}</div>
+        <div className="cursor-pointer opacity-60 hover:opacity-100">
+          <Image
+            className=""
+            src={deletelogo}
+            alt="delete"
+            min-height={16}
+            width={16}
+            onClick={() => onDeletePermission(params)}
+          />
+        </div>
+      </div>
+    );
+  }
+
   function getValue(params, field) {
     if (params.row[`${field}`] === true) {
-      return (
-        <div className="item-center" style={{ color: "green" }}>
-          {params.formattedValue}
-        </div>
-      );
+      return <ValueComponent color={"green"} params={params} />;
     } else if (params.row[`${field}`] === false) {
-      return (
-        <div className="item-center" style={{ color: "red" }}>
-          {params.formattedValue}
-        </div>
-      );
+      return <ValueComponent color={"red"} params={params} />;
     } else {
       return null;
     }
@@ -661,13 +663,13 @@ export default function PermissionTable({ permissions, groups, page, group }) {
         instance_id: updatedRow.id,
         editable: updatedRow[diff_key],
       };
-      const response = await Api.post("field-permission/", payload);
+      const response = await Api.post("field-permission", payload);
       return response.data[0];
     },
     [Api]
   );
 
-  const handleProcessRowUpdateError = React.useCallback((error) => {
+  const handleProcessRowUpdateError = useCallback((error) => {
     setSnackbar({ children: error.message, severity: "error" });
   }, []);
 
@@ -697,6 +699,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
         showColumnVerticalBorder
         getCellClassName={getCellClassName}
         autoHeight
+        // onCellClick={onDeletePermission}
       />
       <br />
 

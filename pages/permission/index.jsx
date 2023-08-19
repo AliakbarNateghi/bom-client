@@ -21,6 +21,7 @@ export async function getServerSideProps(context) {
     `field-permission/?page=${page}&group=${group}`
   );
   const permissions = response.data;
+  console.log("permissions :", permissions);
   const groupsResponse = await Api.get(`groups`);
   const groups = groupsResponse.data;
   return {
@@ -36,7 +37,12 @@ export async function getServerSideProps(context) {
 export default function Permission({ permissions, groups, page, group }) {
   return (
     <div>
-      <PermissionTable permissions={permissions} groups={groups} page={page} group={group} />
+      <PermissionTable
+        permissions={permissions}
+        groups={groups}
+        page={page}
+        group={group}
+      />
     </div>
   );
 }

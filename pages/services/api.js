@@ -17,10 +17,16 @@ class Api {
   }
 
   static constructUrl(resource, slug = "") {
-    if (resource.includes("field-permission")) {
-      return `${resource}`;
-    }
     return `${resource}/${slug}`;
+  }
+
+  static async delete(resource, slug) {
+    try {
+      return await axios.delete(this.constructUrl(resource, slug));
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
   }
 
   static async put(resource, slug, params) {
@@ -53,15 +59,6 @@ class Api {
   static async patch(resource, slug, params) {
     try {
       return await axios.patch(this.constructUrl(resource, slug), params);
-    } catch (err) {
-      console.error(err);
-      throw err;
-    }
-  }
-
-  static async delete(resource, params) {
-    try {
-      return await axios.delete(this.constructUrl(resource), params);
     } catch (err) {
       console.error(err);
       throw err;

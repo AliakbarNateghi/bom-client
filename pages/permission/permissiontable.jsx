@@ -3,6 +3,8 @@ import Api from "@/pages/services/api";
 import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import deletelogo from "@/public/logos/delete.png";
+import { errorToast, successToast, warningToast } from "@/pages/services/toast";
+import { Modal, Button, Box, Typography } from "@mui/material";
 
 const useFakeMutation = () => {
   return useCallback(
@@ -20,11 +22,25 @@ const useFakeMutation = () => {
   );
 };
 
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
+
 export default function PermissionTable({ permissions, groups, page, group }) {
   const [updatedCell, setUpdatedCell] = useState({});
   const [snackbar, setSnackbar] = useState(null);
   const [pageNumber, setPageNumber] = useState(page);
   const [groupID, setgroupID] = useState(group);
+  const [massPermission, setMassPermission] = useState(false);
+
   const rows = [];
   for (let i = 15; i > 0; i--) {
     rows.push({
@@ -112,6 +128,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
                 alt="delete"
                 height={12}
                 width={12}
+                className="hover:scale-150"
                 onClick={onDeletePermission}
               />
             </div>
@@ -139,6 +156,9 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       headerName: "id",
       width: 100,
       editable: false,
+      // resizable: true,
+      // minWidth: 50,
+      // maxWidth: 200
     },
     {
       field: "revision",
@@ -690,6 +710,12 @@ export default function PermissionTable({ permissions, groups, page, group }) {
     window.location.reload();
   };
 
+  const onColumnHeaderClick = (e) => {
+    // e.preventDefault();
+    setMassPermission(true);
+    console.log("e :", e);
+  };
+
   return (
     <div style={{ height: "100%", width: "100%" }}>
       <DataGrid
@@ -705,6 +731,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
         getCellClassName={getCellClassName}
         autoHeight
         // onCellClick={onDeletePermission}
+        onColumnHeaderClick={onColumnHeaderClick}
       />
       <br />
 
@@ -766,6 +793,101 @@ export default function PermissionTable({ permissions, groups, page, group }) {
           </div>
         </form>
       </div>
+
+      <Modal
+        open={massPermission}
+        onClose={() => {
+          setMassPermission(false);
+        }}
+        aria-labelledby="permission-modal-title"
+        aria-describedby="permission-modal-description"
+      >
+        <Box sx={style}>
+          <Image
+            // src={showPass ? openEye : closeEye}
+            width={32}
+            height={32}
+            // onClick={() => setShowPass(!showPass)}
+          />
+          <form
+            // onSubmit={onChangePass}
+            className="border-0 sm:border-1 p-10 rounded border-gray-400"
+          >
+            <div className="w-full">
+              <label
+                htmlFor="current-pass"
+                className="text-sm font-medium leading-6 text-gray-900 float-right digikala"
+              >
+                رمز عبور فعلی
+              </label>
+              <div className="mt-2">
+                <input
+                  // type={showPass ? "text" : "password"}
+                  id="current-pass"
+                  // onChange={(e) => setCurrentPass(e.target.value)}
+                  // value={currentPass}
+                  className="outline-0 rounded p-1 w-full border-2 border-gray-400"
+                />
+              </div>
+            </div>
+
+            <div className="w-full">
+              <label
+                htmlFor="first-new-pass"
+                className="text-sm font-medium leading-6 text-gray-900 float-right digikala"
+              >
+                رمز عبور جدید
+              </label>
+              <div className="mt-2">
+                <input
+                  // type={showPass ? "text" : "password"}
+                  id="first-new-pass"
+                  // onChange={(e) => setFirstNewPass(e.target.value)}
+                  // value={firstNewPass}
+                  className="outline-0 rounded p-1 w-full border-2 border-gray-400"
+                />
+              </div>
+            </div>
+
+            <div className="w-full">
+              <label
+                htmlFor="second-new-pass"
+                className="text-sm font-medium leading-6 text-gray-900 float-right digikala"
+              >
+                تکرار رمز عبور جدید
+              </label>
+              <div className="mt-2">
+                <input
+                  // type={showPass ? "text" : "password"}
+                  id="second-new-pass"
+                  // onChange={(e) => setSecondNewPass(e.target.value)}
+                  // value={secondNewPass}
+                  className="outline-0 rounded p-1 w-full border-2 border-gray-400"
+                />
+              </div>
+            </div>
+
+            {/* <div>
+              {firstNewPass === secondNewPass ? (
+                <br />
+              ) : (
+                <p className="digikala text-red-500 text-right">
+                  رمز ها مشابهت ندارند
+                </p>
+              )}
+            </div> */}
+
+            <div className="mt-5">
+              <button
+                className="w-full bg-gray-950 text-white w-100 rounded py-2 digikala"
+                type="submit"
+              >
+                تغییر رمز
+              </button>
+            </div>
+          </form>
+        </Box>
+      </Modal>
     </div>
   );
 }

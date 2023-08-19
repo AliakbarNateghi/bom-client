@@ -23,12 +23,8 @@ const useFakeMutation = () => {
 export default function PermissionTable({ permissions, groups, page, group }) {
   const [updatedCell, setUpdatedCell] = useState({});
   const [snackbar, setSnackbar] = useState(null);
-
   const [pageNumber, setPageNumber] = useState(page);
   const [groupID, setgroupID] = useState(group);
-  const [cell, setCell] = useState(true);
-  const [deletedCells, setDeletedCells] = useState([]);
-
   const rows = [];
   for (let i = 15; i > 0; i--) {
     rows.push({
@@ -92,37 +88,22 @@ export default function PermissionTable({ permissions, groups, page, group }) {
     return o2 ? { ...o1, ...o2 } : o1;
   });
 
-  // async function onDeletePermission(params) {
-  //   // console.log("params1 :", params);
-
-  //   const response = await Api.delete(
-  //     "field-permission",
-  //     `${params.id}/?field=${params.field}&group=${groupID}`
-  //   );
-  //   setDeletedCells([...deletedCells, params]);
-  // }
-  const onDeletePermission = async (params) => {
-    try {
-      await setDeletedCells([...deletedCells, params]);
-      await Api.delete(
-        "field-permission",
-        `${params.id}/?field=${params.field}&group=${groupID}`
-      );
-      // window.location.reload();
-      // return response.data[0];
-      return null;
-    } catch (err) {
-      throw err;
-    }
-  };
-
   function ValueComponent({ color, params }) {
-    console.log("deletedCells :", deletedCells);
-    console.log("params :", params);
-    const [test, setTest] = useState(params.formattedValue);
+    const [deletedCell, setDeletedCell] = useState(params.formattedValue);
+    const onDeletePermission = async () => {
+      setDeletedCell(null);
+      try {
+        await Api.delete(
+          "field-permission",
+          `${params.id}/?field=${params.field}&group=${groupID}`
+        );
+      } catch (err) {
+        throw err;
+      }
+    };
     return (
       <>
-        {test ? (
+        {deletedCell ? (
           <div className="flex space-x-11 items-center">
             <div style={{ color }}>{params.formattedValue}</div>
             <div className="cursor-pointer opacity-60 hover:opacity-100">
@@ -131,7 +112,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
                 alt="delete"
                 height={12}
                 width={12}
-                onClick={() => setTest(null)}
+                onClick={onDeletePermission}
               />
             </div>
           </div>

@@ -3,12 +3,6 @@
 import Image from "next/image";
 import openEye from "@/public/logos/open-eye.png";
 import closeEye from "@/public/logos/close-eye.png";
-import { useDispatch, useSelector, Provider } from "react-redux";
-import { userInfo } from "@/pages/redux/slices/userinfo";
-import userupdate from "@/pages/redux/slices/userupdate";
-import { unwrapResult } from "@reduxjs/toolkit";
-import { redirect, useRouter } from "next/navigation";
-import Loggedin from "@/pages/services/loggedin";
 import React, { useState, useEffect, useCallback } from "react";
 import { errorToast, successToast, warningToast } from "@/pages/services/toast";
 import { Modal, Button, Box, Typography } from "@mui/material";

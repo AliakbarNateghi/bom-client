@@ -1,14 +1,11 @@
 import "../styles/globals.css";
-import useAuth from "./services/loggedin";
 import Header from "./components/layout/header";
 import { Provider } from "react-redux";
 import { store } from "./redux/store/clientStore";
 import { useRouter } from "next/router";
-import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Logout from "./services/logout";
 
 export default function App({ Component, pageProps }) {
   const [loggedin, setLoggedin] = useState(false);

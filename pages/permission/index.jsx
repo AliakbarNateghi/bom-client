@@ -1,7 +1,6 @@
 import Api from "../services/api";
 import Cookies from "universal-cookie";
 import PermissionTable from "./permissiontable";
-import { DataGrid } from "@mui/x-data-grid";
 
 export async function getServerSideProps(context) {
   const { req } = context;
@@ -21,7 +20,7 @@ export async function getServerSideProps(context) {
     `field-permission/?page=${page}&group=${group}`
   );
   const permissions = response.data;
-  console.log("permissions :", permissions);
+  // console.log("permissions :", permissions);
   const groupsResponse = await Api.get(`groups`);
   const groups = groupsResponse.data;
   return {

@@ -1,15 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useDispatch, Provider } from "react-redux";
+import { useDispatch } from "react-redux";
 import { login } from "@/pages/redux/slices/user";
-// import { redirect, useRouter } from "next/navigation";
 import { useRouter } from "next/router";
 import { unwrapResult } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
 import { errorToast } from "@/pages/services/toast";
-import { store } from "@/pages/redux/store/clientStore";
-// import { getCookie } from "@/pages/services/cookie";
 
 export default function Login() {
   const [loginForm, setLoginForm] = useState({ username: "", password: "" });

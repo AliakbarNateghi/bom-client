@@ -3,7 +3,6 @@ import Api from "@/pages/services/api";
 import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import deletelogo from "@/public/logos/delete.png";
-import { Opacity } from "@mui/icons-material";
 
 const useFakeMutation = () => {
   return useCallback(
@@ -27,7 +26,8 @@ export default function PermissionTable({ permissions, groups, page, group }) {
 
   const [pageNumber, setPageNumber] = useState(page);
   const [groupID, setgroupID] = useState(group);
-  const [cell, setCell] = useState();
+  const [cell, setCell] = useState(true);
+  const [deletedCells, setDeletedCells] = useState([]);
 
   const rows = [];
   for (let i = 15; i > 0; i--) {
@@ -92,29 +92,53 @@ export default function PermissionTable({ permissions, groups, page, group }) {
     return o2 ? { ...o1, ...o2 } : o1;
   });
 
-  async function onDeletePermission(params) {
-    console.log("params :", params);
-    const response = await Api.delete(
-      "field-permission",
-      `${params.id}/?field=${params.field}&group=${groupID}`
-    );
-  }
+  // async function onDeletePermission(params) {
+  //   // console.log("params1 :", params);
+
+  //   const response = await Api.delete(
+  //     "field-permission",
+  //     `${params.id}/?field=${params.field}&group=${groupID}`
+  //   );
+  //   setDeletedCells([...deletedCells, params]);
+  // }
+  const onDeletePermission = async (params) => {
+    try {
+      await setDeletedCells([...deletedCells, params]);
+      await Api.delete(
+        "field-permission",
+        `${params.id}/?field=${params.field}&group=${groupID}`
+      );
+      // window.location.reload();
+      // return response.data[0];
+      return null;
+    } catch (err) {
+      throw err;
+    }
+  };
 
   function ValueComponent({ color, params }) {
+    console.log("deletedCells :", deletedCells);
+    console.log("params :", params);
+    const [test, setTest] = useState(params.formattedValue);
     return (
-      <div className="flex space-x-10 items-center">
-        <div style={{ color }}>{params.formattedValue}</div>
-        <div className="cursor-pointer opacity-60 hover:opacity-100">
-          <Image
-            className=""
-            src={deletelogo}
-            alt="delete"
-            min-height={16}
-            width={16}
-            onClick={() => onDeletePermission(params)}
-          />
-        </div>
-      </div>
+      <>
+        {test ? (
+          <div className="flex space-x-11 items-center">
+            <div style={{ color }}>{params.formattedValue}</div>
+            <div className="cursor-pointer opacity-60 hover:opacity-100">
+              <Image
+                src={deletelogo}
+                alt="delete"
+                height={12}
+                width={12}
+                onClick={() => setTest(null)}
+              />
+            </div>
+          </div>
+        ) : (
+          <div></div>
+        )}
+      </>
     );
   }
 

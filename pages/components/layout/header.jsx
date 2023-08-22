@@ -67,6 +67,21 @@ export default function Header({ loggedin }) {
               </li>
 
               <li className="mt-3 md:mt-0 md:ml-4">
+                {userGroups.map((group) => {
+                  return group == "god" ? (
+                    <Link
+                      className="digikala"
+                      href="/users"
+                    >
+                      کاربران
+                    </Link>
+                  ) : (
+                    <div></div>
+                  );
+                })}
+              </li>
+
+              <li className="mt-3 md:mt-0 md:ml-4">
                 <Link className="digikala" href="/user/profile">
                   پروفایل
                 </Link>

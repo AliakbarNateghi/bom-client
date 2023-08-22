@@ -5,6 +5,8 @@ import Image from "next/image";
 import deletelogo from "@/public/logos/delete.png";
 import { errorToast, successToast, warningToast } from "@/pages/services/toast";
 import { Modal, Button, Box, Typography } from "@mui/material";
+import verify from "@/public/logos/permission.png";
+import PropTypes from "prop-types";
 
 const useFakeMutation = () => {
   return useCallback(
@@ -40,6 +42,8 @@ export default function PermissionTable({ permissions, groups, page, group }) {
   const [pageNumber, setPageNumber] = useState(page);
   const [groupID, setgroupID] = useState(group);
   const [massPermission, setMassPermission] = useState(false);
+  const [column, setColumn] = useState("");
+  const [editable, setEditable] = useState(false);
 
   const rows = [];
   for (let i = 15; i > 0; i--) {
@@ -156,9 +160,8 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       headerName: "id",
       width: 100,
       editable: false,
-      // resizable: true,
-      // minWidth: 50,
-      // maxWidth: 200
+      sortable: false,
+      // onColumnHeaderClick
     },
     {
       field: "revision",
@@ -166,6 +169,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "revision");
       },
@@ -176,6 +180,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "ID");
       },
@@ -186,6 +191,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "P_on_N_status_code");
       },
@@ -196,6 +202,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "fig_no");
       },
@@ -206,6 +213,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "item_no");
       },
@@ -216,6 +224,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "module");
       },
@@ -226,6 +235,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "level");
       },
@@ -236,6 +246,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "code");
       },
@@ -246,6 +257,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "parent_code");
       },
@@ -256,6 +268,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "part_number");
       },
@@ -266,6 +279,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "description");
       },
@@ -276,6 +290,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 220,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "comment");
       },
@@ -286,6 +301,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "sap_name");
       },
@@ -296,6 +312,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "unit_per_assy");
       },
@@ -306,6 +323,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 150,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "unit_per_end_item");
       },
@@ -316,6 +334,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 220,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "corrected_units_per_end_item");
       },
@@ -326,6 +345,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "gg_qty");
       },
@@ -336,6 +356,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "srp");
       },
@@ -346,6 +367,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "store_comment");
       },
@@ -356,6 +378,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "assembly");
       },
@@ -366,6 +389,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "standard_part");
       },
@@ -376,6 +400,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "material");
       },
@@ -386,6 +411,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 220,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "mfg_complexity_level");
       },
@@ -396,6 +422,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "disassembled");
       },
@@ -406,6 +433,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 220,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "supplying_or_manufacturing");
       },
@@ -416,6 +444,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 220,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "internal_or_external_outsourcing");
       },
@@ -426,6 +455,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "vendor");
       },
@@ -436,6 +466,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "joining");
       },
@@ -446,6 +477,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 220,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "manufacturing_process");
       },
@@ -456,6 +488,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 150,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "raw_material_form");
       },
@@ -466,6 +499,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "function");
       },
@@ -476,6 +510,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "qc_criteria");
       },
@@ -486,6 +521,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 180,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "manufacturing_priority");
       },
@@ -496,6 +532,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 300,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "manufacturing_responsible_department");
       },
@@ -506,6 +543,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 300,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "designing_responsible_department");
       },
@@ -516,6 +554,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 220,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "usage_on_other_engines");
       },
@@ -526,6 +565,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 280,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "manufacturing_parts_category");
       },
@@ -536,6 +576,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 220,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "scope_matrix_category");
       },
@@ -546,6 +587,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 360,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(
           params,
@@ -559,6 +601,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 200,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "system_D_requirements");
       },
@@ -569,6 +612,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 200,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "percurment_state");
       },
@@ -579,6 +623,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "details");
       },
@@ -589,6 +634,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "joint_type");
       },
@@ -599,6 +645,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 300,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "discarded_during_disassembly");
       },
@@ -609,6 +656,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "expendables");
       },
@@ -619,6 +667,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 300,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "discarded_or_unusable_according_to_docs");
       },
@@ -629,6 +678,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 220,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "destroyed_for_analysis");
       },
@@ -639,6 +689,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 220,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "rejected_by_qc_or_inspection");
       },
@@ -649,6 +700,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 220,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "class_size_or_weight_as_required");
       },
@@ -659,6 +711,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       width: 130,
       type: "boolean",
       editable: true,
+      sortable: false,
       renderCell: (params) => {
         return getValue(params, "EBOM");
       },
@@ -686,7 +739,7 @@ export default function PermissionTable({ permissions, groups, page, group }) {
         group: groupID,
         field: diff_key,
         instance_id: updatedRow.id,
-        editable: updatedRow[diff_key],
+        editable: updatedRow[diff_key] || false,
       };
       const response = await Api.post("field-permission", payload);
       return response.data[0];
@@ -711,9 +764,21 @@ export default function PermissionTable({ permissions, groups, page, group }) {
   };
 
   const onColumnHeaderClick = (e) => {
-    // e.preventDefault();
     setMassPermission(true);
-    console.log("e :", e);
+    setColumn(e.field);
+  };
+
+  const onSubmitMassPermission = async (e) => {
+    e.preventDefault();
+    const massPayload = {
+      field: column,
+      group: groupID,
+      editable: editable === "حذف" ? null : editable,
+    };
+    Api.init();
+    await Api.post("mass-permission", massPayload);
+    await window.location.reload();
+    setMassPermission(false);
   };
 
   return (
@@ -728,10 +793,10 @@ export default function PermissionTable({ permissions, groups, page, group }) {
         hideFooter={true}
         showCellVerticalBorder
         showColumnVerticalBorder
-        getCellClassName={getCellClassName}
+        // getCellClassName={getCellClassName}
         autoHeight
         // onCellClick={onDeletePermission}
-        onColumnHeaderClick={onColumnHeaderClick}
+        onColumnHeaderClick={(e) => onColumnHeaderClick(e)}
       />
       <br />
 
@@ -804,85 +869,89 @@ export default function PermissionTable({ permissions, groups, page, group }) {
       >
         <Box sx={style}>
           <Image
-            // src={showPass ? openEye : closeEye}
+            src={verify}
             width={32}
             height={32}
             // onClick={() => setShowPass(!showPass)}
           />
           <form
-            // onSubmit={onChangePass}
+            onSubmit={onSubmitMassPermission}
             className="border-0 sm:border-1 p-10 rounded border-gray-400"
           >
-            <div className="w-full">
+            <div className="w-full mt-2">
               <label
-                htmlFor="current-pass"
+                htmlFor="column"
                 className="text-sm font-medium leading-6 text-gray-900 float-right digikala"
               >
-                رمز عبور فعلی
+                ستون
               </label>
-              <div className="mt-2">
-                <input
-                  // type={showPass ? "text" : "password"}
-                  id="current-pass"
-                  // onChange={(e) => setCurrentPass(e.target.value)}
-                  // value={currentPass}
-                  className="outline-0 rounded p-1 w-full border-2 border-gray-400"
-                />
-              </div>
+              <select
+                className="block appearance-none w-full py-2 px-4 pr-8 rounded bg-gray"
+                id="column"
+                value={column}
+              >
+                {columns.map((column) => (
+                  <option key={column.id} value={column.field}>
+                    {column.headerName}
+                  </option>
+                ))}
+              </select>
             </div>
-
-            <div className="w-full">
+            <div className="w-full mt-2">
               <label
-                htmlFor="first-new-pass"
+                htmlFor="group"
                 className="text-sm font-medium leading-6 text-gray-900 float-right digikala"
               >
-                رمز عبور جدید
+                گروه
               </label>
-              <div className="mt-2">
-                <input
-                  // type={showPass ? "text" : "password"}
-                  id="first-new-pass"
-                  // onChange={(e) => setFirstNewPass(e.target.value)}
-                  // value={firstNewPass}
-                  className="outline-0 rounded p-1 w-full border-2 border-gray-400"
-                />
-              </div>
+              <select
+                className="block appearance-none w-full py-2 px-4 pr-8 rounded bg-gray"
+                id="group"
+                onChange={(e) => {
+                  setgroupID(e.target.value);
+                }}
+                value={groupID}
+              >
+                {groups.map((group) => (
+                  <option key={group.id} value={group.id}>
+                    {group.name}
+                  </option>
+                ))}
+              </select>
             </div>
-
-            <div className="w-full">
+            <div className="w-full mt-2">
               <label
-                htmlFor="second-new-pass"
+                htmlFor="editable"
                 className="text-sm font-medium leading-6 text-gray-900 float-right digikala"
               >
-                تکرار رمز عبور جدید
+                نوع دسترسی
               </label>
-              <div className="mt-2">
-                <input
-                  // type={showPass ? "text" : "password"}
-                  id="second-new-pass"
-                  // onChange={(e) => setSecondNewPass(e.target.value)}
-                  // value={secondNewPass}
-                  className="outline-0 rounded p-1 w-full border-2 border-gray-400"
-                />
-              </div>
+              <select
+                className="block appearance-none w-full py-2 px-4 pr-8 rounded bg-gray digikala"
+                id="editable"
+                onChange={(e) => {
+                  setEditable(e.target.value);
+                  console.log("e.target.value :", e.target.value);
+                }}
+                value={editable}
+              >
+                <option value={false} className="digikala">
+                  دیدن
+                </option>
+                <option value={true} className="digikala">
+                  دیدن + ادیت
+                </option>
+                <option value={null} className="digikala">
+                  حذف
+                </option>
+              </select>
             </div>
-
-            {/* <div>
-              {firstNewPass === secondNewPass ? (
-                <br />
-              ) : (
-                <p className="digikala text-red-500 text-right">
-                  رمز ها مشابهت ندارند
-                </p>
-              )}
-            </div> */}
-
             <div className="mt-5">
               <button
                 className="w-full bg-gray-950 text-white w-100 rounded py-2 digikala"
                 type="submit"
               >
-                تغییر رمز
+                اعمال دسترسی
               </button>
             </div>
           </form>

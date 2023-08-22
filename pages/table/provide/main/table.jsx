@@ -23,7 +23,7 @@ const useFakeMutation = () => {
   );
 };
 
-export default function DataTable({ components, hiddencols }) {
+export default function ScopeTable({ components, hiddencols }) {
   const [updatedCell, setUpdatedCell] = useState({});
   const [snackbar, setSnackbar] = useState(null);
   const mutateRow = useFakeMutation();

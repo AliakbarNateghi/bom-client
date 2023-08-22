@@ -1,6 +1,6 @@
-import Api from "../services/api";
+import Api from "../../../services/api";
 import Cookies from "universal-cookie";
-import PermissionTable from "./permissiontable";
+import ScopePermission from "./permission";
 
 export async function getServerSideProps(context) {
   const { req } = context;
@@ -36,7 +36,7 @@ export async function getServerSideProps(context) {
 export default function Permission({ permissions, groups, page, group }) {
   return (
     <div>
-      <PermissionTable
+      <ScopePermission
         permissions={permissions}
         groups={groups}
         page={page}

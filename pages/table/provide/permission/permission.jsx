@@ -36,7 +36,7 @@ const style = {
   p: 4,
 };
 
-export default function PermissionTable({ permissions, groups, page, group }) {
+export default function ScopePermission({ permissions, groups, page, group }) {
   const [updatedCell, setUpdatedCell] = useState({});
   const [snackbar, setSnackbar] = useState(null);
   const [pageNumber, setPageNumber] = useState(page);

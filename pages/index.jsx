@@ -27,14 +27,14 @@ export default function Home({}) {
       <ul>
         <li>
           <Link
-            href="/table/scopematrix/main?page=1"
+            href="/table/main/bom?page=1"
             className="digikala text-blue-500"
           >
             اسکوپ ماتریکس
           </Link>
         </li>
         <li>
-          <Link href="#" className="digikala text-blue-500">
+          <Link href="/table/main/provide?page=1" className="digikala text-blue-500">
             تامین
           </Link>
         </li>
@@ -47,14 +47,14 @@ export default function Home({}) {
             <ul>
               <li>
                 <Link
-                  href="/table/scopematrix/permission?page=1&group=1"
+                  href="/table/permission/bom?page=1&group=1"
                   className="digikala text-blue-500"
                 >
                   اسکوپ ماتریکس
                 </Link>
               </li>
               <li>
-                <Link href="#" className="digikala text-blue-500">
+                <Link href="/table/permission/provide?page=1&group=1" className="digikala text-blue-500">
                   تامین
                 </Link>
               </li>

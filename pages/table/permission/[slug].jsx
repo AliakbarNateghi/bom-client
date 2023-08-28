@@ -44,7 +44,13 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default function ScopePermission({ permissions, groups, page, group, slug }) {
+export default function ScopePermission({
+  permissions,
+  groups,
+  page,
+  group,
+  slug,
+}) {
   function ValueComponent({ color, params }) {
     const [deletedCell, setDeletedCell] = useState(params.formattedValue);
     const onDeletePermission = async () => {
@@ -91,568 +97,901 @@ export default function ScopePermission({ permissions, groups, page, group, slug
     }
   }
 
-  const columns = [
-    {
-      field: "id",
-      headerName: "id",
-      width: 100,
-      editable: false,
-      sortable: false,
-    },
-    {
-      field: "revision",
-      headerName: "REVISION",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "revision");
+  let columns;
+  if (slug === "bom") {
+    columns = [
+      {
+        field: "id",
+        headerName: "id",
+        width: 100,
+        editable: false,
+        sortable: false,
       },
-    },
-    {
-      field: "ID",
-      headerName: "ID",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "ID");
+      {
+        field: "revision",
+        headerName: "REVISION",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "revision");
+        },
       },
-    },
-    {
-      field: "P_on_N_status_code",
-      headerName: "P/N Status Code",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "P_on_N_status_code");
+      {
+        field: "ID",
+        headerName: "ID",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "ID");
+        },
       },
-    },
-    {
-      field: "fig_no",
-      headerName: "Fig. No.",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "fig_no");
+      {
+        field: "P_on_N_status_code",
+        headerName: "P/N Status Code",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "P_on_N_status_code");
+        },
       },
-    },
-    {
-      field: "item_no",
-      headerName: "Item No.",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "item_no");
+      {
+        field: "fig_no",
+        headerName: "Fig. No.",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "fig_no");
+        },
       },
-    },
-    {
-      field: "module",
-      headerName: "Module",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "module");
+      {
+        field: "item_no",
+        headerName: "Item No.",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "item_no");
+        },
       },
-    },
-    {
-      field: "level",
-      headerName: "Level",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "level");
+      {
+        field: "module",
+        headerName: "Module",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "module");
+        },
       },
-    },
-    {
-      field: "code",
-      headerName: "Code",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "code");
+      {
+        field: "level",
+        headerName: "Level",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "level");
+        },
       },
-    },
-    {
-      field: "parent_code",
-      headerName: "Parent Code",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "parent_code");
+      {
+        field: "code",
+        headerName: "Code",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "code");
+        },
       },
-    },
-    {
-      field: "part_number",
-      headerName: "Part Number",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "part_number");
+      {
+        field: "parent_code",
+        headerName: "Parent Code",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "parent_code");
+        },
       },
-    },
-    {
-      field: "description",
-      headerName: "Description",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "description");
+      {
+        field: "part_number",
+        headerName: "Part Number",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "part_number");
+        },
       },
-    },
-    {
-      field: "comment",
-      headerName: "Comment",
-      width: 220,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "comment");
+      {
+        field: "description",
+        headerName: "Description",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "description");
+        },
       },
-    },
-    {
-      field: "sap_name",
-      headerName: "SAP NAME",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "sap_name");
+      {
+        field: "comment",
+        headerName: "Comment",
+        width: 220,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "comment");
+        },
       },
-    },
-    {
-      field: "unit_per_assy",
-      headerName: "Units Per Assy",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "unit_per_assy");
+      {
+        field: "sap_name",
+        headerName: "SAP NAME",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "sap_name");
+        },
       },
-    },
-    {
-      field: "unit_per_end_item",
-      headerName: "Units Per End Item",
-      width: 150,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "unit_per_end_item");
+      {
+        field: "unit_per_assy",
+        headerName: "Units Per Assy",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "unit_per_assy");
+        },
       },
-    },
-    {
-      field: "corrected_units_per_end_item",
-      headerName: "Corrected Units Per End Item",
-      width: 220,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "corrected_units_per_end_item");
+      {
+        field: "unit_per_end_item",
+        headerName: "Units Per End Item",
+        width: 150,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "unit_per_end_item");
+        },
       },
-    },
-    {
-      field: "gg_qty",
-      headerName: "GG QTY",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "gg_qty");
+      {
+        field: "corrected_units_per_end_item",
+        headerName: "Corrected Units Per End Item",
+        width: 220,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "corrected_units_per_end_item");
+        },
       },
-    },
-    {
-      field: "srp",
-      headerName: "SRP",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "srp");
+      {
+        field: "gg_qty",
+        headerName: "GG QTY",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "gg_qty");
+        },
       },
-    },
-    {
-      field: "store_comment",
-      headerName: "Store Comment",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "store_comment");
+      {
+        field: "srp",
+        headerName: "SRP",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "srp");
+        },
       },
-    },
-    {
-      field: "assembly",
-      headerName: "Assembly",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "assembly");
+      {
+        field: "store_comment",
+        headerName: "Store Comment",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "store_comment");
+        },
       },
-    },
-    {
-      field: "standard_part",
-      headerName: "Standard Part",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "standard_part");
+      {
+        field: "assembly",
+        headerName: "Assembly",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "assembly");
+        },
       },
-    },
-    {
-      field: "material",
-      headerName: "Material",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "material");
+      {
+        field: "standard_part",
+        headerName: "Standard Part",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "standard_part");
+        },
       },
-    },
-    {
-      field: "mfg_complexity_level",
-      headerName: "Mfg. Complexity Level",
-      width: 220,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "mfg_complexity_level");
+      {
+        field: "material",
+        headerName: "Material",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "material");
+        },
       },
-    },
-    {
-      field: "disassembled",
-      headerName: "Disassembled",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "disassembled");
+      {
+        field: "mfg_complexity_level",
+        headerName: "Mfg. Complexity Level",
+        width: 220,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "mfg_complexity_level");
+        },
       },
-    },
-    {
-      field: "supplying_or_manufacturing",
-      headerName: "Supplying / Manufacturing ",
-      width: 220,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "supplying_or_manufacturing");
+      {
+        field: "disassembled",
+        headerName: "Disassembled",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "disassembled");
+        },
       },
-    },
-    {
-      field: "internal_or_external_outsourcing",
-      headerName: "Internal / External outsourcing",
-      width: 220,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "internal_or_external_outsourcing");
+      {
+        field: "supplying_or_manufacturing",
+        headerName: "Supplying / Manufacturing ",
+        width: 220,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "supplying_or_manufacturing");
+        },
       },
-    },
-    {
-      field: "vendor",
-      headerName: "Vendor",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "vendor");
+      {
+        field: "internal_or_external_outsourcing",
+        headerName: "Internal / External outsourcing",
+        width: 220,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "internal_or_external_outsourcing");
+        },
       },
-    },
-    {
-      field: "joining",
-      headerName: "Joining",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "joining");
+      {
+        field: "vendor",
+        headerName: "Vendor",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "vendor");
+        },
       },
-    },
-    {
-      field: "manufacturing_process",
-      headerName: "Manufacturing Process",
-      width: 220,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "manufacturing_process");
+      {
+        field: "joining",
+        headerName: "Joining",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "joining");
+        },
       },
-    },
-    {
-      field: "raw_material_form",
-      headerName: "Raw Material Form",
-      width: 150,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "raw_material_form");
+      {
+        field: "manufacturing_process",
+        headerName: "Manufacturing Process",
+        width: 220,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "manufacturing_process");
+        },
       },
-    },
-    {
-      field: "function",
-      headerName: "Function",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "function");
+      {
+        field: "raw_material_form",
+        headerName: "Raw Material Form",
+        width: 150,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "raw_material_form");
+        },
       },
-    },
-    {
-      field: "qc_criteria",
-      headerName: "QC Criteria",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "qc_criteria");
+      {
+        field: "function",
+        headerName: "Function",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "function");
+        },
       },
-    },
-    {
-      field: "manufacturing_priority",
-      headerName: "Manufacturing Priority ",
-      width: 180,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "manufacturing_priority");
+      {
+        field: "qc_criteria",
+        headerName: "QC Criteria",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "qc_criteria");
+        },
       },
-    },
-    {
-      field: "manufacturing_responsible_department",
-      headerName: "Manufacturing Responsible Department",
-      width: 300,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "manufacturing_responsible_department");
+      {
+        field: "manufacturing_priority",
+        headerName: "Manufacturing Priority ",
+        width: 180,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "manufacturing_priority");
+        },
       },
-    },
-    {
-      field: "designing_responsible_department",
-      headerName: "Designing Responsible Department",
-      width: 300,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "designing_responsible_department");
+      {
+        field: "manufacturing_responsible_department",
+        headerName: "Manufacturing Responsible Department",
+        width: 300,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "manufacturing_responsible_department");
+        },
       },
-    },
-    {
-      field: "usage_on_other_engines",
-      headerName: "USAGE ON OTHER ENGINES",
-      width: 220,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "usage_on_other_engines");
+      {
+        field: "designing_responsible_department",
+        headerName: "Designing Responsible Department",
+        width: 300,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "designing_responsible_department");
+        },
       },
-    },
-    {
-      field: "manufacturing_parts_category",
-      headerName: "MANUFACTURING PARTS Category",
-      width: 280,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "manufacturing_parts_category");
+      {
+        field: "usage_on_other_engines",
+        headerName: "USAGE ON OTHER ENGINES",
+        width: 220,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "usage_on_other_engines");
+        },
       },
-    },
-    {
-      field: "scope_matrix_category",
-      headerName: "Scope Matrix Category",
-      width: 220,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "scope_matrix_category");
+      {
+        field: "manufacturing_parts_category",
+        headerName: "MANUFACTURING PARTS Category",
+        width: 280,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "manufacturing_parts_category");
+        },
       },
-    },
-    {
-      field: "requires_manufacturing_or_supplying_for_reassembly",
-      headerName: "Requires Manufacturing/Supplying For Re-Assembly",
-      width: 360,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(
-          params,
-          "requires_manufacturing_or_supplying_for_reassembly"
-        );
+      {
+        field: "scope_matrix_category",
+        headerName: "Scope Matrix Category",
+        width: 220,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "scope_matrix_category");
+        },
       },
-    },
-    {
-      field: "system_D_requirements",
-      headerName: "System D. Requirement",
-      width: 200,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "system_D_requirements");
+      {
+        field: "requires_manufacturing_or_supplying_for_reassembly",
+        headerName: "Requires Manufacturing/Supplying For Re-Assembly",
+        width: 360,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(
+            params,
+            "requires_manufacturing_or_supplying_for_reassembly"
+          );
+        },
       },
-    },
-    {
-      field: "percurment_state",
-      headerName: "PERCURMENT STATE",
-      width: 200,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "percurment_state");
+      {
+        field: "system_D_requirements",
+        headerName: "System D. Requirement",
+        width: 200,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "system_D_requirements");
+        },
       },
-    },
-    {
-      field: "details",
-      headerName: "DETAILS",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "details");
+      {
+        field: "percurment_state",
+        headerName: "PERCURMENT STATE",
+        width: 200,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "percurment_state");
+        },
       },
-    },
-    {
-      field: "joint_type",
-      headerName: "Joint Type",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "joint_type");
+      {
+        field: "details",
+        headerName: "DETAILS",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "details");
+        },
       },
-    },
-    {
-      field: "discarded_during_disassembly",
-      headerName: "DISCARDED DURING DISSASSEMBLY",
-      width: 300,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "discarded_during_disassembly");
+      {
+        field: "joint_type",
+        headerName: "Joint Type",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "joint_type");
+        },
       },
-    },
-    {
-      field: "expendables",
-      headerName: "Expendables",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "expendables");
+      {
+        field: "discarded_during_disassembly",
+        headerName: "DISCARDED DURING DISSASSEMBLY",
+        width: 300,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "discarded_during_disassembly");
+        },
       },
-    },
-    {
-      field: "discarded_or_unusable_according_to_docs",
-      headerName: "Discarded/Unusable According To Docs",
-      width: 300,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "discarded_or_unusable_according_to_docs");
+      {
+        field: "expendables",
+        headerName: "Expendables",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "expendables");
+        },
       },
-    },
-    {
-      field: "destroyed_for_analysis",
-      headerName: "Destroyed For Analysis",
-      width: 220,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "destroyed_for_analysis");
+      {
+        field: "discarded_or_unusable_according_to_docs",
+        headerName: "Discarded/Unusable According To Docs",
+        width: 300,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "discarded_or_unusable_according_to_docs");
+        },
       },
-    },
-    {
-      field: "rejected_by_qc_or_inspection",
-      headerName: "Rejected by QC/Inspection",
-      width: 220,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "rejected_by_qc_or_inspection");
+      {
+        field: "destroyed_for_analysis",
+        headerName: "Destroyed For Analysis",
+        width: 220,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "destroyed_for_analysis");
+        },
       },
-    },
-    {
-      field: "class_size_or_weight_as_required",
-      headerName: "Class Size/Weight As Required",
-      width: 220,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "class_size_or_weight_as_required");
+      {
+        field: "rejected_by_qc_or_inspection",
+        headerName: "Rejected by QC/Inspection",
+        width: 220,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "rejected_by_qc_or_inspection");
+        },
       },
-    },
-    {
-      field: "EBOM",
-      headerName: "EBOM",
-      width: 130,
-      type: "boolean",
-      editable: true,
-      sortable: false,
-      renderCell: (params) => {
-        return getValue(params, "EBOM");
+      {
+        field: "class_size_or_weight_as_required",
+        headerName: "Class Size/Weight As Required",
+        width: 220,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "class_size_or_weight_as_required");
+        },
       },
-    },
-  ];
+      {
+        field: "EBOM",
+        headerName: "EBOM",
+        width: 130,
+        type: "boolean",
+        editable: true,
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "EBOM");
+        },
+      },
+    ];
+  } else if (slug === "provide") {
+    columns = [
+      {
+        field: "id",
+        headerName: "id",
+        width: 100,
+        editable: false,
+      },
+      {
+        field: "application_type",
+        headerName: "نوع درخواست (گزارش خريد/قرارداد)",
+        width: 260,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "application_type");
+        },
+      },
+      {
+        field: "supply_stage",
+        headerName: "مرحله تامين",
+        width: 400,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "supply_stage");
+        },
+      },
+      {
+        field: "material_supplier",
+        headerName: "تامين كننده متريال",
+        width: 130,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "material_supplier");
+        },
+      },
+      {
+        field: "pr",
+        headerName: " PR شماره",
+        width: 130,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "pr");
+        },
+      },
+      {
+        field: "po",
+        headerName: "PO شماره",
+        width: 130,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "po");
+        },
+      },
+      {
+        field: "subject",
+        headerName: "موضوع",
+        width: 500,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "subject");
+        },
+      },
+      {
+        field: "request_type",
+        headerName: "جنس درخواست",
+        width: 130,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "request_type");
+        },
+      },
+      {
+        field: "customer_management",
+        headerName: "مديريت سفارش دهنده",
+        width: 220,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "customer_management");
+        },
+      },
+
+      {
+        field: "contract_number",
+        headerName: "شماره قرارداد",
+        width: 130,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "contract_number");
+        },
+      },
+      {
+        field: "supplier",
+        headerName: "تامين كننده",
+        width: 220,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "supplier");
+        },
+      },
+      {
+        field: "amount",
+        headerName: "مبلغ",
+        width: 130,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "amount");
+        },
+      },
+      {
+        field: "adjustment_amount",
+        headerName: "مبلغ تعديل",
+        width: 130,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "adjustment_amount");
+        },
+      },
+      // {
+      //   field: "revision",
+      //   headerName: "جمع مبلغ",
+      //   width: 130,
+      //   editable: true,
+      //   type: "boolean",
+      //   sortable: false,
+      //   renderCell: (params) => {
+      //     return getValue(params, "revision");
+      //   },
+      // },
+      {
+        field: "currency",
+        headerName: "نوع ارز",
+        width: 130,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "currency");
+        },
+      },
+      {
+        field: "expert",
+        headerName: "كارشناس مسئول",
+        width: 130,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "expert");
+        },
+      },
+      {
+        field: "prepayment_percentage",
+        headerName: "درصد پيش‌پرداخت",
+        width: 130,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "prepayment_percentage");
+        },
+      },
+      {
+        field: "prepayment_according_to_contract",
+        headerName: "مبلغ پيش‌پرداخت طبق قرارداد",
+        width: 300,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "reviprepayment_according_to_contractsion");
+        },
+      },
+
+      {
+        field: "prepaid_by_toga",
+        headerName: "پيش پرداخت توسط توگا",
+        width: 220,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "prepaid_by_toga");
+        },
+      },
+      {
+        field: "prepaid_by_air_engine",
+        headerName: "پيش پرداخت توسط موتور هوايي",
+        width: 300,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "prepaid_by_air_engine");
+        },
+      },
+      // {
+      //   field: "revision",
+      //   headerName: " جمع پيش پرداخت ها- ريالي",
+      //   width: 260,
+      //   editable: true,
+      //   type: "boolean",
+      //   sortable: false,
+      //   renderCell: (params) => {
+      //     return getValue(params, "revision");
+      //   },
+      // },
+      {
+        field: "prepayment_guarantee_check",
+        headerName: "چك تضمين پيش پرداخت",
+        width: 220,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "prepayment_guarantee_check");
+        },
+      },
+      {
+        field: "prepayment_guarantee",
+        headerName: "ضمانتنامه پيش پرداخت",
+        width: 220,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "prepayment_guarantee");
+        },
+      },
+      {
+        field: "mortgage_document_guarantee",
+        headerName: "ضمانت نامه سند رهني",
+        width: 220,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "mortgage_document_guarantee");
+        },
+      },
+      // {
+      //   field: "revision",
+      //   headerName: "جمع ضمانت نامه هاي پيش پرداخت",
+      //   width: 230,
+      //   editable: true,
+      //   type: "boolean",
+      //   sortable: false,
+      //   renderCell: (params) => {
+      //     return getValue(params, "revision");
+      //   },
+      // },
+      {
+        field: "financial_situation",
+        headerName: "وضعيت در معاونت مالي",
+        width: 220,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "financial_situation");
+        },
+      },
+      {
+        field: "prepayment_request_date",
+        headerName: "تاريخ درخواست پيش پرداخت",
+        width: 220,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "prepayment_request_date");
+        },
+      },
+      {
+        field: "prepayment_amount",
+        headerName: "مبلغ پيش پرداخت",
+        width: 130,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "prepayment_amount");
+        },
+      },
+      {
+        field: "currency_type",
+        headerName: "نوع ارز",
+        width: 160,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "currency_type");
+        },
+      },
+      {
+        field: "prepayment_date",
+        headerName: "تاريخ پرداخت پيش پرداخت",
+        width: 260,
+        editable: true,
+        type: "boolean",
+        sortable: false,
+        renderCell: (params) => {
+          return getValue(params, "prepayment_date");
+        },
+      },
+    ];
+  }
 
   const rows = [];
   for (let i = 100; i > 0; i--) {

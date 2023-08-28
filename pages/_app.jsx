@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import Header from "./components/layout/header";
+import Sidebar from "./components/layout/sidebar";
 import { Provider } from "react-redux";
 import { store } from "./redux/store/clientStore";
 import { useRouter } from "next/router";
@@ -22,7 +23,8 @@ export default function App({ Component, pageProps }) {
 
   return (
     <Provider store={store}>
-      <Header name={pageProps.user} loggedin={loggedin} />
+      {/* <Header name={pageProps.user} loggedin={loggedin} /> */}
+      <Sidebar loggedin={loggedin} />
 
       <main className="px-4 py-6">
         <Component {...pageProps} />

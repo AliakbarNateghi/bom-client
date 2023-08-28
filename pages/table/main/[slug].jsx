@@ -1,8 +1,16 @@
-import Api from "../../../services/api";
+import Api from "../../services/api";
 import Cookies from "universal-cookie";
 import Table from "@/pages/components/layout/table";
+import { useRouter } from "next/router";
+
+export function Slug() {
+  const router = useRouter();
+  const { slug } = router.query;
+  return null;
+}
 
 export async function getServerSideProps(context) {
+  const { slug } = context.query;
   const { req } = context;
   const cookies = new Cookies(req.headers.cookie);
   if (!cookies.get("access_token")) {
@@ -15,21 +23,21 @@ export async function getServerSideProps(context) {
   }
   Api.init(cookies);
   const page = context.query.page || context.params?.page;
-  const response = await Api.get(`components/?page=${page}`);
+  const response = await Api.get(`components/${slug}/?page=${page}`);
   const components = response.data;
   const responsecols = await Api.get(`hidden-columns`);
   const hiddencols = responsecols.data;
-  console.log("hidden", hiddencols);
   return {
     props: {
       components,
       hiddencols,
       page,
+      slug,
     },
   };
 }
 
-export default function ScopeTable({ components, hiddencols, page }) {
+export default function ScopeTable({ components, hiddencols, page, slug }) {
   const editables = components["editables"];
   const querysets = components["querysets"];
 
@@ -519,7 +527,8 @@ export default function ScopeTable({ components, hiddencols, page }) {
       hiddencols={hiddencols[0]}
       page={page}
       columns={columns}
-      server={"components"}
+      server={`components/${slug}`}
+      slug={slug}
     />
   );
 }

@@ -33,7 +33,7 @@ export default function Header({ loggedin }) {
       {loggedin ? (
         <header className="bg-gray-400 sticky top-0 z-50">
           <nav className="flex items-center justify-between px-4 py-3">
-            <Link href="/?page=1">
+            <Link href="/">
               <div className="text-white font-bold text-xl">
                 <Image src={logo} alt="BOM" width={64} height={64} />
               </div>
@@ -69,10 +69,7 @@ export default function Header({ loggedin }) {
               <li className="mt-3 md:mt-0 md:ml-4">
                 {userGroups.map((group) => {
                   return group == "god" ? (
-                    <Link
-                      className="digikala"
-                      href="/users"
-                    >
+                    <Link className="digikala" href="/users">
                       کاربران
                     </Link>
                   ) : (

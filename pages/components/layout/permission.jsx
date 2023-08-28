@@ -28,6 +28,7 @@ export default function Permission({
   columns,
   server,
   massServer,
+  slug,
 }) {
   const router = useRouter();
   const [snackbar, setSnackbar] = useState(null);
@@ -99,8 +100,7 @@ export default function Permission({
     Api.init();
     await Api.post(massServer, massPayload);
     await setMassPermission(false);
-    await router.push(`${router.pathname}/?page=${page}&group=${groupID}`);
-    // await window.location.reload();
+    await router.push(`${slug}/?page=${page}&group=${groupID}`);
   };
 
   return (
@@ -120,12 +120,12 @@ export default function Permission({
       />
       <br />
       <div className="flex flex-row justify-start justify-around">
-        <div class="flex">
+        <div className="flex">
           <p className="flex items-center justify-center mr-4 px-3 h-8 text-sm font-medium bg-white border border-gray-300 rounded-lg dark:bg-gray-800 dark:text-white">
             {pageNumber * 100 - 99}-{pageNumber * 100} of {count}
           </p>
           <Link
-            href={`${router.pathname}?page=${
+            href={`${slug}?page=${
               pageNumber * 1 - 1
             }&group=${groupID}`}
             className={`flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
@@ -134,7 +134,7 @@ export default function Permission({
             {`<`}
           </Link>
           <Link
-            href={`${router.pathname}?page=${
+            href={`${slug}?page=${
               pageNumber * 1 + 1
             }&group=${groupID}`}
             className="flex items-center justify-center px-3 h-8 ml-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
@@ -271,7 +271,6 @@ export default function Permission({
                 id="editable"
                 onChange={(e) => {
                   setEditable(e.target.value);
-                  console.log("e.target.value :", e.target.value);
                 }}
                 value={editable}
               >

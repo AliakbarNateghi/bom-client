@@ -11,6 +11,7 @@ export default function Table({
   page,
   columns,
   server,
+  slug,
 }) {
   const router = useRouter();
 
@@ -77,12 +78,12 @@ export default function Table({
         }}
       />
       <br />
-      <div class="flex flex-row ">
+      <div className="flex flex-row ">
         <p className="flex items-center justify-center mr-4 px-3 h-8 text-sm font-medium bg-white border border-gray-300 rounded-lg dark:bg-gray-800 dark:text-white">
           {pageNumber * 100 - 99}-{pageNumber * 100} of {count}
         </p>
         <Link
-          href={`${router.pathname}?page=${pageNumber * 1 - 1}`}
+          href={`${slug}?page=${pageNumber * 1 - 1}`}
           className={`flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
           onClick={() => setPageNumber(pageNumber * 1 - 1)}
         >
@@ -90,7 +91,7 @@ export default function Table({
         </Link>
 
         <Link
-          href={`${router.pathname}?page=${pageNumber * 1 + 1}`}
+          href={`${slug}?page=${pageNumber * 1 + 1}`}
           className="flex items-center justify-center px-3 h-8 ml-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           onClick={() => setPageNumber(pageNumber * 1 + 1)}
         >

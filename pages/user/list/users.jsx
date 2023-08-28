@@ -29,7 +29,6 @@ export default function Users({ users, groups }) {
   const [group, setGroup] = useState([]);
   const [userName, setUserName] = useState("");
   const [userGroups, setUserGroups] = useState([]);
-  console.log("group :", group);
 
   const openModal = (e) => {
     e.preventDefault();
@@ -37,7 +36,6 @@ export default function Users({ users, groups }) {
     
   };
   const handleChangeMultiple = (e) => {
-    console.log("e :", e);
     const { options } = e.target;
     const value = [];
     for (let i = 0, l = options.length; i < l; i += 1) {

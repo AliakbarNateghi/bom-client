@@ -1,11 +1,19 @@
 import { useState } from "react";
-import Api from "../../../services/api";
+import Api from "../../services/api";
 import Cookies from "universal-cookie";
 import Permission from "@/pages/components/layout/permission";
 import Image from "next/image";
 import deletelogo from "@/public/logos/delete.png";
+import { useRouter } from "next/router";
+
+export function Slug() {
+  const router = useRouter();
+  const { slug } = router.query;
+  return null;
+}
 
 export async function getServerSideProps(context) {
+  const { slug } = context.query;
   const { req } = context;
   const cookies = new Cookies(req.headers.cookie);
   if (!cookies.get("access_token")) {
@@ -20,7 +28,7 @@ export async function getServerSideProps(context) {
   const page = context.query.page || context.params?.page;
   const group = context.query.group || context.params?.group;
   const response = await Api.get(
-    `field-permission/?page=${page}&group=${group}`
+    `field-permission/${slug}/?page=${page}&group=${group}`
   );
   const permissions = response.data;
   const groupsResponse = await Api.get(`groups`);
@@ -31,18 +39,19 @@ export async function getServerSideProps(context) {
       groups,
       page,
       group,
+      slug,
     },
   };
 }
 
-export default function ScopePermission({ permissions, groups, page, group }) {
+export default function ScopePermission({ permissions, groups, page, group, slug }) {
   function ValueComponent({ color, params }) {
     const [deletedCell, setDeletedCell] = useState(params.formattedValue);
     const onDeletePermission = async () => {
       setDeletedCell(null);
       try {
         await Api.delete(
-          "field-permission",
+          `field-permission/${slug}`,
           `${params.id}/?field=${params.field}&group=${group}`
         );
       } catch (err) {
@@ -710,8 +719,9 @@ export default function ScopePermission({ permissions, groups, page, group }) {
       group={group}
       rows={rows}
       columns={columns}
-      server={"field-permission"}
-      massServer={"mass-permission"}
+      server={`field-permission/${slug}`}
+      massServer={`mass-permission/${slug}`}
+      slug={slug}
     />
   );
 }

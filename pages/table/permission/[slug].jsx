@@ -854,7 +854,7 @@ export default function ScopePermission({
         type: "boolean",
         sortable: false,
         renderCell: (params) => {
-          return getValue(params, "reviprepayment_according_to_contractsion");
+          return getValue(params, "prepayment_according_to_contract");
         },
       },
 

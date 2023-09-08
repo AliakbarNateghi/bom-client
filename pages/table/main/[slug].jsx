@@ -52,7 +52,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
     const cellColor = bool ? "green" : "red";
     return (
       <div className="item-center" style={{ color: cellColor }}>
-        {params.value}
+        {params.value != "nan" && params.value ? params.value : ""}
       </div>
     );
   }

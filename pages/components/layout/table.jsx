@@ -1,4 +1,4 @@
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Api from "@/pages/services/api";
 import React, { useState, useCallback } from "react";
 import { successToast, errorToast, warningToast } from "@/pages/services/toast";
@@ -75,6 +75,13 @@ export default function Table({
         initialState={{
           columns: {
             columnVisibilityModel: hiddencols["hidden_cols"],
+          },
+        }}
+        sx={{
+          "& .MuiDataGrid-columnHeader": {
+            backgroundColor: "#f0f0f0",
+            fontFamily: "bkoodak",
+            fontSize: "16px",
           },
         }}
       />

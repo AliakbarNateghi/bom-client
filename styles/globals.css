@@ -35,6 +35,65 @@ body {
   font-family: 'bkoodak';
 }
 
+/*  */
+.bg-243447 {
+  background-color: #243447;
+}
+
+.bg-243447:hover {
+  background-color: #141d26;
+}
+/*  */
+
+/*  */
+.bg-f0f0f0 {
+  background-color: #f0f0f0;
+}
+/*  */
+
+
+/*  */
+.bg-00b200 {
+  background-color: #00b200;
+}
+
+.bg-4caf50 {
+  background-color: #4caf50;
+}
+
+.bg-ffc107 {
+  background-color: #ffc107;
+}
+
+.bg-ffd600 {
+  background-color: #ffd600;
+}
+
+.bg-f44336 {
+  background-color: #f44336;
+}
+
+.bg-ff1744 {
+  background-color: #ff1744;
+}
+
+.bg-2196f3 {
+  background-color: #2196f3;
+}
+
+.bg-03a9f4 {
+  background-color: #03a9f4;
+}
+
+.bg-9e9e9e {
+  background-color: #9e9e9e;
+}
+
+.bg-e0e0e0 {
+  background-color: #e0e0e0;
+}
+/*  */
+
 #sidebar {
     scale: 0.4;
     width: 60px;

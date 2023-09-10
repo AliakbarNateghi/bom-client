@@ -43,16 +43,16 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
   const querysets = components["querysets"];
 
   function getColor(params, field) {
-    let bool;
-    for (let i = 0; i < querysets.length; i++) {
-      if (querysets[i].id === params.id) {
-        bool = editables[i][`${field}`];
-      }
-    }
-    const cellColor = bool ? "green" : "red";
+    // let bool;
+    // for (let i = 0; i < querysets.length; i++) {
+    //   if (querysets[i].id === params.id) {
+    //     bool = editables[i][`${field}`];
+    //   }
+    // }
+    // const cellColor = bool ? "green" : "red";
     return (
       <div
-        className="bkoodak text-base"
+        className="bkoodak text-base font-medium"
         // style={{ color: cellColor }}
       >
         {/* {params.value != "nan" && params.value ? params.value : ""} */}
@@ -70,10 +70,12 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
       }
     }
     if (bool == null) {
-      return "hover:bg-gray-300 pointer-events-none";
+      return "pointer-events-none";
       // cursor-not-allowed
     }
-    return bool ? "bg-sky-300 hover:bg-sky-500 cursor-pointer" : "bg-red-300 hover:bg-red-500 pointer-events-none";
+    return bool
+      ? "bg-green-400 hover:bg-green-500 cursor-pointer"
+      : "bg-sky-400 hover:bg-sky-700 pointer-events-none";
   }
 
   let columns;
@@ -84,13 +86,18 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "id",
         width: 100,
         editable: false,
+        align: "center",
         headerAlign: "center",
+        cellClassName: () => {
+          return "bg-f0f0f0 font-bold";
+        },
       },
       {
         field: "revision",
         headerName: "REVISION",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "revision");
@@ -104,6 +111,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "ID",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "ID");
@@ -117,6 +125,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "P/N Status Code",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "P_on_N_status_code");
@@ -130,6 +139,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Fig. No.",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "fig_no");
@@ -143,6 +153,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Item No.",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "item_no");
@@ -156,6 +167,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Module",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "module");
@@ -169,6 +181,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Level",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "level");
@@ -182,6 +195,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Code",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "code");
@@ -195,6 +209,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Parent Code",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "parent_code");
@@ -208,6 +223,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Part Number",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "part_number");
@@ -221,6 +237,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Description",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "description");
@@ -234,6 +251,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Comment",
         width: 220,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "comment");
@@ -247,6 +265,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "SAP NAME",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "sap_name");
@@ -260,6 +279,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Units Per Assy",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "unit_per_assy");
@@ -273,6 +293,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Units Per End Item",
         width: 150,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "unit_per_end_item");
@@ -286,6 +307,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Corrected Units Per End Item",
         width: 220,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "corrected_units_per_end_item");
@@ -299,6 +321,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "GG QTY",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "gg_qty");
@@ -312,6 +335,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "SRP",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "srp");
@@ -325,6 +349,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Store Comment",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "store_comment");
@@ -339,6 +364,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         width: 130,
         type: "boolean",
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "assembly");
@@ -353,6 +379,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         width: 130,
         type: "boolean",
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "standard_part");
@@ -366,6 +393,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Material",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "material");
@@ -379,6 +407,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Mfg. Complexity Level",
         width: 220,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "mfg_complexity_level");
@@ -392,6 +421,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Disassembled",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "disassembled");
@@ -405,6 +435,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Supplying / Manufacturing ",
         width: 220,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "supplying_or_manufacturing");
@@ -418,6 +449,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Internal / External outsourcing",
         width: 220,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "internal_or_external_outsourcing");
@@ -431,6 +463,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Vendor",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "vendor");
@@ -444,6 +477,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Joining",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "joining");
@@ -457,6 +491,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Manufacturing Process",
         width: 220,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "manufacturing_process");
@@ -470,6 +505,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Raw Material Form",
         width: 150,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "raw_material_form");
@@ -483,6 +519,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Function",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "function");
@@ -496,6 +533,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "QC Criteria",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "qc_criteria");
@@ -509,6 +547,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Manufacturing Priority ",
         width: 180,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "manufacturing_priority");
@@ -522,6 +561,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Manufacturing Responsible Department",
         width: 300,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "manufacturing_responsible_department");
@@ -535,6 +575,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Designing Responsible Department",
         width: 300,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "designing_responsible_department");
@@ -548,6 +589,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "USAGE ON OTHER ENGINES",
         width: 220,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "usage_on_other_engines");
@@ -561,6 +603,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "MANUFACTURING PARTS Category",
         width: 280,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "manufacturing_parts_category");
@@ -574,6 +617,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Scope Matrix Category",
         width: 220,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "scope_matrix_category");
@@ -587,6 +631,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Requires Manufacturing/Supplying For Re-Assembly",
         width: 360,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(
@@ -606,6 +651,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "System D. Requirement",
         width: 200,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "system_D_requirements");
@@ -619,6 +665,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "PERCURMENT STATE",
         width: 200,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "percurment_state");
@@ -632,6 +679,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "DETAILS",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "details");
@@ -645,6 +693,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Joint Type",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "joint_type");
@@ -658,6 +707,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "DISCARDED DURING DISSASSEMBLY",
         width: 300,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "discarded_during_disassembly");
@@ -672,6 +722,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         width: 130,
         type: "boolean",
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "expendables");
@@ -685,6 +736,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Discarded/Unusable According To Docs",
         width: 300,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(
@@ -701,6 +753,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Destroyed For Analysis",
         width: 220,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "destroyed_for_analysis");
@@ -714,6 +767,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Rejected by QC/Inspection",
         width: 220,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "rejected_by_qc_or_inspection");
@@ -727,6 +781,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "Class Size/Weight As Required",
         width: 220,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "class_size_or_weight_as_required");
@@ -740,6 +795,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "EBOM",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "EBOM");
@@ -756,13 +812,18 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "id",
         width: 100,
         editable: false,
+        align: "center",
         headerAlign: "center",
+        cellClassName: () => {
+          return "bg-f0f0f0 font-bold";
+        },
       },
       {
         field: "application_type",
         headerName: "نوع درخواست (گزارش خرید/قرارداد)",
         width: 260,
         editable: true,
+        align: "center",
         headerAlign: "center",
         type: "singleSelect",
         valueOptions: ["قرارداد", "پیمانکار"],
@@ -778,6 +839,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "مرحله تامین",
         width: 400,
         editable: true,
+        align: "center",
         headerAlign: "center",
         type: "singleSelect",
         valueOptions: [
@@ -811,6 +873,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "تامین كننده متریال",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         type: "singleSelect",
         valueOptions: ["پیمانکار", "کارفرما"],
@@ -826,6 +889,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: " PR شماره",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "pr");
@@ -839,6 +903,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "PO شماره",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "po");
@@ -852,6 +917,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "موضوع",
         width: 500,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "subject");
@@ -865,6 +931,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "جنس درخواست",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         type: "singleSelect",
         valueOptions: [
@@ -887,6 +954,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "مدیریت سفارش دهنده",
         width: 220,
         editable: true,
+        align: "center",
         headerAlign: "center",
         type: "singleSelect",
         valueOptions: [
@@ -911,6 +979,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "شماره قرارداد",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "contract_number");
@@ -924,6 +993,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "تامین كننده",
         width: 220,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "supplier");
@@ -937,6 +1007,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "مبلغ",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "amount");
@@ -950,6 +1021,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "مبلغ تعدیل",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "adjustment_amount");
@@ -963,6 +1035,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
       //   headerName: "جمع مبلغ",
       //   width: 130,
       //   editable: true,
+      //   align: "center",
       //   headerAlign: "center",
       //   renderCell: (params) => {
       //     return getColor(params, "revision");
@@ -973,6 +1046,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "نوع ارز",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         type: "singleSelect",
         valueOptions: ["ریال", "یورو", "دلار", "یوان", "درهم"],
@@ -988,6 +1062,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "كارشناس مسئول",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         type: "singleSelect",
         valueOptions: ["غنی آبادی", "محمد زاده", "روشن دل"],
@@ -1003,6 +1078,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "درصد پیش‌پرداخت",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "prepayment_percentage");
@@ -1016,6 +1092,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "مبلغ پیش‌پرداخت طبق قرارداد",
         width: 300,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "prepayment_according_to_contract");
@@ -1029,6 +1106,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "پیش پرداخت توسط توگا",
         width: 220,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "prepaid_by_toga");
@@ -1042,6 +1120,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "پیش پرداخت توسط موتور هوایی",
         width: 300,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "prepaid_by_air_engine");
@@ -1055,7 +1134,8 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
       //   headerName: " جمع پیش پرداخت ها- ریالی",
       //   width: 260,
       //   editable: true,
-      //   headerAlign: "center",
+      //   align: "center",
+      //   headerAlign: "center"
       //   renderCell: (params) => {
       //     return getColor(params, "revision");
       //   },
@@ -1065,6 +1145,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "چك تضمین پیش پرداخت",
         width: 220,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "prepayment_guarantee_check");
@@ -1078,6 +1159,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "ضمانتنامه پیش پرداخت",
         width: 220,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "prepayment_guarantee");
@@ -1091,6 +1173,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "ضمانت نامه سند رهنی",
         width: 220,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "mortgage_document_guarantee");
@@ -1104,6 +1187,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
       //   headerName: "جمع ضمانت نامه های پیش پرداخت",
       //   width: 230,
       //   editable: true,
+      //   align: "center",
       //   headerAlign: "center",
       //   renderCell: (params) => {
       //     return getColor(params, "revision");
@@ -1114,6 +1198,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "وضعیت در معاونت مالی",
         width: 220,
         editable: true,
+        align: "center",
         headerAlign: "center",
         type: "singleSelect",
         valueOptions: [
@@ -1139,6 +1224,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "تاریخ درخواست پیش پرداخت",
         width: 220,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "prepayment_request_date");
@@ -1152,6 +1238,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "مبلغ پیش پرداخت",
         width: 130,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "prepayment_amount");
@@ -1165,6 +1252,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "نوع ارز",
         width: 160,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "currency_type");
@@ -1178,6 +1266,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         headerName: "تاریخ پرداخت پیش پرداخت",
         width: 260,
         editable: true,
+        align: "center",
         headerAlign: "center",
         cellClassName: (params) => {
           return getClassName(params, "prepayment_date");

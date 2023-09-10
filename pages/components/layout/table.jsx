@@ -25,7 +25,7 @@ export default function Table({
   const saveOnServer = useCallback(
     async (newRow) => {
       Api.init();
-      console.log("newRow :", newRow);
+      // console.log("newRow :", newRow);
       const response = await Api.patch(server, `${newRow.id}/`, newRow);
       if (response.data.message === "success") {
         successToast("آپدیت شد");

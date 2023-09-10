@@ -75,7 +75,7 @@ export default function Home({}) {
         <li className="text-center">
           <Link
             href="/table/main/bom?page=1"
-            className="digikala text-blue-500 text-xl text-right"
+            className="digikala text-blue-500 hover:text-red-600 text-xl text-right"
           >
             اسکوپ ماتریکس
           </Link>
@@ -83,7 +83,7 @@ export default function Home({}) {
         <li className="text-center">
           <Link
             href="/table/main/provide?page=1"
-            className="digikala text-blue-500 text-xl text-right"
+            className="digikala text-blue-500 hover:text-red-600 text-xl text-right"
           >
             تامین
           </Link>
@@ -98,7 +98,7 @@ export default function Home({}) {
               <li className="text-center">
                 <Link
                   href="/table/permission/bom?page=1&group=1"
-                  className="digikala text-blue-500 text-xl"
+                  className="digikala text-blue-500 hover:text-red-600 text-xl"
                 >
                   اسکوپ ماتریکس
                 </Link>
@@ -106,7 +106,7 @@ export default function Home({}) {
               <li className="text-center">
                 <Link
                   href="/table/permission/provide?page=1&group=1"
-                  className="digikala text-blue-500 text-xl"
+                  className="digikala text-blue-500 hover:text-red-600 text-xl"
                 >
                   تامین
                 </Link>

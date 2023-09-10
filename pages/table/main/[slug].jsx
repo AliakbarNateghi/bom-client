@@ -52,7 +52,8 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
     const cellColor = bool ? "green" : "red";
     return (
       <div className="item-center" style={{ color: cellColor }}>
-        {params.value != "nan" && params.value ? params.value : ""}
+        {/* {params.value != "nan" && params.value ? params.value : ""} */}
+        {params.value}
       </div>
     );
   }
@@ -533,7 +534,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
       },
       {
         field: "application_type",
-        headerName: "نوع درخواست (گزارش خريد/قرارداد)",
+        headerName: "نوع درخواست (گزارش خرید/قرارداد)",
         width: 260,
         editable: true,
         type: "singleSelect",
@@ -544,27 +545,27 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
       },
       {
         field: "supply_stage",
-        headerName: "مرحله تامين",
+        headerName: "مرحله تامین",
         width: 400,
         editable: true,
         type: "singleSelect",
         valueOptions: [
-          "يافتن پيمانكاران و تاييد صلاحيت پيمانكار",
+          "یافتن پیمانكاران و تایید صلاحیت پیمانكار",
           "درخواست استعلام/مناقصه",
-          "دريافت پيشنهاد قيمت/پاكات",
-          "دريافت تاييد فني از واحد درخواست دهنده",
-          "تهيه گزارش كميسيون معاملات/گزارش خريد",
-          "برگزاري كميسيون معاملات",
-          "تاييد كميسيون معاملات",
+          "دریافت پیشنهاد قیمت/پاكات",
+          "دریافت تایید فنی از واحد درخواست دهنده",
+          "تهیه گزارش كمیسیون معاملات/گزارش خرید",
+          "برگزاری كمیسیون معاملات",
+          "تایید كمیسیون معاملات",
           "ابلاغ سفارش",
-          "تهيه پيش نويس قرارداد",
-          "تاييد پيش نويس قرارداد توسط درخواست دهنده",
-          "امضاي پيمانكار",
-          "امضاي داخلی",
+          "تهیه پیش نویس قرارداد",
+          "تایید پیش نویس قرارداد توسط درخواست دهنده",
+          "امضای پیمانكار",
+          "امضای داخلی",
           "ابلاغ قرارداد",
           "تحویل گردید",
           "حذف شد",
-          "دريافت تضامي",
+          "دریافت تضامین",
           "ارجاع به مالی",
         ],
         renderCell: (params) => {
@@ -573,7 +574,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
       },
       {
         field: "material_supplier",
-        headerName: "تامين كننده متريال",
+        headerName: "تامین كننده متریال",
         width: 130,
         editable: true,
         type: "singleSelect",
@@ -623,13 +624,21 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           "ابزار و ماشین آلات",
           "خدمت",
         ],
+        // valueOptions: [
+        //   { value: "raw_material", label: "ماده اولیه" },
+        //   { value: "semi_finished", label: "ماده نیمه آماده" },
+        //   { value: "component_supply", label: "تامین قطعه" },
+        //   { value: "manufacturing", label: "ساخت" },
+        //   { value: "tools_and_machinery", label: "ابزار و ماشین آلات" },
+        //   { value: "service", label: "خدمت" },
+        // ],
         renderCell: (params) => {
           return getColor(params, "request_type");
         },
       },
       {
         field: "customer_management",
-        headerName: "مديريت سفارش دهنده",
+        headerName: "مدیریت سفارش دهنده",
         width: 220,
         editable: true,
         type: "singleSelect",
@@ -640,7 +649,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           "ماینور پارت",
           "محفظه احتراق",
           "طراحی سازه موتور",
-          "استاندارد و کیفیت",
+          "استاندارد و كیفیت",
         ],
         renderCell: (params) => {
           return getColor(params, "customer_management");
@@ -658,7 +667,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
       },
       {
         field: "supplier",
-        headerName: "تامين كننده",
+        headerName: "تامین كننده",
         width: 220,
         editable: true,
         renderCell: (params) => {
@@ -676,7 +685,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
       },
       {
         field: "adjustment_amount",
-        headerName: "مبلغ تعديل",
+        headerName: "مبلغ تعدیل",
         width: 130,
         editable: true,
         renderCell: (params) => {
@@ -698,7 +707,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
         width: 130,
         editable: true,
         type: "singleSelect",
-        valueOptions: ["ریال", "يورو", "دلار", "يوان", "درهم"],
+        valueOptions: ["ریال", "یورو", "دلار", "یوان", "درهم"],
         renderCell: (params) => {
           return getColor(params, "currency");
         },
@@ -716,7 +725,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
       },
       {
         field: "prepayment_percentage",
-        headerName: "درصد پيش‌پرداخت",
+        headerName: "درصد پیش‌پرداخت",
         width: 130,
         editable: true,
         renderCell: (params) => {
@@ -725,17 +734,17 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
       },
       {
         field: "prepayment_according_to_contract",
-        headerName: "مبلغ پيش‌پرداخت طبق قرارداد",
+        headerName: "مبلغ پیش‌پرداخت طبق قرارداد",
         width: 300,
         editable: true,
         renderCell: (params) => {
-          return getColor(params, "reviprepayment_according_to_contractsion");
+          return getColor(params, "prepayment_according_to_contract");
         },
       },
 
       {
         field: "prepaid_by_toga",
-        headerName: "پيش پرداخت توسط توگا",
+        headerName: "پیش پرداخت توسط توگا",
         width: 220,
         editable: true,
         renderCell: (params) => {
@@ -744,7 +753,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
       },
       {
         field: "prepaid_by_air_engine",
-        headerName: "پيش پرداخت توسط موتور هوايي",
+        headerName: "پیش پرداخت توسط موتور هوایی",
         width: 300,
         editable: true,
         renderCell: (params) => {
@@ -753,7 +762,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
       },
       // {
       //   field: "revision",
-      //   headerName: " جمع پيش پرداخت ها- ريالي",
+      //   headerName: " جمع پیش پرداخت ها- ریالی",
       //   width: 260,
       //   editable: true,
       //   renderCell: (params) => {
@@ -762,7 +771,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
       // },
       {
         field: "prepayment_guarantee_check",
-        headerName: "چك تضمين پيش پرداخت",
+        headerName: "چك تضمین پیش پرداخت",
         width: 220,
         editable: true,
         renderCell: (params) => {
@@ -771,7 +780,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
       },
       {
         field: "prepayment_guarantee",
-        headerName: "ضمانتنامه پيش پرداخت",
+        headerName: "ضمانتنامه پیش پرداخت",
         width: 220,
         editable: true,
         renderCell: (params) => {
@@ -780,7 +789,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
       },
       {
         field: "mortgage_document_guarantee",
-        headerName: "ضمانت نامه سند رهني",
+        headerName: "ضمانت نامه سند رهنی",
         width: 220,
         editable: true,
         renderCell: (params) => {
@@ -789,7 +798,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
       },
       // {
       //   field: "revision",
-      //   headerName: "جمع ضمانت نامه هاي پيش پرداخت",
+      //   headerName: "جمع ضمانت نامه های پیش پرداخت",
       //   width: 230,
       //   editable: true,
       //   renderCell: (params) => {
@@ -798,19 +807,19 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
       // },
       {
         field: "financial_situation",
-        headerName: "وضعيت در معاونت مالي",
+        headerName: "وضعیت در معاونت مالی",
         width: 220,
         editable: true,
         type: "singleSelect",
         valueOptions: [
-          "دريافت تضامين",
-          "درخواست پيش پرداخت",
-          "تعيين نوع ارز",
-          "توافق با تامين كننده",
-          "دريافت مستندات ارزی",
-          "درخواست ارز از مپنا بين الملل",
-          "ارسال مدارك به مپنا بين الملل",
-          "پيگيري درخواست ارز",
+          "دریافت تضامین",
+          "درخواست پیش پرداخت",
+          "تعیین نوع ارز",
+          "توافق با تامین كننده",
+          "دریافت مستندات ارزی",
+          "درخواست ارز از مپنا بین الملل",
+          "ارسال مدارك به مپنا بین الملل",
+          "پیگیری درخواست ارز",
           "پرداخت شده",
         ],
         renderCell: (params) => {
@@ -819,7 +828,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
       },
       {
         field: "prepayment_request_date",
-        headerName: "تاريخ درخواست پيش پرداخت",
+        headerName: "تاریخ درخواست پیش پرداخت",
         width: 220,
         editable: true,
         renderCell: (params) => {
@@ -828,7 +837,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
       },
       {
         field: "prepayment_amount",
-        headerName: "مبلغ پيش پرداخت",
+        headerName: "مبلغ پیش پرداخت",
         width: 130,
         editable: true,
         renderCell: (params) => {
@@ -846,7 +855,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
       },
       {
         field: "prepayment_date",
-        headerName: "تاريخ پرداخت پيش پرداخت",
+        headerName: "تاریخ پرداخت پیش پرداخت",
         width: 260,
         editable: true,
         renderCell: (params) => {

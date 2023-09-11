@@ -41,12 +41,26 @@ export default function Sidebar({ loggedin }) {
   let links = [
     { label: "خانه", link: "/", onClick: () => {} },
     { label: "پروفایل", link: "/user/profile", onClick: () => {} },
+    { label: "اسکوپ ماتریکس", link: "/table/main/bom?page=1", onClick: Logout },
+    { label: "تامین", link: "/table/main/provide?page=1", onClick: Logout },
     { label: "خروج", link: "/user/login", onClick: Logout },
   ];
 
-  isAdmin
-    ? links.push({ label: "کاربران", link: "/user/list", onClick: () => {} })
-    : "";
+  let adminLinks = [
+    { label: "کاربران", link: "/user/list", onClick: () => {} },
+    {
+      label: "دسترسی تامین",
+      link: "/table/permission/provide?page=1&group=1",
+      onClick: () => {},
+    },
+    {
+      label: "دسترسی اسکوپ ماتریکس",
+      link: "/table/permission/bom?page=1&group=1",
+      onClick: () => {},
+    },
+  ];
+
+  isAdmin ? adminLinks.map((adminLink) => links.splice(4, 0, adminLink)) : "";
 
   return (
     <div>
@@ -84,10 +98,14 @@ export default function Sidebar({ loggedin }) {
                         onClick={item.onClick}
                         href={item.link}
                         key={item.label}
-                        sx={{
-                          py: 0,
-                          minHeight: 32,
-                        }}
+                        background="red"
+                        sx={
+                          item.label == "خروج"
+                            ? {
+                                background: "#ff1744",
+                              }
+                            : {}
+                        }
                       >
                         <ListItemText
                           primary={item.label}

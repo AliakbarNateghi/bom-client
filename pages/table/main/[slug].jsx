@@ -75,7 +75,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
     }
     return bool
       ? "bg-green-400 hover:bg-green-500 cursor-pointer"
-      : "bg-sky-400 hover:bg-sky-700 pointer-events-none";
+      : "bg-sky-400 hover:bg-sky-600 pointer-events-none";
   }
 
   let columns;

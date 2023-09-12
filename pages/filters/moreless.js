@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function MoreLess({ params, field }) {
+export default function MoreLess({ params }) {
   const [expanded, setExpanded] = useState(false);
   const value = params?.value;
 

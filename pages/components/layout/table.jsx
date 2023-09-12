@@ -92,7 +92,7 @@ export default function Table({
       <DataGrid
         getRowHeight={() => "auto"}
         // getEstimatedRowHeight={() => 200}
-        // slots={{ toolbar: GridToolbar }}
+        slots={{ toolbar: GridToolbar }}
         rows={rows}
         columns={columns}
         processRowUpdate={(updatedRow, originalRow) =>

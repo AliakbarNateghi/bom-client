@@ -1,4 +1,4 @@
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { Modal, Box } from "@mui/material";
 import Api from "@/pages/services/api";
 import React, { useState, useCallback } from "react";
@@ -20,11 +20,13 @@ const style = {
 
 const guides = [
   ".رنگ سلول های آبی به این معناست که کاربر اجازه مشاهده سلول مورد نظر را دارد",
-  ".رنگ سلول های سبز به این معناست که کاربر علاوه بر مشاهده سلول توانایی ویرایش سلول را با دوبار کلیک کردن بر روی سلول خواهد داشت",
+  "رنگ سلول های سبز به این معناست که کاربر علاوه بر مشاهده سلول توانایی ویرایش سلول را با دوبار کلیک کردن بر روی سلول خواهد داشت",
   "اگر سلول مورد نظر بی رنگ است به این معناست که کاربر اجازه دیدن یا ویرایش سلول را ندارد. (برای کسب دسترسی به ادمین سیستم مراجعه نمایید)",
   ".با کلیک کردن بر روی هر سر ستون میتوانید ترتیب چیده شدن سلول ها را تغییر دهید",
   ".با کلیک منوی کبابی هر سر ستون میتوانید ستون هایی که نیاز ندارید را پنهان نمایید",
   ".در انتهای جدول در هر صفحه میتوانید تعداد رکورد های موجود در جدول را مشاهده کنید و بین صفحات مختلف جا به جا شوید",
+  "بعضی سلول های جدول در حالت انتخاب قرار دارند و درصورتی که کاربر دسترسی ویرایش داشته باشد با دوبار کلیک میتواند از بین گزینه های باز شده یک گزینه را انتخاب نماید",
+  ".اگر در سلولی بیشتر از 200 کاراکتر موجود باشد میتوانید با کلیک بر روی گزینه بیشتر کل متن را مشاهده نمایید",
 ];
 
 export default function Table({
@@ -81,13 +83,16 @@ export default function Table({
   };
 
   return (
-    <div style={{ height: "100%", width: "100%" }}>
+    <div style={{ height: "100%", width: "100%", marginTop: "2%" }}>
       <div
         onClick={() => setGuideModal(true)}
         title="راهنما"
-        className="absolute right-4 top-4 w-10 h-10 hover:w-12 hover:h-12 hover:right-3 hover:top-3 gradient-background cursor-pointer"
+        className="fixed z-[1] right-4 top-4 w-10 h-10 hover:w-12 hover:h-12 hover:right-3 hover:top-3 gradient-background cursor-pointer"
       ></div>
       <DataGrid
+        getRowHeight={() => "auto"}
+        // getEstimatedRowHeight={() => 200}
+        // slots={{ toolbar: GridToolbar }}
         rows={rows}
         columns={columns}
         processRowUpdate={(updatedRow, originalRow) =>
@@ -108,8 +113,16 @@ export default function Table({
           "& .MuiDataGrid-columnHeader": {
             backgroundColor: "#f0f0f0",
             fontFamily: "bkoodak",
-            // fontWeight: "bolder",
             fontSize: "16px",
+          },
+          "&.MuiDataGrid-root--densityCompact .MuiDataGrid-cell": {
+            py: "10px",
+          },
+          "&.MuiDataGrid-root--densityStandard .MuiDataGrid-cell": {
+            py: "20px",
+          },
+          "&.MuiDataGrid-root--densityComfortable .MuiDataGrid-cell": {
+            py: "30px",
           },
         }}
       />
@@ -122,13 +135,15 @@ export default function Table({
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <div className="w-full list relative">
+          <div className="w-full list">
             <h2 className="bkoodak text-4xl text-center mb-5">
-              راهنمای استفاده از جدول اسکوپ ماتریکس
+              راهنمای استفاده از جداول
             </h2>
             <ul className="relative ">
               {guides.map((text) => (
-                <li className="relative m-5 right-0 text-center bkoodak text-xl">{text}</li>
+                <li className="relative m-5 right-0 text-center bkoodak text-xl hover:text-white cursor-help">
+                  {text}
+                </li>
               ))}
             </ul>
           </div>

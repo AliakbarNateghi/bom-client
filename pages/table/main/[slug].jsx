@@ -2,6 +2,8 @@ import Api from "../../services/api";
 import Cookies from "universal-cookie";
 import Table from "@/pages/components/layout/table";
 import { useRouter } from "next/router";
+import MoreLess from "@/pages/filters/moreless";
+
 // import { DatePicker } from "react-persian-datepicker";
 
 export function Slug() {
@@ -38,28 +40,13 @@ export async function getServerSideProps(context) {
   };
 }
 
+// function MoreLess(params, field) {
+//   return <div className="bkoodak text-base font-medium">{params.value}</div>;
+// }
+
 export default function ScopeTable({ components, hiddencols, page, slug }) {
   const editables = components["editables"];
   const querysets = components["querysets"];
-
-  function getColor(params, field) {
-    // let bool;
-    // for (let i = 0; i < querysets.length; i++) {
-    //   if (querysets[i].id === params.id) {
-    //     bool = editables[i][`${field}`];
-    //   }
-    // }
-    // const cellColor = bool ? "green" : "red";
-    return (
-      <div
-        className="bkoodak text-base font-medium"
-        // style={{ color: cellColor }}
-      >
-        {/* {params.value != "nan" && params.value ? params.value : ""} */}
-        {params.value}
-      </div>
-    );
-  }
 
   function getClassName(params, field) {
     let bool;
@@ -103,7 +90,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "revision");
         },
         renderCell: (params) => {
-          return getColor(params, "revision");
+          return <MoreLess params={params} field="revision" />;
         },
       },
       {
@@ -117,7 +104,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "ID");
         },
         renderCell: (params) => {
-          return getColor(params, "ID");
+          return <MoreLess params={params} field="ID" />;
         },
       },
       {
@@ -131,7 +118,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "P_on_N_status_code");
         },
         renderCell: (params) => {
-          return getColor(params, "P_on_N_status_code");
+          return <MoreLess params={params} field="P_on_N_status_code" />;
         },
       },
       {
@@ -145,7 +132,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "fig_no");
         },
         renderCell: (params) => {
-          return getColor(params, "fig_no");
+          return <MoreLess params={params} field="fig_no" />;
         },
       },
       {
@@ -159,7 +146,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "item_no");
         },
         renderCell: (params) => {
-          return getColor(params, "item_no");
+          return <MoreLess params={params} field="item_no" />;
         },
       },
       {
@@ -173,7 +160,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "module");
         },
         renderCell: (params) => {
-          return getColor(params, "module");
+          return <MoreLess params={params} field="module" />;
         },
       },
       {
@@ -187,7 +174,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "level");
         },
         renderCell: (params) => {
-          return getColor(params, "level");
+          return <MoreLess params={params} field="level" />;
         },
       },
       {
@@ -201,7 +188,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "code");
         },
         renderCell: (params) => {
-          return getColor(params, "code");
+          return <MoreLess params={params} field="code" />;
         },
       },
       {
@@ -215,7 +202,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "parent_code");
         },
         renderCell: (params) => {
-          return getColor(params, "parent_code");
+          return <MoreLess params={params} field="parent_code" />;
         },
       },
       {
@@ -229,7 +216,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "part_number");
         },
         renderCell: (params) => {
-          return getColor(params, "part_number");
+          return <MoreLess params={params} field="part_number" />;
         },
       },
       {
@@ -243,7 +230,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "description");
         },
         renderCell: (params) => {
-          return getColor(params, "description");
+          return <MoreLess params={params} field="description" />;
         },
       },
       {
@@ -257,7 +244,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "comment");
         },
         renderCell: (params) => {
-          return getColor(params, "comment");
+          return <MoreLess params={params} field="comment" />;
         },
       },
       {
@@ -271,7 +258,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "sap_name");
         },
         renderCell: (params) => {
-          return getColor(params, "sap_name");
+          return <MoreLess params={params} field="sap_name" />;
         },
       },
       {
@@ -285,7 +272,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "unit_per_assy");
         },
         renderCell: (params) => {
-          return getColor(params, "unit_per_assy");
+          return <MoreLess params={params} field="unit_per_assy" />;
         },
       },
       {
@@ -299,7 +286,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "unit_per_end_item");
         },
         renderCell: (params) => {
-          return getColor(params, "unit_per_end_item");
+          return <MoreLess params={params} field="unit_per_end_item" />;
         },
       },
       {
@@ -313,7 +300,9 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "corrected_units_per_end_item");
         },
         renderCell: (params) => {
-          return getColor(params, "corrected_units_per_end_item");
+          return (
+            <MoreLess params={params} field="corrected_units_per_end_item" />
+          );
         },
       },
       {
@@ -327,7 +316,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "gg_qty");
         },
         renderCell: (params) => {
-          return getColor(params, "gg_qty");
+          return <MoreLess params={params} field="gg_qty" />;
         },
       },
       {
@@ -341,13 +330,13 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "srp");
         },
         renderCell: (params) => {
-          return getColor(params, "srp");
+          return <MoreLess params={params} field="srp" />;
         },
       },
       {
         field: "store_comment",
         headerName: "Store Comment",
-        width: 130,
+        width: 360,
         editable: true,
         align: "center",
         headerAlign: "center",
@@ -355,7 +344,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "store_comment");
         },
         renderCell: (params) => {
-          return getColor(params, "store_comment");
+          return <MoreLess params={params} field="store_comment" />;
         },
       },
       {
@@ -370,7 +359,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "assembly");
         },
         // renderCell: (params) => {
-        //   return getColor(params, "assembly");
+        //   return <MoreLess params={params} field="assembly" />
         // },
       },
       {
@@ -385,7 +374,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "standard_part");
         },
         // renderCell: (params) => {
-        //   return getColor(params, "standard_part");
+        //   return <MoreLess params={params} field="standard_part" />
         // },
       },
       {
@@ -399,7 +388,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "material");
         },
         renderCell: (params) => {
-          return getColor(params, "material");
+          return <MoreLess params={params} field="material" />;
         },
       },
       {
@@ -413,7 +402,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "mfg_complexity_level");
         },
         renderCell: (params) => {
-          return getColor(params, "mfg_complexity_level");
+          return <MoreLess params={params} field="mfg_complexity_level" />;
         },
       },
       {
@@ -427,7 +416,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "disassembled");
         },
         renderCell: (params) => {
-          return getColor(params, "disassembled");
+          return <MoreLess params={params} field="disassembled" />;
         },
       },
       {
@@ -441,7 +430,9 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "supplying_or_manufacturing");
         },
         renderCell: (params) => {
-          return getColor(params, "supplying_or_manufacturing");
+          return (
+            <MoreLess params={params} field="supplying_or_manufacturing" />
+          );
         },
       },
       {
@@ -455,7 +446,12 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "internal_or_external_outsourcing");
         },
         renderCell: (params) => {
-          return getColor(params, "internal_or_external_outsourcing");
+          return (
+            <MoreLess
+              params={params}
+              field="internal_or_external_outsourcing"
+            />
+          );
         },
       },
       {
@@ -469,7 +465,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "vendor");
         },
         renderCell: (params) => {
-          return getColor(params, "vendor");
+          return <MoreLess params={params} field="vendor" />;
         },
       },
       {
@@ -483,7 +479,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "joining");
         },
         renderCell: (params) => {
-          return getColor(params, "joining");
+          return <MoreLess params={params} field="joining" />;
         },
       },
       {
@@ -497,7 +493,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "manufacturing_process");
         },
         renderCell: (params) => {
-          return getColor(params, "manufacturing_process");
+          return <MoreLess params={params} field="manufacturing_process" />;
         },
       },
       {
@@ -511,7 +507,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "raw_material_form");
         },
         renderCell: (params) => {
-          return getColor(params, "raw_material_form");
+          return <MoreLess params={params} field="raw_material_form" />;
         },
       },
       {
@@ -525,7 +521,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "function");
         },
         renderCell: (params) => {
-          return getColor(params, "function");
+          return <MoreLess params={params} field="function" />;
         },
       },
       {
@@ -539,7 +535,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "qc_criteria");
         },
         renderCell: (params) => {
-          return getColor(params, "qc_criteria");
+          return <MoreLess params={params} field="qc_criteria" />;
         },
       },
       {
@@ -553,7 +549,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "manufacturing_priority");
         },
         renderCell: (params) => {
-          return getColor(params, "manufacturing_priority");
+          return <MoreLess params={params} field="manufacturing_priority" />;
         },
       },
       {
@@ -567,7 +563,12 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "manufacturing_responsible_department");
         },
         renderCell: (params) => {
-          return getColor(params, "manufacturing_responsible_department");
+          return (
+            <MoreLess
+              params={params}
+              field="manufacturing_responsible_department"
+            />
+          );
         },
       },
       {
@@ -581,7 +582,12 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "designing_responsible_department");
         },
         renderCell: (params) => {
-          return getColor(params, "designing_responsible_department");
+          return (
+            <MoreLess
+              params={params}
+              field="designing_responsible_department"
+            />
+          );
         },
       },
       {
@@ -595,7 +601,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "usage_on_other_engines");
         },
         renderCell: (params) => {
-          return getColor(params, "usage_on_other_engines");
+          return <MoreLess params={params} field="usage_on_other_engines" />;
         },
       },
       {
@@ -609,7 +615,9 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "manufacturing_parts_category");
         },
         renderCell: (params) => {
-          return getColor(params, "manufacturing_parts_category");
+          return (
+            <MoreLess params={params} field="manufacturing_parts_category" />
+          );
         },
       },
       {
@@ -623,7 +631,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "scope_matrix_category");
         },
         renderCell: (params) => {
-          return getColor(params, "scope_matrix_category");
+          return <MoreLess params={params} field="scope_matrix_category" />;
         },
       },
       {
@@ -640,9 +648,11 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           );
         },
         renderCell: (params) => {
-          return getColor(
-            params,
-            "requires_manufacturing_or_supplying_for_reassembly"
+          return (
+            <MoreLess
+              params={params}
+              field="requires_manufacturing_or_supplying_for_reassembly"
+            />
           );
         },
       },
@@ -657,7 +667,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "system_D_requirements");
         },
         renderCell: (params) => {
-          return getColor(params, "system_D_requirements");
+          return <MoreLess params={params} field="system_D_requirements" />;
         },
       },
       {
@@ -671,7 +681,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "percurment_state");
         },
         renderCell: (params) => {
-          return getColor(params, "percurment_state");
+          return <MoreLess params={params} field="percurment_state" />;
         },
       },
       {
@@ -685,7 +695,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "details");
         },
         renderCell: (params) => {
-          return getColor(params, "details");
+          return <MoreLess params={params} field="details" />;
         },
       },
       {
@@ -699,7 +709,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "joint_type");
         },
         renderCell: (params) => {
-          return getColor(params, "joint_type");
+          return <MoreLess params={params} field="joint_type" />;
         },
       },
       {
@@ -713,7 +723,9 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "discarded_during_disassembly");
         },
         renderCell: (params) => {
-          return getColor(params, "discarded_during_disassembly");
+          return (
+            <MoreLess params={params} field="discarded_during_disassembly" />
+          );
         },
       },
       {
@@ -728,7 +740,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "expendables");
         },
         // renderCell: (params) => {
-        //   return getColor(params, "expendables");
+        //   return <MoreLess params={params} field="expendables" />
         // },
       },
       {
@@ -745,7 +757,12 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           );
         },
         renderCell: (params) => {
-          return getColor(params, "discarded_or_unusable_according_to_docs");
+          return (
+            <MoreLess
+              params={params}
+              field="discarded_or_unusable_according_to_docs"
+            />
+          );
         },
       },
       {
@@ -759,7 +776,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "destroyed_for_analysis");
         },
         renderCell: (params) => {
-          return getColor(params, "destroyed_for_analysis");
+          return <MoreLess params={params} field="destroyed_for_analysis" />;
         },
       },
       {
@@ -773,7 +790,9 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "rejected_by_qc_or_inspection");
         },
         renderCell: (params) => {
-          return getColor(params, "rejected_by_qc_or_inspection");
+          return (
+            <MoreLess params={params} field="rejected_by_qc_or_inspection" />
+          );
         },
       },
       {
@@ -787,7 +806,12 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "class_size_or_weight_as_required");
         },
         renderCell: (params) => {
-          return getColor(params, "class_size_or_weight_as_required");
+          return (
+            <MoreLess
+              params={params}
+              field="class_size_or_weight_as_required"
+            />
+          );
         },
       },
       {
@@ -801,7 +825,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "EBOM");
         },
         renderCell: (params) => {
-          return getColor(params, "EBOM");
+          return <MoreLess params={params} field="EBOM" />;
         },
       },
     ];
@@ -831,7 +855,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "application_type");
         },
         renderCell: (params) => {
-          return getColor(params, "application_type");
+          return <MoreLess params={params} field="application_type" />;
         },
       },
       {
@@ -865,7 +889,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "supply_stage");
         },
         renderCell: (params) => {
-          return getColor(params, "supply_stage");
+          return <MoreLess params={params} field="supply_stage" />;
         },
       },
       {
@@ -881,7 +905,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "material_supplier");
         },
         renderCell: (params) => {
-          return getColor(params, "material_supplier");
+          return <MoreLess params={params} field="material_supplier" />;
         },
       },
       {
@@ -895,7 +919,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "pr");
         },
         renderCell: (params) => {
-          return getColor(params, "pr");
+          return <MoreLess params={params} field="pr" />;
         },
       },
       {
@@ -909,7 +933,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "po");
         },
         renderCell: (params) => {
-          return getColor(params, "po");
+          return <MoreLess params={params} field="po" />;
         },
       },
       {
@@ -923,7 +947,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "subject");
         },
         renderCell: (params) => {
-          return getColor(params, "subject");
+          return <MoreLess params={params} field="subject" />;
         },
       },
       {
@@ -946,7 +970,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "request_type");
         },
         renderCell: (params) => {
-          return getColor(params, "request_type");
+          return <MoreLess params={params} field="request_type" />;
         },
       },
       {
@@ -970,7 +994,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "customer_management");
         },
         renderCell: (params) => {
-          return getColor(params, "customer_management");
+          return <MoreLess params={params} field="customer_management" />;
         },
       },
 
@@ -985,7 +1009,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "contract_number");
         },
         renderCell: (params) => {
-          return getColor(params, "contract_number");
+          return <MoreLess params={params} field="contract_number" />;
         },
       },
       {
@@ -999,7 +1023,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "supplier");
         },
         renderCell: (params) => {
-          return getColor(params, "supplier");
+          return <MoreLess params={params} field="supplier" />;
         },
       },
       {
@@ -1013,7 +1037,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "amount");
         },
         renderCell: (params) => {
-          return getColor(params, "amount");
+          return <MoreLess params={params} field="amount" />;
         },
       },
       {
@@ -1027,7 +1051,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "adjustment_amount");
         },
         renderCell: (params) => {
-          return getColor(params, "adjustment_amount");
+          return <MoreLess params={params} field="adjustment_amount" />;
         },
       },
       // {
@@ -1038,7 +1062,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
       //   align: "center",
       //   headerAlign: "center",
       //   renderCell: (params) => {
-      //     return getColor(params, "revision");
+      //     return <MoreLess params={params} field="revision" />
       //   },
       // },
       {
@@ -1054,7 +1078,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "currency");
         },
         renderCell: (params) => {
-          return getColor(params, "currency");
+          return <MoreLess params={params} field="currency" />;
         },
       },
       {
@@ -1070,7 +1094,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "expert");
         },
         renderCell: (params) => {
-          return getColor(params, "expert");
+          return <MoreLess params={params} field="expert" />;
         },
       },
       {
@@ -1084,7 +1108,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "prepayment_percentage");
         },
         renderCell: (params) => {
-          return getColor(params, "prepayment_percentage");
+          return <MoreLess params={params} field="prepayment_percentage" />;
         },
       },
       {
@@ -1098,7 +1122,12 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "prepayment_according_to_contract");
         },
         renderCell: (params) => {
-          return getColor(params, "prepayment_according_to_contract");
+          return (
+            <MoreLess
+              params={params}
+              field="prepayment_according_to_contract"
+            />
+          );
         },
       },
       {
@@ -1112,7 +1141,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "prepaid_by_toga");
         },
         renderCell: (params) => {
-          return getColor(params, "prepaid_by_toga");
+          return <MoreLess params={params} field="prepaid_by_toga" />;
         },
       },
       {
@@ -1126,7 +1155,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "prepaid_by_air_engine");
         },
         renderCell: (params) => {
-          return getColor(params, "prepaid_by_air_engine");
+          return <MoreLess params={params} field="prepaid_by_air_engine" />;
         },
       },
       // {
@@ -1137,7 +1166,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
       //   align: "center",
       //   headerAlign: "center"
       //   renderCell: (params) => {
-      //     return getColor(params, "revision");
+      //     return <MoreLess params={params} field="revision" />
       //   },
       // },
       {
@@ -1151,7 +1180,9 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "prepayment_guarantee_check");
         },
         renderCell: (params) => {
-          return getColor(params, "prepayment_guarantee_check");
+          return (
+            <MoreLess params={params} field="prepayment_guarantee_check" />
+          );
         },
       },
       {
@@ -1165,7 +1196,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "prepayment_guarantee");
         },
         renderCell: (params) => {
-          return getColor(params, "prepayment_guarantee");
+          return <MoreLess params={params} field="prepayment_guarantee" />;
         },
       },
       {
@@ -1179,7 +1210,9 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "mortgage_document_guarantee");
         },
         renderCell: (params) => {
-          return getColor(params, "mortgage_document_guarantee");
+          return (
+            <MoreLess params={params} field="mortgage_document_guarantee" />
+          );
         },
       },
       // {
@@ -1190,7 +1223,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
       //   align: "center",
       //   headerAlign: "center",
       //   renderCell: (params) => {
-      //     return getColor(params, "revision");
+      //     return <MoreLess params={params} field="revision" />
       //   },
       // },
       {
@@ -1216,7 +1249,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "financial_situation");
         },
         renderCell: (params) => {
-          return getColor(params, "financial_situation");
+          return <MoreLess params={params} field="financial_situation" />;
         },
       },
       {
@@ -1230,7 +1263,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "prepayment_request_date");
         },
         renderCell: (params) => {
-          return getColor(params, "prepayment_request_date");
+          return <MoreLess params={params} field="prepayment_request_date" />;
         },
       },
       {
@@ -1244,7 +1277,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "prepayment_amount");
         },
         renderCell: (params) => {
-          return getColor(params, "prepayment_amount");
+          return <MoreLess params={params} field="prepayment_amount" />;
         },
       },
       {
@@ -1258,7 +1291,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "currency_type");
         },
         renderCell: (params) => {
-          return getColor(params, "currency_type");
+          return <MoreLess params={params} field="currency_type" />;
         },
       },
       {
@@ -1272,7 +1305,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
           return getClassName(params, "prepayment_date");
         },
         renderCell: (params) => {
-          return getColor(params, "prepayment_date");
+          return <MoreLess params={params} field="prepayment_date" />;
         },
       },
     ];

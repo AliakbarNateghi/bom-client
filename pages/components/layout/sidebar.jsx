@@ -41,8 +41,12 @@ export default function Sidebar({ loggedin }) {
   let links = [
     { label: "خانه", link: "/", onClick: () => {} },
     { label: "پروفایل", link: "/user/profile", onClick: () => {} },
-    { label: "اسکوپ ماتریکس", link: "/table/main/bom?page=1", onClick: Logout },
-    { label: "تامین", link: "/table/main/provide?page=1", onClick: Logout },
+    {
+      label: "اسکوپ ماتریکس",
+      link: "/table/main/bom?page=1",
+      onClick: () => {},
+    },
+    { label: "تامین", link: "/table/main/provide?page=1", onClick: () => {} },
     { label: "خروج", link: "/user/login", onClick: Logout },
   ];
 
@@ -63,12 +67,13 @@ export default function Sidebar({ loggedin }) {
   isAdmin ? adminLinks.map((adminLink) => links.splice(4, 0, adminLink)) : "";
 
   return (
-    <div>
+    <div className="fixed z-[2]">
       {loggedin ? (
         <div>
           <div
             id="sidebar"
             onClick={sidebarClick}
+            // onBlur={() => setSidebar(false)}
             className={sidebar ? "open" : ""}
           >
             <span></span>
@@ -76,7 +81,7 @@ export default function Sidebar({ loggedin }) {
             <span></span>
           </div>
           {sidebar ? (
-            <Box sx={{ display: "flex" }} className="absolute z-[1] pl-1">
+            <Box className="absolute z-[1] pl-1 flex w-64">
               <ThemeProvider
                 theme={createTheme({
                   components: {

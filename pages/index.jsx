@@ -12,8 +12,8 @@ export default function Home({}) {
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state) => state.userInfo);
   const [user, setUser] = useState(data);
-  const [telegramHover, setTelegramHover] = useState(false)
-  const [whatsappHover, setWhatsappHover] = useState(false)
+  const [telegramHover, setTelegramHover] = useState(false);
+  const [whatsappHover, setWhatsappHover] = useState(false);
 
   const userGroups = [];
   for (let i = 0; i < data?.groups?.length; i++) {
@@ -79,7 +79,10 @@ export default function Home({}) {
           <div></div>
         );
       })}
-      <br /><br /><br /><br />
+      <br />
+      <br />
+      <br />
+      <br />
       <div className="flex flex-col">
         <p className="digikala text-2xl text-center">
           برای گزارش باگ ب شماره واتساپ زیر باگ خود را بفرستید یا به اکانت
@@ -90,14 +93,15 @@ export default function Home({}) {
           <SocialIcon
             url="https://wa.link/p5mhw8"
             fallback="whatsapp"
-            bgColor={whatsappHover ? '#25D366' : 'black'}
+            bgColor={whatsappHover ? "#25D366" : "black"}
             style={{ width: 25, height: 25 }}
             onMouseOver={() => setWhatsappHover(true)}
             onMouseLeave={() => setWhatsappHover(false)}
           />
           <Link
             href="https://wa.link/p5mhw8"
-            className="digikala text-xl hover:text-blue-500"
+            className="digikala text-xl"
+            id="whatsapp-icon"
           >
             09309096215
           </Link>
@@ -105,14 +109,15 @@ export default function Home({}) {
         <div className="flex justify-between m-5">
           <SocialIcon
             url="https://telegram.me/aliakbar_nateghi"
-            bgColor={telegramHover ? '#229ED9' : 'black'}
+            bgColor={telegramHover ? "#229ED9" : "black"}
             style={{ width: 25, height: 25 }}
             onMouseOver={() => setTelegramHover(true)}
             onMouseLeave={() => setTelegramHover(false)}
           />
           <Link
             href="https://telegram.me/aliakbar_nateghi"
-            className="digikala text-xl hover:text-blue-500"
+            className="digikala text-xl"
+            id="telegram-icon"
           >
             @aliakbar_nateghi
           </Link>

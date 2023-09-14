@@ -17,6 +17,7 @@ class Api {
   }
 
   static constructUrl(resource, slug = "") {
+    console.log("url :", `${resource}/${slug}`);
     return `${resource}/${slug}`;
   }
 

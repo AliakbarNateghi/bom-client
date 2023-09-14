@@ -150,7 +150,7 @@ export default function Profile({ user }) {
               </Button>
               <br />
               <Button onClick={() => setPassModal(true)}>
-                <p className="digikala"> تغییر رمز عبور</p>
+                <p className="digikala">تغییر رمز عبور</p>
               </Button>
 
               <Modal
@@ -237,25 +237,6 @@ export default function Profile({ user }) {
                         />
                       </div>
                     </div>
-
-                    {/* <div className="w-full">
-                      <label
-                        htmlFor="password"
-                        className="text-sm font-medium leading-6 text-gray-900 float-right digikala"
-                      >
-                        رمز عبور
-                      </label>
-                      <div className="mt-2">
-                        <input
-                          type="password"
-                          id="password"
-                          onChange={(e) => setPassword(e.target.value)}
-                          value={password}
-                          className="outline-0 rounded p-1 w-full border-2 border-gray-400"
-                        />
-                      </div>
-                    </div> */}
-
                     <div className="mt-5">
                       <button
                         className="w-full bg-gray-950 text-white w-100 rounded py-2 digikala"

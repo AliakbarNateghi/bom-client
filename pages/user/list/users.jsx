@@ -1,9 +1,7 @@
 "use client";
 
-import Image from "next/image";
-import openEye from "@/public/logos/open-eye.png";
-import closeEye from "@/public/logos/close-eye.png";
 import React, { useState, useEffect, useCallback } from "react";
+import { useRouter } from "next/router";
 import { errorToast, successToast, warningToast } from "@/pages/services/toast";
 import { Modal, Button, Box, Typography } from "@mui/material";
 import Api from "@/pages/services/api";
@@ -48,6 +46,7 @@ function MoreLess({ value, className }) {
 }
 
 export default function Users({ users, groups }) {
+  const router = useRouter();
   const [groupID, setGroupID] = useState("");
   const [open, setOpen] = useState(false);
   const [group, setGroup] = useState([]);
@@ -55,11 +54,13 @@ export default function Users({ users, groups }) {
   const [userGroups, setUserGroups] = useState([]);
 
   const openModal = (e) => {
-    e.preventDefault();
-    console.log("e :", e);
-    // users.map((user) => user === )
+    setUserName(e.username);
+    const currentUserGroups = [];
+    e.groups.map((group) => currentUserGroups.push(group.id));
+    setUserGroups(currentUserGroups);
     setOpen(true);
   };
+
   const handleChangeMultiple = (e) => {
     const { options } = e.target;
     const value = [];
@@ -70,11 +71,27 @@ export default function Users({ users, groups }) {
     }
     setGroup(value);
   };
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    setOpen(false);
-    setGroup(groups);
-  };
+
+  const onSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      const form = e.currentTarget;
+      const selected = Array.from(
+        form.elements["select-multiple-native"].options
+      )
+        .filter((option) => option.selected)
+        .map((option) => option.value);
+
+      Api.init();
+      const response = await Api.put(`users-info`, `${userName}/`, {
+        groups: selected,
+      });
+      router.push("/user/list");
+      setOpen(false);
+    },
+    [Api, userName]
+  );
+
   return (
     <div className="flex items-center h-screen w-full justify-center">
       {users.map((user) => (
@@ -112,63 +129,63 @@ export default function Users({ users, groups }) {
               </div>
 
               <div className="w-full mt-2">
-                <Button onClick={openModal}>
+                <Button onClick={() => openModal(user)}>
                   <p className="digikala">تغییر گروه کاربر</p>
                 </Button>
-                <Modal
-                  open={open}
-                  onClose={() => {
-                    setOpen(false);
-                  }}
-                  aria-labelledby="modal-modal-title"
-                  aria-describedby="modal-modal-description"
-                >
-                  <Box sx={style}>
-                    <form
-                      onSubmit={onSubmit}
-                      className="border-0 sm:border-1 p-10 rounded border-gray-400"
-                    >
-                      <h3 className="text-center text-xl text-gray-900 font-medium leading-8">
-                        {user.username}
-                      </h3>
-                      <FormControl sx={{ m: 1, minWidth: 120, maxWidth: 300 }}>
-                        <InputLabel shrink htmlFor="select-multiple-native">
-                          گروه ها
-                        </InputLabel>
-                        <Select
-                          multiple
-                          native
-                          value={user.groups}
-                          onChange={handleChangeMultiple}
-                          label="Groups"
-                          inputProps={{
-                            id: "select-multiple-native",
-                          }}
-                        >
-                          {groups.map((group) => (
-                            <option key={group.id} value={group.id}>
-                              {group.name}
-                            </option>
-                          ))}
-                        </Select>
-                      </FormControl>
-
-                      <div className="mt-5">
-                        <button
-                          className="w-full bg-gray-950 text-white rounded py-2 digikala"
-                          type="submit"
-                        >
-                          بروزرسانی
-                        </button>
-                      </div>
-                    </form>
-                  </Box>
-                </Modal>
               </div>
             </div>
           </div>
         </div>
       ))}
+      <Modal
+        open={open}
+        onClose={() => {
+          setOpen(false);
+        }}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <form
+            onSubmit={onSubmit}
+            className="border-0 sm:border-1 p-10 rounded border-gray-400"
+          >
+            <h3 className="text-center text-xl text-gray-900 font-medium leading-8">
+              {userName}
+            </h3>
+            <FormControl sx={{ m: 1, minWidth: 120, maxWidth: 300 }}>
+              <InputLabel shrink htmlFor="select-multiple-native">
+                گروه ها
+              </InputLabel>
+              <Select
+                multiple
+                native
+                defaultValue={userGroups}
+                onChange={handleChangeMultiple}
+                label="Groups"
+                inputProps={{
+                  id: "select-multiple-native",
+                }}
+              >
+                {groups.map((group) => (
+                  <option key={group.id} value={group.id}>
+                    {group.name}
+                  </option>
+                ))}
+              </Select>
+            </FormControl>
+
+            <div className="mt-5">
+              <button
+                className="w-full bg-gray-950 text-white rounded py-2 digikala"
+                type="submit"
+              >
+                بروزرسانی
+              </button>
+            </div>
+          </form>
+        </Box>
+      </Modal>
     </div>
   );
 }

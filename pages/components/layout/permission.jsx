@@ -94,6 +94,7 @@ export default function Permission({
         editable: updatedRow[diff_key] || false,
       };
       const response = await Api.post(server, payload);
+      router.push(`${slug}/?page=${pageNumber}&group=${groupID}`);
       return response.data[0];
     },
     [Api]
@@ -211,7 +212,6 @@ export default function Permission({
         >
           انتخاب گروه
         </button>
-
         {groupPopOver ? (
           <div className="transition ease-in-out duration-700 flex items-center fixed right-4 bottom-20 bg-sky-300 rounded-lg p-4">
             <form className="w-full max-w-lg" onSubmit={onSubmit}>

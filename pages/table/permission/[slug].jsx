@@ -1,10 +1,17 @@
 import { useState, useCallback } from "react";
 import Api from "../../services/api";
 import Cookies from "universal-cookie";
-import Permission from "@/pages/components/layout/permission";
 import Image from "next/image";
 import deletelogo from "@/public/logos/delete.png";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+import CircularIndeterminate from "@/pages/components/layout/loading";
+const Permission = dynamic(
+  () => import("@/pages/components/layout/permission"),
+  {
+    loading: () => <CircularIndeterminate />,
+  }
+);
 
 export function Slug() {
   const router = useRouter();

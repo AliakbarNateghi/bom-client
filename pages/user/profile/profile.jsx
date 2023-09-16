@@ -55,9 +55,15 @@ export default function Profile({ user }) {
     async (e) => {
       e.preventDefault();
       Api.init();
-      const response = await Api.put(`user-info`, `${userName}/`, payload);
-      setOpen(false);
-      return response.data;
+      try {
+        const response = await Api.put(`user-info`, `${userName}/`, payload);
+        successToast("با موفقیت ویرایش شد");
+        setOpen(false);
+      } catch (err) {
+        err.response.status === 400
+          ? errorToast("لطفا دوباره اطلاعات خود را چک کنید")
+          : errorToast("خطای سیستم");
+      }
     },
     [Api, payload]
   );

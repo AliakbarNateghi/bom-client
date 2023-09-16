@@ -1,8 +1,12 @@
 import Api from "../../services/api";
 import Cookies from "universal-cookie";
-import Table from "@/pages/components/layout/table";
 import { useRouter } from "next/router";
 import MoreLess from "@/pages/filters/moreless";
+import dynamic from "next/dynamic";
+import CircularIndeterminate from "@/pages/components/layout/loading";
+const Table = dynamic(() => import("@/pages/components/layout/table"), {
+  loading: () => <CircularIndeterminate />,
+});
 
 // import { DatePicker } from "react-persian-datepicker";
 
@@ -39,10 +43,6 @@ export async function getServerSideProps(context) {
     },
   };
 }
-
-// function MoreLess(params, field) {
-//   return <div className="bkoodak text-base font-medium">{params.value}</div>;
-// }
 
 export default function ScopeTable({ components, hiddencols, page, slug }) {
   const editables = components["editables"];

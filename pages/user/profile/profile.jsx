@@ -5,20 +5,9 @@ import openEye from "@/public/logos/open-eye.png";
 import closeEye from "@/public/logos/close-eye.png";
 import React, { useState, useEffect, useCallback } from "react";
 import { errorToast, successToast, warningToast } from "@/pages/services/toast";
-import { Modal, Button, Box, Typography } from "@mui/material";
+import { Modal, Button, Box } from "@mui/material";
 import Api from "@/pages/services/api";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+import BaseModal from "@/pages/components/parts/modal/basemodal";
 
 export default function Profile({ user }) {
   const [userName, setUserName] = useState();
@@ -159,7 +148,7 @@ export default function Profile({ user }) {
                 <p className="digikala">تغییر رمز عبور</p>
               </Button>
 
-              <Modal
+              <BaseModal
                 open={open}
                 onClose={() => {
                   setOpen(false);
@@ -167,94 +156,92 @@ export default function Profile({ user }) {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
               >
-                <Box sx={style}>
-                  <form
-                    onSubmit={onSubmit}
-                    className="border-0 sm:border-1 p-10 rounded border-gray-400"
-                  >
-                    <div className="w-full">
-                      <label
-                        htmlFor="firstname"
-                        className="text-sm font-medium leading-6 text-gray-900 float-right digikala"
-                      >
-                        نام
-                      </label>
-                      <div className="mt-2">
-                        <input
-                          type="text"
-                          id="firstname"
-                          onChange={(e) => setFirstName(e.target.value)}
-                          value={firstName}
-                          className="outline-0 rounded p-1 w-full border-2 border-gray-400"
-                        />
-                      </div>
+                <form
+                  onSubmit={onSubmit}
+                  className="border-0 sm:border-1 p-10 rounded border-gray-400"
+                >
+                  <div className="w-full">
+                    <label
+                      htmlFor="firstname"
+                      className="text-sm font-medium leading-6 text-gray-900 float-right digikala"
+                    >
+                      نام
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="text"
+                        id="firstname"
+                        onChange={(e) => setFirstName(e.target.value)}
+                        value={firstName}
+                        className="outline-0 rounded p-1 w-full border-2 border-gray-400"
+                      />
                     </div>
+                  </div>
 
-                    <div className="w-full">
-                      <label
-                        htmlFor="lastname"
-                        className="text-sm font-medium leading-6 text-gray-900 float-right digikala"
-                      >
-                        نام خانوادگی
-                      </label>
-                      <div className="mt-2">
-                        <input
-                          type="text"
-                          id="lastname"
-                          onChange={(e) => setLastName(e.target.value)}
-                          value={lastName}
-                          className="outline-0 rounded p-1 w-full border-2 border-gray-400"
-                        />
-                      </div>
+                  <div className="w-full">
+                    <label
+                      htmlFor="lastname"
+                      className="text-sm font-medium leading-6 text-gray-900 float-right digikala"
+                    >
+                      نام خانوادگی
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="text"
+                        id="lastname"
+                        onChange={(e) => setLastName(e.target.value)}
+                        value={lastName}
+                        className="outline-0 rounded p-1 w-full border-2 border-gray-400"
+                      />
                     </div>
+                  </div>
 
-                    <div className="w-full">
-                      <label
-                        htmlFor="email"
-                        className="text-sm font-medium leading-6 text-gray-900 float-right digikala"
-                      >
-                        ایمیل
-                      </label>
-                      <div className="mt-2">
-                        <input
-                          type="email"
-                          id="email"
-                          onChange={(e) => setEmail(e.target.value)}
-                          value={email}
-                          className="outline-0 rounded p-1 w-full border-2 border-gray-400"
-                        />
-                      </div>
+                  <div className="w-full">
+                    <label
+                      htmlFor="email"
+                      className="text-sm font-medium leading-6 text-gray-900 float-right digikala"
+                    >
+                      ایمیل
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="email"
+                        id="email"
+                        onChange={(e) => setEmail(e.target.value)}
+                        value={email}
+                        className="outline-0 rounded p-1 w-full border-2 border-gray-400"
+                      />
                     </div>
+                  </div>
 
-                    <div className="w-full">
-                      <label
-                        htmlFor="phonenumber"
-                        className="text-sm font-medium leading-6 text-gray-900 float-right digikala"
-                      >
-                        شماره تلفن
-                      </label>
-                      <div className="mt-2">
-                        <input
-                          type="number"
-                          id="phonenumber"
-                          onChange={(e) => setPhoneNumber(e.target.value)}
-                          value={phoneNumber}
-                          className="outline-0 rounded p-1 w-full border-2 border-gray-400"
-                        />
-                      </div>
+                  <div className="w-full">
+                    <label
+                      htmlFor="phonenumber"
+                      className="text-sm font-medium leading-6 text-gray-900 float-right digikala"
+                    >
+                      شماره تلفن
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="number"
+                        id="phonenumber"
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        value={phoneNumber}
+                        className="outline-0 rounded p-1 w-full border-2 border-gray-400"
+                      />
                     </div>
-                    <div className="mt-5">
-                      <button
-                        className="w-full bg-gray-950 text-white w-100 rounded py-2 digikala"
-                        type="submit"
-                      >
-                        بروزرسانی
-                      </button>
-                    </div>
-                  </form>
-                </Box>
-              </Modal>
-              <Modal
+                  </div>
+                  <div className="mt-5">
+                    <button
+                      className="w-full bg-gray-950 text-white w-100 rounded py-2 digikala"
+                      type="submit"
+                    >
+                      بروزرسانی
+                    </button>
+                  </div>
+                </form>
+              </BaseModal>
+              <BaseModal
                 open={passModal}
                 onClose={() => {
                   setPassModal(false);
@@ -262,92 +249,90 @@ export default function Profile({ user }) {
                 aria-labelledby="pass-modal-title"
                 aria-describedby="pass-modal-description"
               >
-                <Box sx={style}>
-                  <Image
-                    src={showPass ? openEye : closeEye}
-                    width={32}
-                    height={32}
-                    onClick={() => setShowPass(!showPass)}
-                  />
-                  <form
-                    onSubmit={onChangePass}
-                    className="border-0 sm:border-1 p-10 rounded border-gray-400"
-                  >
-                    <div className="w-full">
-                      <label
-                        htmlFor="current-pass"
-                        className="text-sm font-medium leading-6 text-gray-900 float-right digikala"
-                      >
-                        رمز عبور فعلی
-                      </label>
-                      <div className="mt-2">
-                        <input
-                          type={showPass ? "text" : "password"}
-                          id="current-pass"
-                          onChange={(e) => setCurrentPass(e.target.value)}
-                          value={currentPass}
-                          className="outline-0 rounded p-1 w-full border-2 border-gray-400"
-                        />
-                      </div>
+                <Image
+                  src={showPass ? openEye : closeEye}
+                  width={32}
+                  height={32}
+                  onClick={() => setShowPass(!showPass)}
+                />
+                <form
+                  onSubmit={onChangePass}
+                  className="border-0 sm:border-1 p-10 rounded border-gray-400"
+                >
+                  <div className="w-full">
+                    <label
+                      htmlFor="current-pass"
+                      className="text-sm font-medium leading-6 text-gray-900 float-right digikala"
+                    >
+                      رمز عبور فعلی
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type={showPass ? "text" : "password"}
+                        id="current-pass"
+                        onChange={(e) => setCurrentPass(e.target.value)}
+                        value={currentPass}
+                        className="outline-0 rounded p-1 w-full border-2 border-gray-400"
+                      />
                     </div>
+                  </div>
 
-                    <div className="w-full">
-                      <label
-                        htmlFor="first-new-pass"
-                        className="text-sm font-medium leading-6 text-gray-900 float-right digikala"
-                      >
-                        رمز عبور جدید
-                      </label>
-                      <div className="mt-2">
-                        <input
-                          type={showPass ? "text" : "password"}
-                          id="first-new-pass"
-                          onChange={(e) => setFirstNewPass(e.target.value)}
-                          value={firstNewPass}
-                          className="outline-0 rounded p-1 w-full border-2 border-gray-400"
-                        />
-                      </div>
+                  <div className="w-full">
+                    <label
+                      htmlFor="first-new-pass"
+                      className="text-sm font-medium leading-6 text-gray-900 float-right digikala"
+                    >
+                      رمز عبور جدید
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type={showPass ? "text" : "password"}
+                        id="first-new-pass"
+                        onChange={(e) => setFirstNewPass(e.target.value)}
+                        value={firstNewPass}
+                        className="outline-0 rounded p-1 w-full border-2 border-gray-400"
+                      />
                     </div>
+                  </div>
 
-                    <div className="w-full">
-                      <label
-                        htmlFor="second-new-pass"
-                        className="text-sm font-medium leading-6 text-gray-900 float-right digikala"
-                      >
-                        تکرار رمز عبور جدید
-                      </label>
-                      <div className="mt-2">
-                        <input
-                          type={showPass ? "text" : "password"}
-                          id="second-new-pass"
-                          onChange={(e) => setSecondNewPass(e.target.value)}
-                          value={secondNewPass}
-                          className="outline-0 rounded p-1 w-full border-2 border-gray-400"
-                        />
-                      </div>
+                  <div className="w-full">
+                    <label
+                      htmlFor="second-new-pass"
+                      className="text-sm font-medium leading-6 text-gray-900 float-right digikala"
+                    >
+                      تکرار رمز عبور جدید
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type={showPass ? "text" : "password"}
+                        id="second-new-pass"
+                        onChange={(e) => setSecondNewPass(e.target.value)}
+                        value={secondNewPass}
+                        className="outline-0 rounded p-1 w-full border-2 border-gray-400"
+                      />
                     </div>
+                  </div>
 
-                    <div>
-                      {firstNewPass === secondNewPass ? (
-                        <br />
-                      ) : (
-                        <p className="digikala text-red-500 text-right">
-                          رمز ها مشابهت ندارند
-                        </p>
-                      )}
-                    </div>
+                  <div>
+                    {firstNewPass === secondNewPass ? (
+                      <br />
+                    ) : (
+                      <p className="digikala text-red-500 text-right">
+                        رمز ها مشابهت ندارند
+                      </p>
+                    )}
+                  </div>
 
-                    <div className="mt-5">
-                      <button
-                        className="w-full bg-gray-950 text-white w-100 rounded py-2 digikala"
-                        type="submit"
-                      >
-                        تغییر رمز
-                      </button>
-                    </div>
-                  </form>
-                </Box>
-              </Modal>
+                  <div className="mt-5">
+                    <button
+                      className="w-full bg-gray-950 text-white w-100 rounded py-2 digikala"
+                      type="submit"
+                    >
+                      تغییر رمز
+                    </button>
+                  </div>
+                </form>
+              </BaseModal>
             </div>
           </div>
         </div>

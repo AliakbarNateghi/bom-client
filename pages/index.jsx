@@ -1,6 +1,6 @@
 import { userInfo } from "@/pages/redux/slices/userinfo";
 import { useSelector, useDispatch } from "react-redux";
-import background from "@/public/logos/background8.jpg";
+import background from "@/public/logos/background.jpg";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";

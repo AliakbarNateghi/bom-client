@@ -8,18 +8,7 @@ import Api from "@/pages/services/api";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+import BaseModal from "@/pages/components/parts/modal/basemodal";
 
 function MoreLess({ value, className }) {
   const [expanded, setExpanded] = useState(false);
@@ -137,7 +126,7 @@ export default function Users({ users, groups }) {
           </div>
         </div>
       ))}
-      <Modal
+      <BaseModal
         open={open}
         onClose={() => {
           setOpen(false);
@@ -145,47 +134,45 @@ export default function Users({ users, groups }) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          <form
-            onSubmit={onSubmit}
-            className="border-0 sm:border-1 p-10 rounded border-gray-400"
-          >
-            <h3 className="text-center text-xl text-gray-900 font-medium leading-8">
-              {userName}
-            </h3>
-            <FormControl sx={{ m: 1, minWidth: 120, maxWidth: 300 }}>
-              <InputLabel shrink htmlFor="select-multiple-native">
-                گروه ها
-              </InputLabel>
-              <Select
-                multiple
-                native
-                defaultValue={userGroups}
-                onChange={handleChangeMultiple}
-                label="Groups"
-                inputProps={{
-                  id: "select-multiple-native",
-                }}
-              >
-                {groups.map((group) => (
-                  <option key={group.id} value={group.id}>
-                    {group.name}
-                  </option>
-                ))}
-              </Select>
-            </FormControl>
+        <form
+          onSubmit={onSubmit}
+          className="border-0 sm:border-1 p-10 rounded border-gray-400"
+        >
+          <h3 className="text-center text-xl text-gray-900 font-medium leading-8">
+            {userName}
+          </h3>
+          <FormControl sx={{ m: 1, minWidth: 120, maxWidth: 300 }}>
+            <InputLabel shrink htmlFor="select-multiple-native">
+              گروه ها
+            </InputLabel>
+            <Select
+              multiple
+              native
+              defaultValue={userGroups}
+              onChange={handleChangeMultiple}
+              label="Groups"
+              inputProps={{
+                id: "select-multiple-native",
+              }}
+            >
+              {groups.map((group) => (
+                <option key={group.id} value={group.id}>
+                  {group.name}
+                </option>
+              ))}
+            </Select>
+          </FormControl>
 
-            <div className="mt-5">
-              <button
-                className="w-full bg-gray-950 text-white rounded py-2 digikala"
-                type="submit"
-              >
-                بروزرسانی
-              </button>
-            </div>
-          </form>
-        </Box>
-      </Modal>
+          <div className="mt-5">
+            <button
+              className="w-full bg-gray-950 text-white rounded py-2 digikala"
+              type="submit"
+            >
+              بروزرسانی
+            </button>
+          </div>
+        </form>
+      </BaseModal>
     </div>
   );
 }

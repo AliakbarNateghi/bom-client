@@ -5,18 +5,8 @@ import React, { useState, useCallback } from "react";
 import { successToast, errorToast, warningToast } from "@/pages/services/toast";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 1000,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+import GuideModal from "./modal/guidemodal";
+import BasePagination from "./pagination";
 
 const guides = [
   ".رنگ سلول های آبی به این معناست که کاربر اجازه مشاهده سلول مورد نظر را دارد",
@@ -27,6 +17,10 @@ const guides = [
   ".در انتهای جدول در هر صفحه میتوانید تعداد رکورد های موجود در جدول را مشاهده کنید و بین صفحات مختلف جا به جا شوید",
   "بعضی سلول های جدول در حالت انتخاب قرار دارند و درصورتی که کاربر دسترسی ویرایش داشته باشد با دوبار کلیک میتواند از بین گزینه های باز شده یک گزینه را انتخاب نماید",
   ".اگر در سلولی بیشتر از 200 کاراکتر موجود باشد میتوانید با کلیک بر روی گزینه بیشتر کل متن را مشاهده نمایید",
+  ".میتوانید سلول های دلخواه خود را پنهان نمایید COLUMNS در تب بالای جدول با کلیک بر روی",
+  ".میتوانید سلول های دلخواه خود را با فیلتر مورد نظر ببینید FILTERS با کلیک بر روی گزینه",
+  ".میتوانید اندازه ارتفاع سلول ها را به نسبت محتوای موجود در آنها در سه اندازه تغییر دهید DENSITY با کلیک بر روی گزینه",
+  ".میتوانید اکسل جدول مورد نظر را دانلود نمایید EXPORT با کلیک بر روی گزینه",
 ];
 
 export default function Table({
@@ -126,50 +120,17 @@ export default function Table({
           },
         }}
       />
-      <Modal
+      <GuideModal
         open={guideModal}
         onClose={() => {
           setGuideModal(false);
         }}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <div className="w-full list">
-            <h2 className="bkoodak text-4xl text-center mb-5">
-              راهنمای استفاده از جداول
-            </h2>
-            <ul className="relative ">
-              {guides.map((text) => (
-                <li className="relative m-5 right-0 text-center bkoodak text-xl hover:text-white cursor-help">
-                  {text}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Box>
-      </Modal>
-      <br />
-      <div className="flex flex-row fixed bottom-4 left-4">
-        <p className="flex items-center justify-center mr-4 px-3 h-8 text-sm font-medium bg-white border border-gray-300 rounded-lg dark:bg-gray-800 dark:text-white">
-          {pageNumber * 100 - 99}-{pageNumber * 100} of {count}
-        </p>
-        <Link
-          href={`${slug}?page=${pageNumber * 1 - 1}`}
-          className={`flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
-          onClick={() => setPageNumber(pageNumber * 1 - 1)}
-        >
-          {`<`}
-        </Link>
+        width={1000}
+        title="راهنمای استفاده از جداول"
+        guides={guides}
+      />
 
-        <Link
-          href={`${slug}?page=${pageNumber * 1 + 1}`}
-          className="flex items-center justify-center px-3 h-8 ml-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-          onClick={() => setPageNumber(pageNumber * 1 + 1)}
-        >
-          {`>`}
-        </Link>
-      </div>
+      <BasePagination slug={slug} count={count} />
     </div>
   );
 }

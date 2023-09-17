@@ -5,9 +5,11 @@ import Image from "next/image";
 import deletelogo from "@/public/logos/delete.png";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 import CircularIndeterminate from "@/pages/components/layout/loading";
 const Permission = dynamic(
-  () => import("@/pages/components/layout/permission"),
+  () => import("@/pages/components/parts/permission"),
   {
     loading: () => <CircularIndeterminate />,
   }
@@ -51,7 +53,7 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default function ScopePermission({
+export default function PermissionRoot({
   permissions,
   groups,
   page,
@@ -59,7 +61,6 @@ export default function ScopePermission({
   slug,
 }) {
   const router = useRouter();
-  // const [test, setTest] = useState(false)
   function ValueComponent({ params }) {
     const [deletedCell, setDeletedCell] = useState(params.formattedValue);
     const onDeletePermission = async () => {
@@ -78,16 +79,16 @@ export default function ScopePermission({
         {deletedCell ? (
           <div className="flex space-x-11 items-center">
             {/* <div style={{ color }}>{params.formattedValue}</div> */}
-            <div className="relative left-12 bottom-2 cursor-pointer opacity-60 hover:opacity-100">
-              <Image
+            <div className="relative left-12 bottom-2 cursor-pointer opacity-90 hover:opacity-100">
+              <IconButton
                 title="حذف تمام دسترسی های سلول"
-                src={deletelogo}
-                alt="delete"
-                height={15}
-                width={15}
-                className="hover:scale-150 hover:bg-rose-400 hover:rounded-lg"
+                aria-label="delete"
+                color=""
                 onClick={onDeletePermission}
-              />
+                size="small"
+              >
+                <DeleteIcon fontSize="inherit" />
+              </IconButton>
             </div>
           </div>
         ) : (

@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import MoreLess from "@/pages/filters/moreless";
 import dynamic from "next/dynamic";
 import CircularIndeterminate from "@/pages/components/layout/loading";
-const Table = dynamic(() => import("@/pages/components/layout/table"), {
+const Table = dynamic(() => import("@/pages/components/parts/table"), {
   loading: () => <CircularIndeterminate />,
 });
 
@@ -44,7 +44,7 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default function ScopeTable({ components, hiddencols, page, slug }) {
+export default function TableRoot({ components, hiddencols, page, slug }) {
   const editables = components["editables"];
   const querysets = components["querysets"];
 
@@ -57,7 +57,7 @@ export default function ScopeTable({ components, hiddencols, page, slug }) {
       }
     }
     if (bool == null) {
-      return "pointer-events-none";
+      return "pointer-events-none hidden";
       // cursor-not-allowed
     }
     return bool

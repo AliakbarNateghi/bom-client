@@ -21,6 +21,16 @@ export function Slug() {
   return null;
 }
 
+// const GetClassName = ({ params, field }) => {
+//   if (params?.row[`${field}`] === true) {
+//     return "bg-green-400 hover:bg-green-600 cursor-pointer";
+//   } else if (params?.row[`${field}`] === false) {
+//     return "bg-sky-400 hover:bg-sky-600 cursor-pointer";
+//   } else {
+//     return "hover:bg-gray-300 cursor-pointer";
+//   }
+// };
+
 export async function getServerSideProps(context) {
   const { slug } = context.query;
   const { req } = context;
@@ -71,7 +81,8 @@ export default function PermissionRoot({
           `${params.id}/?field=${params.field}&group=${group}`
         ).then(router.push(`${slug}/?page=${page}&group=${group}`));
       } catch (err) {
-        throw err;
+        // throw err;
+        console.log("err :", err);
       }
     };
     return (
@@ -114,7 +125,6 @@ export default function PermissionRoot({
     } else if (params.row[`${field}`] === false) {
       return "bg-sky-400 hover:bg-sky-600 cursor-pointer";
     } else {
-      // router.push(`${slug}/?page=${page}&group=${group}`);
       return "hover:bg-gray-300 cursor-pointer";
     }
   }
@@ -146,6 +156,7 @@ export default function PermissionRoot({
         },
         cellClassName: (params) => {
           return getClassName(params, "revision");
+          // return <GetClassName params={params} field="revision" />;
         },
       },
       {

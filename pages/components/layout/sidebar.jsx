@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, Suspense } from "react";
 import Link from "next/link";
 import Logout from "@/pages/services/logout";
 import Image from "next/image";
@@ -10,6 +10,7 @@ import { styled, ThemeProvider, createTheme } from "@mui/material/styles";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Paper from "@mui/material/Paper";
+import CircularIndeterminate from "./loading";
 
 export default function Sidebar({ loggedin }) {
   const router = useRouter();
@@ -42,7 +43,7 @@ export default function Sidebar({ loggedin }) {
     { label: "خانه", link: "/", onClick: () => {} },
     { label: "پروفایل", link: "/user/profile", onClick: () => {} },
     {
-      label: "اسکوپ ماتریکس",
+      label: "BOM",
       link: "/table/main/bom?page=1",
       onClick: () => {},
     },
@@ -58,7 +59,7 @@ export default function Sidebar({ loggedin }) {
       onClick: () => {},
     },
     {
-      label: "دسترسی اسکوپ ماتریکس",
+      label: "‌‌BOM دسترسی",
       link: "/table/permission/bom?page=1&group=1",
       onClick: () => {},
     },
@@ -73,7 +74,6 @@ export default function Sidebar({ loggedin }) {
           <div
             id="sidebar"
             onClick={sidebarClick}
-            // onBlur={() => setSidebar(false)}
             className={sidebar ? "open" : ""}
           >
             <span></span>
@@ -98,29 +98,31 @@ export default function Sidebar({ loggedin }) {
               >
                 <Paper elevation={0} sx={{ maxWidth: 256 }}>
                   <Box sx={{}}>
-                    {links.map((item) => (
-                      <ListItemButton
-                        onClick={item.onClick}
-                        href={item.link}
-                        key={item.label}
-                        background="red"
-                        sx={
-                          item.label == "خروج"
-                            ? {
-                                background: "#ff1744",
-                              }
-                            : {}
-                        }
-                      >
-                        <ListItemText
-                          primary={item.label}
-                          primaryTypographyProps={{
-                            fontSize: 14,
-                            fontWeight: "bold",
-                          }}
-                        />
-                      </ListItemButton>
-                    ))}
+                    <Suspense fallback={<CircularIndeterminate />}>
+                      {links.map((item) => (
+                        <ListItemButton
+                          onClick={item.onClick}
+                          href={item.link}
+                          key={item.label}
+                          background="red"
+                          sx={
+                            item.label == "خروج"
+                              ? {
+                                  background: "#ff1744",
+                                }
+                              : {}
+                          }
+                        >
+                          <ListItemText
+                            primary={item.label}
+                            primaryTypographyProps={{
+                              fontSize: 14,
+                              fontWeight: "bold",
+                            }}
+                          />
+                        </ListItemButton>
+                      ))}
+                    </Suspense>
                   </Box>
                 </Paper>
               </ThemeProvider>

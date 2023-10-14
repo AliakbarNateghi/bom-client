@@ -1,6 +1,6 @@
 import { DataGrid } from "@mui/x-data-grid";
 import Api from "@/pages/services/api";
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import Image from "next/image";
 import verify from "@/public/logos/permission.png";
 import { useRouter } from "next/router";
@@ -227,14 +227,15 @@ export default function Permission({
   const [massPermission, setMassPermission] = useState(false);
   const [column, setColumn] = useState("");
 
-
   const editables = permissions["editables"];
   const count = permissions["count"];
 
-  const merged = rows.map((o1) => {
-    const o2 = editables.find((o2) => o2.id === o1.id);
-    return o2 ? { ...o1, ...o2 } : o1;
-  });
+  const merged = useMemo(() => {
+    return rows.map((o1) => {
+      const o2 = editables.find((o2) => o2.id === o1.id);
+      return o2 ? { ...o1, ...o2 } : o1;
+    });
+  }, [rows, editables]);
 
   function findDifferentKey(obj1, obj2) {
     for (let key in obj1) {
@@ -249,10 +250,14 @@ export default function Permission({
     return null;
   }
 
+  const memoizedFindDifferentKey = useMemo(() => {
+    return findDifferentKey;
+  }, []);
+
   const saveOnServer = useCallback(
     async (updatedRow, originalRow) => {
       Api.init();
-      const diff_key = findDifferentKey(updatedRow, originalRow);
+      const diff_key = memoizedFindDifferentKey(updatedRow, originalRow);
       const payload = {
         group: groupID,
         field: diff_key,
@@ -262,14 +267,14 @@ export default function Permission({
       const response = await Api.post(server, payload);
       return response.data[0];
     },
-    [Api]
+    [Api, memoizedFindDifferentKey]
   );
 
   const handleProcessRowUpdateError = useCallback((error) => {
     setSnackbar({ children: error.message, severity: "error" });
   }, []);
 
-  const onColumnHeaderClick = useCallback(async(e) => {
+  const onColumnHeaderClick = useCallback(async (e) => {
     await router.push(`${slug}/?page=${page}&group=${groupID}`);
     await setMassPermission(true);
     setColumn(e.field);

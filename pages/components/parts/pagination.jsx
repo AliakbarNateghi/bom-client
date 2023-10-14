@@ -15,7 +15,7 @@ export default function BasePagination({ count, slug, groupID }) {
         showLastButton
         // variant="outlined"
         // siblingCount={0}
-        // size="medium"
+        // size="large"
         renderItem={(item) => (
           <PaginationItem
             component={Link}

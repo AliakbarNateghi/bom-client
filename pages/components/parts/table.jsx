@@ -1,4 +1,5 @@
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { GridFilterPanel } from "@mui/x-data-grid";
 import { Modal, Box } from "@mui/material";
 import Api from "@/pages/services/api";
 import React, { useState, useCallback } from "react";
@@ -22,6 +23,10 @@ const guides = [
   ".میتوانید اندازه ارتفاع سلول ها را به نسبت محتوای موجود در آنها در سه اندازه تغییر دهید DENSITY با کلیک بر روی گزینه",
   ".میتوانید اکسل جدول مورد نظر را دانلود نمایید EXPORT با کلیک بر روی گزینه",
 ];
+
+// const CustomFilterPanel = (props) => {
+//   return <GridFilterPanel {...props} />;
+// };
 
 export default function Table({
   components,
@@ -84,7 +89,7 @@ export default function Table({
         className="fixed z-[1] right-4 top-4 w-10 h-10 hover:w-12 hover:h-12 hover:right-3 hover:top-3 gradient-background cursor-pointer"
       ></div>
       <DataGrid
-        getRowHeight={() => "auto"}
+        // getRowHeight={() => "auto"}
         // getEstimatedRowHeight={() => 200}
         slots={{ toolbar: GridToolbar }}
         rows={rows}

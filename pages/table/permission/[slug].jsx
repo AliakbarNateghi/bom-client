@@ -960,6 +960,12 @@ export default function PermissionRoot({
         headerName: "id",
         width: 100,
         editable: false,
+        sortable: false,
+        align: "center",
+        headerAlign: "center",
+        cellClassName: () => {
+          return "bg-f0f0f0 font-bold";
+        },
       },
       {
         field: "application_type",

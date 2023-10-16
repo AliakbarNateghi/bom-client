@@ -8,7 +8,6 @@ const Table = dynamic(() => import("@/pages/components/parts/table"), {
   loading: () => <CircularIndeterminate />,
 });
 
-// import { DatePicker } from "react-persian-datepicker";
 
 export function Slug() {
   const router = useRouter();

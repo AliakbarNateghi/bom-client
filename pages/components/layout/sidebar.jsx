@@ -68,7 +68,7 @@ export default function Sidebar({ loggedin }) {
   isAdmin ? adminLinks.map((adminLink) => links.splice(4, 0, adminLink)) : "";
 
   return (
-    <div className="fixed z-[2]">
+    <div className="fixed z-[5]">
       {loggedin ? (
         <div>
           <div

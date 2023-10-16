@@ -4,7 +4,6 @@ import { Modal, Box } from "@mui/material";
 import Api from "@/pages/services/api";
 import React, { useState, useCallback } from "react";
 import { successToast, errorToast, warningToast } from "@/pages/services/toast";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import GuideModal from "./modal/guidemodal";
 import BasePagination from "./pagination";

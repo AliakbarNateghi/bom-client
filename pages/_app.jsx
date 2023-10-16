@@ -24,51 +24,50 @@ export default function App({ Component, pageProps }) {
     }
   }, [router.pathname]);
 
-  // useEffect(() => {
-  //   const handleRouteChange = (url, { shallow }) => {
-  //     console.log(
-  //       `App is changing to ${url} ${
-  //         shallow ? "with" : "without"
-  //       } shallow routing`
-  //     );
-  //     document.getElementById("spinner").style.display = "block";
-  //     return;
-  //   };
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    setTimeout(() => {
+      setShow(true);
+    }, 3);
+  }, []);
 
-  //   const handleRouteComplete = (url, { shallow }) => {
-  //     console.log("you have finished going to the new page");
-  //     document.getElementById("spinner").style.display = "none";
-  //     return;
-  //   };
-
-  //   router.events.on("routeChangeStart", handleRouteChange);
-  //   router.events.on("routeChangeComplete", handleRouteComplete); // If the component is unmounted, unsubscribe
-
-  //   // from the event with the `off` method:
-  //   return () => {
-  //     router.events.off("routeChangeStart", handleRouteChange);
-  //   };
-  // }, []);
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+  }, []);
 
   return (
     <Provider store={store}>
-      <Sidebar loggedin={loggedin} />
-      <main className="px-4 py-6">
-        <Suspense fallback={<CircularIndeterminate />}>
-          <Component {...pageProps} />
-          <ToastContainer
-            position="top-right"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={true}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
-        </Suspense>
-      </main>
+      {show ? (
+        <>
+          <Sidebar loggedin={loggedin} />
+          <main className="px-4 py-6">
+            <Suspense fallback={<CircularIndeterminate />}>
+              {/* {isLoading ? ( */}
+              <Component {...pageProps} />
+              {/* ) : (
+                <CircularIndeterminate />
+              )} */}
+              <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={true}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
+            </Suspense>
+          </main>
+        </>
+      ) : (
+        <></>
+      )}
     </Provider>
   );
 }

@@ -230,13 +230,6 @@ export default function PermissionData({
   const editables = permissions["editables"];
   const count = permissions["count"];
 
-//   const merged = useMemo(() => {
-//     return rows.map((o1) => {
-//       const o2 = editables.find((o2) => o2.id === o1.id);
-//       return o2 ? { ...o1, ...o2 } : o1;
-//     });
-//   }, [rows, editables]);
-
   function findDifferentKey(obj1, obj2) {
     for (let key in obj1) {
       if (obj1.hasOwnProperty(key) && obj2.hasOwnProperty(key)) {

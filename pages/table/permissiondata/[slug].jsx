@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Api from "../../services/api";
 import Cookies from "universal-cookie";
 import Image from "next/image";
@@ -22,16 +22,6 @@ export function Slug() {
   const { slug } = router.query;
   return null;
 }
-
-// const GetClassName = ({ params, field }) => {
-//   if (params?.row[`${field}`] === true) {
-//     return "bg-green-400 hover:bg-green-600 cursor-pointer";
-//   } else if (params?.row[`${field}`] === false) {
-//     return "bg-sky-400 hover:bg-sky-600 cursor-pointer";
-//   } else {
-//     return "hover:bg-gray-300 cursor-pointer";
-//   }
-// };
 
 export async function getServerSideProps(context) {
   const { slug } = context.query;
@@ -70,8 +60,6 @@ export async function getServerSideProps(context) {
 
 function ValueComponent({ params, field, slug, page, group }) {
   const router = useRouter();
-  console.log("params :", params);
-  console.log("field :", field);
   const [deletedCell, setDeletedCell] = useState(params.formattedValue);
   const onDeletePermission = async () => {
     setDeletedCell(null);
@@ -79,7 +67,12 @@ function ValueComponent({ params, field, slug, page, group }) {
       await Api.delete(
         `field-permission/${slug}`,
         `${params.id}/?field=${params.field}&group=${group}`
-      ).then(router.push(`${slug}/?page=${page}&group=${group}`));
+      );
+      // .then(
+      //   router.push(`${slug}/?page=${page}&group=${group}`, undefined, {
+      //     shallow: true,
+      //   })
+      // );
     } catch (err) {
       throw err;
     }
@@ -90,7 +83,7 @@ function ValueComponent({ params, field, slug, page, group }) {
         <div className="flex space-x-11 items-center">
           {/* <div style={{ color }}>{params.formattedValue}</div> */}
           <div className="relative left-12 bottom-2 cursor-pointer opacity-90 hover:opacity-100">
-            <MoreLess params={params} field={field} />
+            {/* <MoreLess params={params} field={field} /> */}
             {/* test */}
             <IconButton
               title="حذف تمام دسترسی های سلول"
@@ -104,7 +97,7 @@ function ValueComponent({ params, field, slug, page, group }) {
           </div>
         </div>
       ) : (
-        <div></div>
+        <div className="bg-white h-full w-96 -ml-8 -mr-5"></div>
       )}
     </>
   );
@@ -136,16 +129,6 @@ function GetValue({ params, field, slug, page, group }) {
   }
 }
 
-// function getClassName(params, field) {
-//   if (params.row[`${field}`] === true) {
-//     return "bg-green-400 hover:bg-green-600 cursor-pointer";
-//   } else if (params.row[`${field}`] === false) {
-//     return "bg-sky-400 hover:bg-sky-600 cursor-pointer";
-//   } else {
-//     return "hover:bg-gray-300 cursor-pointer";
-//   }
-// }
-
 export default function PermissionRoot({
   permissions,
   components,
@@ -155,47 +138,6 @@ export default function PermissionRoot({
   slug,
 }) {
   const querysets = components["querysets"];
-
-  function getClassName(params, field) {
-    if (params.row[`${field}`] === true) {
-      return "bg-green-400 hover:bg-green-600 cursor-pointer";
-    } else if (params.row[`${field}`] === false) {
-      return "bg-sky-400 hover:bg-sky-600 cursor-pointer";
-    } else {
-      return "hover:bg-gray-300 cursor-pointer";
-    }
-  }
-
-  function createObject(field, headerName, width, type, editable) {
-    return {
-      field: field,
-      headerName: headerName,
-      width: width,
-      type: type,
-      editable: editable,
-      sortable: false,
-      align: "center",
-      headerAlign: "center",
-      cellClassName: (params) => {
-        return field !== "id"
-          ? getClassName(params, field)
-          : "bg-f0f0f0 font-bold";
-      },
-      ...(field !== "id" && {
-        renderCell: (params) => {
-          return (
-            <GetValue
-              params={params}
-              field={field}
-              slug={slug}
-              page={page}
-              group={group}
-            />
-          );
-        },
-      }),
-    };
-  }
 
   function getValue(params, field) {
     if (params.row[`${field}`] === true) {
@@ -221,6 +163,50 @@ export default function PermissionRoot({
     } else {
       return null;
     }
+  }
+
+  const getClassName = (params, field) => {
+    if (params.row[`${field}`] === true) {
+      return "bg-green-400 hover:bg-green-600 cursor-pointer";
+    } else if (params.row[`${field}`] === false) {
+      return "bg-sky-400 hover:bg-sky-600 cursor-pointer";
+    } else {
+      return "hover:bg-gray-300 cursor-pointer";
+    }
+  };
+
+  function createObject(field, headerName, width, type, editable) {
+    return {
+      field: field,
+      headerName: headerName,
+      width: width,
+      type: type,
+      editable: editable,
+      sortable: false,
+      align: "center",
+      headerAlign: "center",
+      cellClassName: (params) => {
+        return field !== "id"
+          ? getClassName(params, field)
+          : "bg-f0f0f0 font-bold";
+      },
+      ...(field !== "id" && {
+        renderCell: (params) => {
+          return getValue(params, field);
+          // {
+          //   return (
+          //     <GetValue
+          //       params={params}
+          //       field={field}
+          //       slug={slug}
+          //       page={page}
+          //       group={group}
+          //     />
+          //   );
+          // },
+        },
+      }),
+    };
   }
 
   const bom = [

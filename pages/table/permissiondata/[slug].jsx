@@ -79,6 +79,7 @@ function ValueComponent({ params, field, slug, page, group }) {
   };
   return (
     <>
+      {/* <MoreLess params={params} field={field} /> */}
       {deletedCell ? (
         <div className="flex space-x-11 items-center">
           {/* <div style={{ color }}>{params.formattedValue}</div> */}

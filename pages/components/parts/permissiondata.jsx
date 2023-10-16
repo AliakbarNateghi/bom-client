@@ -278,6 +278,7 @@ export default function PermissionData({
       <TheGuideModal />
       <DataGrid
         rows={editables}
+        // rows={querysets}
         columns={columns}
         processRowUpdate={(updatedRow, originalRow) =>
           saveOnServer(updatedRow, originalRow)

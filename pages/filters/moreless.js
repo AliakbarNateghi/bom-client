@@ -5,9 +5,9 @@ export default function MoreLess({ params }) {
   const value = params?.value;
 
   const content =
-    expanded || typeof value !== "string" ? value : value.slice(0, 200);
+    expanded || typeof value !== "string" ? value : value.slice(0, 60);
 
-  const showMoreLessLink = value?.length > 200;
+  const showMoreLessLink = value?.length > 60;
 
   return (
     <div className="bkoodak text-base font-medium">

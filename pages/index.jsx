@@ -1,16 +1,8 @@
 import { userInfo } from "@/pages/redux/slices/userinfo";
 import { useSelector, useDispatch } from "react-redux";
-import background from "@/public/logos/background.jpg";
-import back1 from "@/public/logos/back1.jpg";
-import back2 from "@/public/logos/back2.jpg";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import Image from "next/image";
-import { SocialIcon } from "react-social-icons";
-import mapna from "@/public/logos/mapnalogo.png";
-import Mapna from "@/public/logos/LogoMapna1.png";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import { TypeAnimation } from "react-type-animation";
 import Box from "@mui/material/Box";
 
@@ -65,9 +57,9 @@ export default function Home({}) {
         />
       </Box>
 
-      <footer className="bg-white shadow dark:bg-gray-900 fixed left-0 bottom-0 w-screen">
+      <footer className="shadow bg-gray-900 fixed left-0 bottom-0 w-screen">
         <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
-          <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+          <span className="text-sm sm:text-center text-gray-400">
             © 2023{" "}
             <Link
               href="https://mapnagroup.com/?lang=en"
@@ -77,7 +69,7 @@ export default function Home({}) {
             </Link>
             . All Rights Reserved.
           </span>
-          <ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+          <ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-400 sm:mt-0">
             <li>
               <Link
                 href="/contact"

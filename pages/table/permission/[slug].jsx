@@ -82,7 +82,6 @@
 //         ).then(router.push(`${slug}/?page=${page}&group=${group}`));
 //       } catch (err) {
 //         // throw err;
-//         console.log("err :", err);
 //       }
 //     };
 //     return (

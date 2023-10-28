@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 // import { getCookie, setCookie, deleteCookie } from 'cookies-next';
 // import { parseCookies } from "nookies";
-// import cookie from 'js-cookie';
+import cookie from 'js-cookie';
 
 // export function getCookies(name) {
 //   const cookies = parseCookies();

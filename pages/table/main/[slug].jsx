@@ -61,7 +61,7 @@ export default function TableRoot({ components, hiddencols, page, slug }) {
     }
     return bool
       ? "bg-green-400 hover:bg-green-500 cursor-pointer"
-      : "bg-sky-400 hover:bg-sky-600 select-none pointer-events-none";
+      : "bg-sky-400 hover:bg-sky-400 hover:pointer-events-none";
   }
 
   function createObject(
@@ -98,35 +98,35 @@ export default function TableRoot({ components, hiddencols, page, slug }) {
 
   const bom = [
     createObject("id", "id", 100, false, undefined),
-    createObject("revision", "REVISION", 130, true),
-    createObject("ID", "ID", 130, true),
-    createObject("P_on_N_status_code", "P/N Status Code", 130, true),
-    createObject("fig_no", "Fig. No.", 130, true),
-    createObject("item_no", "Item No.", 130, true),
-    createObject("module", "Module", 130, true),
-    createObject("level", "Level", 130, true),
-    createObject("code", "Code", 130, true),
-    createObject("parent_code", "Parent Code", 130, true),
-    createObject("part_number", "Part Number", 130, true),
-    createObject("description", "Description", 130, true),
-    createObject("comment", "Comment", 130, true),
-    createObject("sap_name", "SAP NAME", 130, true),
-    createObject("unit_per_assy", "Units Per Assy", 130, true),
-    createObject("unit_per_end_item", "Units Per End Item", 130, true),
+    createObject("revision", "REVISION", 200, true),
+    createObject("ID", "ID", 200, true),
+    createObject("P_on_N_status_code", "P/N Status Code", 200, true),
+    createObject("fig_no", "Fig. No.", 200, true),
+    createObject("item_no", "Item No.", 200, true),
+    createObject("module", "Module", 200, true),
+    createObject("level", "Level", 200, true),
+    createObject("code", "Code", 200, true),
+    createObject("parent_code", "Parent Code", 200, true),
+    createObject("part_number", "Part Number", 200, true),
+    createObject("description", "Description", 200, true),
+    createObject("comment", "Comment", 300, true),
+    createObject("sap_name", "SAP NAME", 200, true),
+    createObject("unit_per_assy", "Units Per Assy", 200, true),
+    createObject("unit_per_end_item", "Units Per End Item", 200, true),
     createObject(
       "corrected_units_per_end_item",
       "Corrected Units Per End Item",
       220,
       true
     ),
-    createObject("gg_qty", "GG QTY", 130, true),
-    createObject("srp", "SRP", 130, true),
-    createObject("store_comment", "Store Comment", 130, true),
-    createObject("assembly", "Assembly", 130, true, "boolean"),
-    createObject("standard_part", "Standard Part", 130, true, "boolean"),
-    createObject("material", "Material", 130, true),
+    createObject("gg_qty", "GG QTY", 200, true),
+    createObject("srp", "SRP", 200, true),
+    createObject("store_comment", "Store Comment", 300, true),
+    createObject("assembly", "Assembly", 200, true, "boolean"),
+    createObject("standard_part", "Standard Part", 200, true, "boolean"),
+    createObject("material", "Material", 200, true),
     createObject("mfg_complexity_level", "Mfg. Complexity Level", 220, true),
-    createObject("disassembled", "Disassembled", 130, true),
+    createObject("disassembled", "Disassembled", 200, true),
     createObject(
       "supplying_or_manufacturing",
       "Supplying / Manufacturing ",
@@ -139,12 +139,12 @@ export default function TableRoot({ components, hiddencols, page, slug }) {
       220,
       true
     ),
-    createObject("vendor", "Vendor", 130, true),
-    createObject("joining", "Joining", 130, true),
+    createObject("vendor", "Vendor", 200, true),
+    createObject("joining", "Joining", 200, true),
     createObject("manufacturing_process", "Manufacturing Process", 220, true),
     createObject("raw_material_form", "Raw Material Form", 150, true),
-    createObject("function", "Function", 130, true),
-    createObject("qc_criteria", "QC Criteria", 130, true),
+    createObject("function", "Function", 200, true),
+    createObject("qc_criteria", "QC Criteria", 200, true),
     createObject(
       "manufacturing_priority",
       "Manufacturing Priority ",
@@ -179,15 +179,15 @@ export default function TableRoot({ components, hiddencols, page, slug }) {
     ),
     createObject("system_D_requirements", "System D. Requirement", 200, true),
     createObject("percurment_state", "PERCURMENT STATE", 150, true),
-    createObject("details", "DETAILS", 130, true),
-    createObject("joint_type", "Joint Type", 130, true),
+    createObject("details", "DETAILS", 200, true),
+    createObject("joint_type", "Joint Type", 200, true),
     createObject(
       "discarded_during_disassembly",
       "DISCARDED DURING DISSASSEMBLY",
       300,
       true
     ),
-    createObject("expendables", "Expendables", 130, true, "boolean"),
+    createObject("expendables", "Expendables", 200, true, "boolean"),
     createObject(
       "discarded_or_unusable_according_to_docs",
       "Discarded/Unusable According To Docs",
@@ -207,7 +207,7 @@ export default function TableRoot({ components, hiddencols, page, slug }) {
       220,
       true
     ),
-    createObject("EBOM", "EBOM", 130, true),
+    createObject("EBOM", "EBOM", 200, true),
   ];
 
   const provide = [
@@ -247,8 +247,8 @@ export default function TableRoot({ components, hiddencols, page, slug }) {
       "singleSelect",
       ["پیمانکار", "کارفرما"]
     ),
-    createObject("pr", " PR شماره", 130, true),
-    createObject("po", "PO شماره", 130, true),
+    createObject("pr", " PR شماره", 200, true),
+    createObject("po", "PO شماره", 200, true),
     createObject("subject", "موضوع", 500, true),
     createObject("request_type", "جنس درخواست", 150, true, "singleSelect", [
       "ماده اولیه",
@@ -276,9 +276,9 @@ export default function TableRoot({ components, hiddencols, page, slug }) {
     ),
     createObject("contract_number", "شماره قرارداد", 150, true),
     createObject("supplier", "تامين كننده", 220, true),
-    createObject("amount", "مبلغ", 130, true),
-    createObject("adjustment_amount", "مبلغ تعديل", 130, true),
-    createObject("currency", "نوع ارز", 130, true, "singleSelect", [
+    createObject("amount", "مبلغ", 200, true),
+    createObject("adjustment_amount", "مبلغ تعديل", 200, true),
+    createObject("currency", "نوع ارز", 200, true, "singleSelect", [
       "ریال",
       "یورو",
       "دلار",
@@ -317,10 +317,9 @@ export default function TableRoot({ components, hiddencols, page, slug }) {
       220,
       true
     ),
-    createObject("financial_situation", "وضعيت در معاونت مالي", 220, true),
     createObject(
-      "prepayment_request_date",
-      "تاريخ درخواست پيش پرداخت",
+      "financial_situation",
+      "وضعيت در معاونت مالي",
       220,
       true,
       "singleSelect",
@@ -335,6 +334,12 @@ export default function TableRoot({ components, hiddencols, page, slug }) {
         "پیگیری درخواست ارز",
         "پرداخت شده",
       ]
+    ),
+    createObject(
+      "prepayment_request_date",
+      "تاريخ درخواست پيش پرداخت",
+      220,
+      true
     ),
     createObject("prepayment_amount", "مبلغ پيش پرداخت", 150, true),
     createObject("currency_type", "نوع ارز", 160, true),

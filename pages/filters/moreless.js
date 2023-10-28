@@ -12,11 +12,14 @@ export default function MoreLess({ params }) {
   return (
     <div className="bkoodak text-base font-medium">
       {content}
-      &nbsp;
+      <br />
+      {/* &nbsp;&nbsp; */}
       {showMoreLessLink && (
         <button
           onClick={() => setExpanded(!expanded)}
-          className="text-blue-500 hover:text-red-500 text-lg"
+          // onMouseOver={() => setExpanded(!expanded)}
+
+          className="text-blue-800 hover:text-red-500 text-lg"
         >
           {expanded ? "کمتر" : "بیشتر"}
         </button>

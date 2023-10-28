@@ -89,7 +89,7 @@ export default function Table({
       ></div>
       <DataGrid
         getRowHeight={() => "auto"}
-        // getEstimatedRowHeight={() => 200}
+        // getEstimatedRowHeight={() => 400}
         slots={{ toolbar: GridToolbar }}
         rows={rows}
         columns={columns}

@@ -47,28 +47,46 @@ export default function Sidebar({ loggedin }) {
   });
 
   let links = [
-    { label: "خانه", link: "/", onClick: () => {} },
-    { label: "پروفایل", link: "/user/profile", onClick: () => {} },
+    { label: "خانه", link: "/", onClick: () => {}, title: "صفحه اصلی" },
+    {
+      label: "پروفایل",
+      link: "/user/profile",
+      onClick: () => {},
+      title: "ادیت مشخصات",
+    },
     {
       label: "BOM",
       link: "/table/main/bom?page=1",
       onClick: () => {},
+      title: "BOM جدول",
     },
-    { label: "تامین", link: "/table/main/provide?page=1", onClick: () => {} },
-    { label: "خروج", link: "/user/login", onClick: Logout },
+    {
+      label: "تامین",
+      link: "/table/main/provide?page=1",
+      onClick: () => {},
+      title: "جدول تامین",
+    },
+    { label: "خروج", link: "/user/login", onClick: Logout, title: "" },
   ];
 
   let adminLinks = [
-    { label: "کاربران", link: "/user/list", onClick: () => {} },
+    {
+      label: "کاربران",
+      link: "/user/list",
+      onClick: () => {},
+      title: "کاربران سامانه",
+    },
     {
       label: "دسترسی تامین",
       link: "/table/permissiondata/provide?page=1&group=1",
       onClick: () => {},
+      title: "جدول تغییر دسترسی تامین",
     },
     {
       label: "‌‌BOM دسترسی",
       link: "/table/permissiondata/bom?page=1&group=1",
       onClick: () => {},
+      title: "BOM جدول تغییر دسترسی",
     },
   ];
 
@@ -115,6 +133,7 @@ export default function Sidebar({ loggedin }) {
                               href={item.link}
                               key={item.label}
                               background="red"
+                              title={item.title}
                               sx={
                                 item.label == "خروج"
                                   ? {
@@ -158,6 +177,7 @@ export default function Sidebar({ loggedin }) {
                   <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                     {links.map((item) => (
                       <li
+                        title={item.title}
                         className={`text-gray-500 dark:text-gray-400 text-xl ${
                           item.link != "/user/login"
                             ? "hover:underline"

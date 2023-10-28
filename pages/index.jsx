@@ -28,22 +28,8 @@ export default function Home({}) {
   }, [router.pathname !== "user/login", dispatch]);
 
   return (
-    <div className="">
-      {/* <Image
-        src={back2}
-        alt=""
-        style={
-          {
-            // width: "100%",
-            // width: "5324px",
-            // height: "3550px",
-            // backgroundRepeat: "no-repeat",
-            // backgroundSize: "contain",
-            // backgroundPosition: "center",
-          }
-        }
-        className="absolute z-[-1] left-0 top-0 blur-sm brightness-50"
-      /> */}
+    <div>
+      <div className="back2"></div>
       <div className="flex flex-col float-right w-1/6 m-5">
         <p className="digikala text-2xl text-center">:لیست جداول</p>
         <ul className="">

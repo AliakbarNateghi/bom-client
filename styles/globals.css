@@ -27,6 +27,20 @@ body {
     font-family: 'digikala' sans-serif;
 }
 
+.back2 {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  background: url(../public/logos/back2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: brightness(60%) blur(3px);
+  -webkit-filter: brightness(60%) blur(3px);
+}
+
 .digikala {
   font-family: 'digikala';
 }

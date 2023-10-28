@@ -55,12 +55,12 @@ export default function Sidebar({ loggedin }) {
     { label: "کاربران", link: "/user/list", onClick: () => {} },
     {
       label: "دسترسی تامین",
-      link: "/table/permission/provide?page=1&group=1",
+      link: "/table/permissiondata/provide?page=1&group=1",
       onClick: () => {},
     },
     {
       label: "‌‌BOM دسترسی",
-      link: "/table/permission/bom?page=1&group=1",
+      link: "/table/permissiondata/bom?page=1&group=1",
       onClick: () => {},
     },
   ];

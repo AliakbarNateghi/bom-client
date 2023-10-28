@@ -1,4 +1,7 @@
 import axios from "axios";
+import BaseModal from "../components/parts/modal/basemodal";
+import { errorToast } from "./toast";
+import { redirect } from "next/dist/server/api-utils";
 
 class Api {
   static init(cookies) {
@@ -24,7 +27,6 @@ class Api {
     try {
       return await axios.delete(this.constructUrl(resource, slug));
     } catch (err) {
-      console.error(err);
       throw err;
     }
   }
@@ -33,7 +35,6 @@ class Api {
     try {
       return await axios.put(this.constructUrl(resource, slug), params);
     } catch (err) {
-      console.error(err);
       throw err;
     }
   }
@@ -43,6 +44,7 @@ class Api {
       const response = await axios.get(this.constructUrl(resource, slug));
       return response;
     } catch (err) {
+      console.log("err :", err);
       throw err;
     }
   }
@@ -51,7 +53,6 @@ class Api {
     try {
       return await axios.post(this.constructUrl(resource), params);
     } catch (err) {
-      console.error(err);
       throw err;
     }
   }
@@ -60,7 +61,6 @@ class Api {
     try {
       return await axios.patch(this.constructUrl(resource, slug), params);
     } catch (err) {
-      console.error(err);
       throw err;
     }
   }

@@ -29,17 +29,17 @@ body {
 }
 
 .back2 {
-  height: 120%;
-  width: 100%;
+  height: 100%;
+  width: 105%;
   position: fixed;
   z-index: -1;
   left: 0;
-  top: -100px;
-  background: url(../public/logos/back2.jpg);
+  top: -50px;
+  background: url(../public/logos/back7.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  filter: brightness(50%) blur(2px);
-  -webkit-filter: brightness(50%) blur(2px);
+  filter: brightness(50%) blur(1px);
+  -webkit-filter: brightness(50%) blur(1px);
 }
 
 .digikala {

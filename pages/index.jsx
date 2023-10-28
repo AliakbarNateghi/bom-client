@@ -45,13 +45,13 @@ export default function Home({}) {
         <TypeAnimation
           sequence={[
             "BOM",
-            2000,
+            1500,
             "Provide",
-            2000,
+            1500,
             "Scope matrix",
-            2000,
+            1500,
             "B P S",
-            2000,
+            1500,
           ]}
           wrapper="span"
           speed={5}
@@ -65,7 +65,7 @@ export default function Home({}) {
         />
       </Box>
 
-      <footer className="bg-white shadow dark:bg-gray-800 fixed left-0 bottom-0 w-screen">
+      <footer className="bg-white shadow dark:bg-gray-900 fixed left-0 bottom-0 w-screen">
         <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
             © 2023{" "}

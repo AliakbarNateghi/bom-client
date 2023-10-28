@@ -88,7 +88,7 @@ export default function Table({
         className="fixed z-[1] right-4 top-4 w-10 h-10 hover:w-12 hover:h-12 hover:right-3 hover:top-3 gradient-background cursor-pointer"
       ></div>
       <DataGrid
-        // getRowHeight={() => "auto"}
+        getRowHeight={() => "auto"}
         // getEstimatedRowHeight={() => 200}
         slots={{ toolbar: GridToolbar }}
         rows={rows}

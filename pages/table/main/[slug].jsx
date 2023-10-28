@@ -61,7 +61,7 @@ export default function TableRoot({ components, hiddencols, page, slug }) {
     }
     return bool
       ? "bg-green-400 hover:bg-green-500 cursor-pointer"
-      : "bg-sky-400 hover:bg-sky-600 pointer-events-none";
+      : "bg-sky-400 hover:bg-sky-600 select-none pointer-events-none";
   }
 
   function createObject(

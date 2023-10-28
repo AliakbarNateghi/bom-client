@@ -1,7 +1,6 @@
 import axios from "axios";
-import BaseModal from "../components/parts/modal/basemodal";
 import { errorToast } from "./toast";
-import { redirect } from "next/dist/server/api-utils";
+import { useRouter } from "next/router";
 
 class Api {
   static init(cookies) {
@@ -44,7 +43,6 @@ class Api {
       const response = await axios.get(this.constructUrl(resource, slug));
       return response;
     } catch (err) {
-      console.log("err :", err);
       throw err;
     }
   }

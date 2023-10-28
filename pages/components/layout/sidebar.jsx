@@ -12,6 +12,8 @@ import ListItemText from "@mui/material/ListItemText";
 import Paper from "@mui/material/Paper";
 import CircularIndeterminate from "./loading";
 import Mapna from "@/public/logos/LogoMapna1.png";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 
 export default function Sidebar({ loggedin }) {
   const router = useRouter();
@@ -149,6 +151,7 @@ export default function Sidebar({ loggedin }) {
                       height={45}
                       alt="MAPNA"
                       className="p-0 m-0"
+                      loading="lazy"
                     />
                   </a>
 

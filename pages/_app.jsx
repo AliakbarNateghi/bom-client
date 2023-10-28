@@ -28,7 +28,7 @@ export default function App({ Component, pageProps }) {
   useEffect(() => {
     setTimeout(() => {
       setShow(true);
-    }, 3);
+    }, 50);
   }, []);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -46,11 +46,7 @@ export default function App({ Component, pageProps }) {
           <Sidebar loggedin={loggedin} />
           <main className="px-4 py-6">
             <Suspense fallback={<CircularIndeterminate />}>
-              {/* {isLoading ? ( */}
               <Component {...pageProps} />
-              {/* ) : (
-                <CircularIndeterminate />
-              )} */}
               <ToastContainer
                 position="top-right"
                 autoClose={3000}
@@ -66,7 +62,9 @@ export default function App({ Component, pageProps }) {
           </main>
         </>
       ) : (
-        <></>
+        <>
+          <CircularIndeterminate />
+        </>
       )}
     </Provider>
   );

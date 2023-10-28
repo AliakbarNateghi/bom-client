@@ -10,13 +10,15 @@ import Image from "next/image";
 import { SocialIcon } from "react-social-icons";
 import mapna from "@/public/logos/mapnalogo.png";
 import Mapna from "@/public/logos/LogoMapna1.png";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { TypeAnimation } from "react-type-animation";
+import Box from "@mui/material/Box";
 
 export default function Home({}) {
   const router = useRouter();
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state) => state.userInfo);
   const [user, setUser] = useState(data);
-  
 
   const userGroups = [];
   for (let i = 0; i < data?.groups?.length; i++) {
@@ -31,6 +33,37 @@ export default function Home({}) {
   return (
     <div>
       <div className="back2"></div>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center", // center horizontally
+          alignItems: "center", // center vertically
+          height: "95vh",
+        }}
+      >
+        <TypeAnimation
+          sequence={[
+            "BOM",
+            2000,
+            "Provide",
+            2000,
+            "Scope matrix",
+            2000,
+            "B P S",
+            2000,
+          ]}
+          wrapper="span"
+          speed={5}
+          style={{
+            fontSize: "5em",
+            display: "inline-block",
+            color: "white",
+            fontFamily: "digikala",
+          }}
+          repeat={0}
+        />
+      </Box>
 
       <footer className="bg-white shadow dark:bg-gray-800 fixed left-0 bottom-0 w-screen">
         <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">

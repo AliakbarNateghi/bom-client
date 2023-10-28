@@ -38,8 +38,8 @@ body {
   background: url(../public/logos/back2.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  filter: brightness(60%) blur(3px);
-  -webkit-filter: brightness(60%) blur(3px);
+  filter: brightness(50%) blur(2px);
+  -webkit-filter: brightness(50%) blur(2px);
 }
 
 .digikala {

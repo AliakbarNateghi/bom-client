@@ -14,7 +14,6 @@ import CircularIndeterminate from "./loading";
 import Mapna from "@/public/logos/LogoMapna1.png";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-
 export default function Sidebar({ loggedin }) {
   const router = useRouter();
   const [isAdmin, setIsAdmin] = useState(false);
@@ -145,7 +144,7 @@ export default function Sidebar({ loggedin }) {
             <div>
               <nav className="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700 fixed top-0 left-0 w-screen">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                  <a href="/" className="flex items-center">
+                  <Link href="/" className="flex items-center">
                     <Image
                       src={Mapna}
                       height={45}
@@ -153,14 +152,14 @@ export default function Sidebar({ loggedin }) {
                       className="p-0 m-0"
                       loading="lazy"
                     />
-                  </a>
+                  </Link>
 
                   <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                     {links.map((item) => (
                       <li className="text-white text-xl hover:text-blue-700 digikala">
-                        <a onClick={item.onClick} href={item.link}>
+                        <Link onClick={item.onClick} href={item.link}>
                           {item.label}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>

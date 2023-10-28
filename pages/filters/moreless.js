@@ -5,9 +5,9 @@ export default function MoreLess({ params }) {
   const value = params?.value;
 
   const content =
-    expanded || typeof value !== "string" ? value : value.slice(0, 60);
+    expanded || typeof value !== "string" ? value : value.slice(0, 120);
 
-  const showMoreLessLink = value?.length > 60;
+  const showMoreLessLink = value?.length > 120;
 
   return (
     <div className="bkoodak text-base font-medium">
@@ -17,8 +17,6 @@ export default function MoreLess({ params }) {
       {showMoreLessLink && (
         <button
           onClick={() => setExpanded(!expanded)}
-          // onMouseOver={() => setExpanded(!expanded)}
-
           className="text-blue-800 hover:text-red-500 text-lg"
         >
           {expanded ? "کمتر" : "بیشتر"}

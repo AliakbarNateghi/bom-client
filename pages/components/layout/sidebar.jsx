@@ -78,13 +78,13 @@ export default function Sidebar({ loggedin }) {
     },
     {
       label: "دسترسی تامین",
-      link: "/table/permissiondata/provide?page=1&group=1",
+      link: "/table/permission/provide?page=1&group=1",
       onClick: () => {},
       title: "جدول تغییر دسترسی تامین",
     },
     {
       label: "‌‌BOM دسترسی",
-      link: "/table/permissiondata/bom?page=1&group=1",
+      link: "/table/permission/bom?page=1&group=1",
       onClick: () => {},
       title: "BOM جدول تغییر دسترسی",
     },

@@ -210,12 +210,12 @@ const TheMassPermissionModal = ({
   );
 };
 
-export default function Permission({
+export default function PermissionData({
+  querysets,
   permissions,
   groups,
   page,
   group,
-  rows,
   columns,
   server,
   massServer,
@@ -229,13 +229,6 @@ export default function Permission({
 
   const editables = permissions["editables"];
   const count = permissions["count"];
-
-  const merged = useMemo(() => {
-    return rows.map((o1) => {
-      const o2 = editables.find((o2) => o2.id === o1.id);
-      return o2 ? { ...o1, ...o2 } : o1;
-    });
-  }, [rows, editables]);
 
   function findDifferentKey(obj1, obj2) {
     for (let key in obj1) {
@@ -284,7 +277,8 @@ export default function Permission({
     <div style={{ height: "100%", width: "100%", marginTop: "2%" }}>
       <TheGuideModal />
       <DataGrid
-        rows={merged}
+        rows={editables}
+        // rows={querysets}
         columns={columns}
         processRowUpdate={(updatedRow, originalRow) =>
           saveOnServer(updatedRow, originalRow)

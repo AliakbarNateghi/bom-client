@@ -12,14 +12,17 @@ import ListItemText from "@mui/material/ListItemText";
 import Paper from "@mui/material/Paper";
 import CircularIndeterminate from "./loading";
 import Mapna from "@/public/logos/LogoMapna1.png";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import Button from "react-bootstrap/Button";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import Dropdown from "react-bootstrap/Dropdown";
 
 export default function Sidebar({ loggedin }) {
   const router = useRouter();
   const [isAdmin, setIsAdmin] = useState(false);
-  const [sidebar, setSidebar] = useState(false);
   const [permissionDropDown, setPermissionDropDown] = useState(false);
   const [dataDropDown, setDataDropDown] = useState(false);
+
+  const [menu, setMenu] = useState(false);
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state) => state.userInfo);
 
@@ -34,19 +37,14 @@ export default function Sidebar({ loggedin }) {
   }, [router.pathname !== "user/login", dispatch]);
 
   useEffect(() => {
-    setSidebar(false);
+    setDataDropDown(false);
+    setPermissionDropDown(false);
   }, [router.pathname]);
 
   useEffect(() => {
     setIsAdmin(false);
     userGroups.includes("god") ? setIsAdmin(true) : null;
   }, [userGroups]);
-
-  const sidebarClick = useCallback(async (e) => {
-    e.preventDefault();
-    await setSidebar(!sidebar);
-    userGroups.includes("god") ? setIsAdmin(true) : null;
-  });
 
   let links = [
     {
@@ -201,68 +199,109 @@ export default function Sidebar({ loggedin }) {
       {loggedin ? (
         <div>
           {router.pathname != "/" ? (
-            <div>
-              <div
-                id="sidebar"
-                onClick={sidebarClick}
-                className={sidebar ? "open" : ""}
-              >
+            <div
+              onMouseOver={() => setMenu(true)}
+              onMouseLeave={() => setMenu(false)}
+            >
+              <div id="sidebar" className={menu ? "open" : ""}>
                 <span></span>
                 <span></span>
                 <span></span>
               </div>
-              {sidebar ? (
-                <Box className="absolute z-[1] pl-1 flex w-64">
-                  <ThemeProvider
-                    theme={createTheme({
-                      components: {
-                        MuiListItemButton: {
-                          defaultProps: {
-                            disableTouchRipple: true,
+
+              {menu ? (
+                <div className="relative">
+                  <ul className="py-2 text-sm text-gray-700">
+                    <Box className="absolute z-[1] pl-1 flex flex-col w-64">
+                      <ThemeProvider
+                        theme={createTheme({
+                          components: {
+                            MuiListItemButton: {
+                              defaultProps: {
+                                disableTouchRipple: true,
+                              },
+                            },
                           },
-                        },
-                      },
-                      palette: {
-                        mode: "dark",
-                      },
-                    })}
-                  >
-                    <Paper elevation={0} sx={{ maxWidth: 256 }}>
-                      <Box sx={{}}>
-                        <Suspense fallback={<CircularIndeterminate />}>
-                          {links.map((item) => (
-                            <div>
-                              <ListItemButton
-                                onClick={item.onClick}
-                                href={item.link}
-                                key={item.label}
-                                background="red"
-                                title={item.title}
-                                sx={
-                                  item.label == "خروج"
-                                    ? {
-                                        background: "#ff1744",
-                                      }
-                                    : {}
+                          palette: {
+                            mode: "dark",
+                          },
+                        })}
+                      >
+                        <Paper elevation={0} sx={{ maxWidth: 300, width: 140 }}>
+                          <Box sx={{}}>
+                            {links.map((item) => (
+                              <div
+                                onMouseOver={
+                                  item.dropdown ? item.onMouseOver : () => {}
                                 }
+                                onMouseLeave={
+                                  item.dropdown ? item.onMouseLeave : () => {}
+                                }
+                                className=""
                               >
-                                <ListItemText
-                                  primary={item.label}
-                                  primaryTypographyProps={{
-                                    fontSize: 14,
-                                    fontWeight: "bold",
-                                  }}
-                                />
-                              </ListItemButton>
-                            </div>
-                          ))}
-                        </Suspense>
-                      </Box>
-                    </Paper>
-                  </ThemeProvider>
-                </Box>
+                                <Paper elevation={0} sx={{ width: 140 }}>
+                                  <Box sx={{}}>
+                                    <ListItemButton
+                                      onClick={item.onClick}
+                                      href={item.link}
+                                      key={item.label}
+                                      background="red"
+                                      title={item.title}
+                                      sx={
+                                        item.label == "خروج"
+                                          ? {
+                                              background: "#ff1744",
+                                            }
+                                          : {}
+                                      }
+                                    >
+                                      <ListItemText
+                                        primary={item.label}
+                                        primaryTypographyProps={{
+                                          fontSize: 14,
+                                          fontWeight: "bold",
+                                        }}
+                                      />
+                                    </ListItemButton>
+                                  </Box>
+                                </Paper>
+                                <div className="absolute left-0 top-0 ml-[145px]">
+                                  {item.useStateName ? (
+                                    <Paper elevation={10} sx={{ width: 175 }}>
+                                      <Box sx={{}}>
+                                        {item.items.map((link) => (
+                                          <ListItemButton
+                                            onClick={link.onClick}
+                                            href={link.link}
+                                            key={link.label}
+                                            background="red"
+                                            title={link.title}
+                                          >
+                                            <ListItemText
+                                              primary={link.label}
+                                              primaryTypographyProps={{
+                                                fontSize: 14,
+                                                fontWeight: "bold",
+                                              }}
+                                            />
+                                          </ListItemButton>
+                                        ))}
+                                      </Box>
+                                    </Paper>
+                                  ) : (
+                                    <></>
+                                  )}
+                                </div>
+                              </div>
+                            ))}
+                          </Box>
+                        </Paper>
+                      </ThemeProvider>
+                    </Box>
+                  </ul>
+                </div>
               ) : (
-                <div></div>
+                <></>
               )}
             </div>
           ) : (
@@ -276,7 +315,6 @@ export default function Sidebar({ loggedin }) {
                     loading="lazy"
                   />
                 </Link>
-                {/* <div className=" flex items-center justify-between mx-auto"> */}
                 <ul className="flex flex-row font-medium space-x-5 p-5">
                   {links.map((item) => (
                     <li
@@ -334,13 +372,12 @@ export default function Sidebar({ loggedin }) {
                     </li>
                   ))}
                 </ul>
-                {/* </div> */}
               </nav>
             </div>
           )}
         </div>
       ) : (
-        <div></div>
+        <></>
       )}
     </div>
   );

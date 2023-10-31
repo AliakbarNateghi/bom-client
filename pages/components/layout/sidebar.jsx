@@ -18,6 +18,8 @@ export default function Sidebar({ loggedin }) {
   const router = useRouter();
   const [isAdmin, setIsAdmin] = useState(false);
   const [sidebar, setSidebar] = useState(false);
+  const [permissionDropDown, setPermissionDropDown] = useState(false);
+  const [dataDropDown, setDataDropDown] = useState(false);
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state) => state.userInfo);
 
@@ -47,26 +49,105 @@ export default function Sidebar({ loggedin }) {
   });
 
   let links = [
-    { label: "خانه", link: "/", onClick: () => {}, title: "صفحه اصلی" },
+    {
+      label: "خانه",
+      link: "/",
+      onClick: () => {},
+      title: "صفحه اصلی",
+      dropdown: false,
+    },
     {
       label: "پروفایل",
       link: "/user/profile",
       onClick: () => {},
       title: "ادیت مشخصات",
+      dropdown: false,
     },
     {
-      label: "BOM",
-      link: "/table/main/bom?page=1",
-      onClick: () => {},
-      title: "BOM جدول",
+      label: "جداول",
+      link: "",
+      onClick: () => {
+        setDataDropDown(!dataDropDown);
+      },
+      onMouseOver: () => {
+        setDataDropDown(true);
+      },
+      onMouseLeave: () => {
+        setDataDropDown(false);
+      },
+      useStateName: dataDropDown,
+      title: "جداول",
+      dropdown: true,
+      items: [
+        {
+          label: "تامین",
+          link: "/table/main/provide?page=1",
+          title: "جدول تامین",
+        },
+        {
+          label: "‌‌BOM",
+          link: "/table/main/bom?page=1",
+          title: "BOM جدول",
+        },
+        {
+          label: "گزارش اصلی",
+          link: "/table/main/core?page=1",
+          title: "جدول گزارش اصلی",
+        },
+        {
+          label: "طراحی",
+          link: "/table/main/design?page=1",
+          title: "جدول طراحی",
+        },
+        {
+          label: "جانبی",
+          link: "/table/main/lateral?page=1",
+          title: "جدول جانبی",
+        },
+        {
+          label: "ساخت",
+          link: "/table/main/manufacturing?page=1",
+          title: "جدول ساخت",
+        },
+        {
+          label: "جانبی دو دستگاه",
+          link: "/table/main/2-devices-side?page=1",
+          title: "جدول جانبی دو دستگاه",
+        },
+        {
+          label: "جانبی ۲۸ دستگاه",
+          link: "/table/main/28-devices-side?page=1",
+          title: "جدول جانبی ۲۸ دستگاه",
+        },
+        {
+          label: "ساخت دو دستگاه",
+          link: "/table/main/2-devices-manufacturing?page=1",
+          title: "جدول ساخت دو دستگاه",
+        },
+        {
+          label: "ساخت ۲۸ دستگاه",
+          link: "/table/main/28-devices-manufacturing?page=1",
+          title: "جدول ساخت ۲۸ دستگاه",
+        },
+        {
+          label: "کیفیت دو دستگاه",
+          link: "/table/main/2-devices-quality?page=1",
+          title: "جدول کیفیت دو دستگاه",
+        },
+        {
+          label: "کیفیت ۲۸ دستگاه",
+          link: "/table/main/28-devices-quality?page=1",
+          title: "جدول کیفیت ۲۸ دستگاه",
+        },
+      ],
     },
     {
-      label: "تامین",
-      link: "/table/main/provide?page=1",
-      onClick: () => {},
-      title: "جدول تامین",
+      label: "خروج",
+      link: "/user/login",
+      onClick: Logout,
+      title: "",
+      dropdown: false,
     },
-    { label: "خروج", link: "/user/login", onClick: Logout, title: "" },
   ];
 
   let adminLinks = [
@@ -75,22 +156,45 @@ export default function Sidebar({ loggedin }) {
       link: "/user/list",
       onClick: () => {},
       title: "کاربران سامانه",
+      dropdown: false,
     },
     {
-      label: "دسترسی تامین",
-      link: "/table/permission/provide?page=1&group=1",
-      onClick: () => {},
-      title: "جدول تغییر دسترسی تامین",
-    },
-    {
-      label: "‌‌BOM دسترسی",
-      link: "/table/permission/bom?page=1&group=1",
-      onClick: () => {},
-      title: "BOM جدول تغییر دسترسی",
+      label: "دسترسی",
+      link: "",
+      onClick: () => {
+        setPermissionDropDown(!permissionDropDown);
+      },
+      onMouseOver: () => {
+        setPermissionDropDown(true);
+      },
+      onMouseLeave: () => {
+        setPermissionDropDown(false);
+      },
+      title: "تغییر دسترسی",
+      dropdown: true,
+      useStateName: permissionDropDown,
+      items: [
+        {
+          label: "تامین",
+          link: "/table/permission/provide?page=1&group=1",
+          title: "جدول تغییر دسترسی تامین",
+        },
+        {
+          label: "‌‌BOM",
+          link: "/table/permission/bom?page=1&group=1",
+          title: "BOM جدول تغییر دسترسی",
+        },
+        {
+          label: "Scope matrix",
+          link: "/table/permission/scope?page=1&group=1",
+          title: "Scope matrix جدول تغییر دسترسی",
+        },
+      ],
     },
   ];
 
-  isAdmin ? adminLinks.map((adminLink) => links.splice(4, 0, adminLink)) : "";
+  // isAdmin ? adminLinks.map((adminLink) => links.splice(4, 0, adminLink)) : "";
+  isAdmin ? (links = adminLinks.concat(links)) : "";
 
   return (
     <div className="fixed z-[5]">
@@ -127,28 +231,30 @@ export default function Sidebar({ loggedin }) {
                       <Box sx={{}}>
                         <Suspense fallback={<CircularIndeterminate />}>
                           {links.map((item) => (
-                            <ListItemButton
-                              onClick={item.onClick}
-                              href={item.link}
-                              key={item.label}
-                              background="red"
-                              title={item.title}
-                              sx={
-                                item.label == "خروج"
-                                  ? {
-                                      background: "#ff1744",
-                                    }
-                                  : {}
-                              }
-                            >
-                              <ListItemText
-                                primary={item.label}
-                                primaryTypographyProps={{
-                                  fontSize: 14,
-                                  fontWeight: "bold",
-                                }}
-                              />
-                            </ListItemButton>
+                            <div>
+                              <ListItemButton
+                                onClick={item.onClick}
+                                href={item.link}
+                                key={item.label}
+                                background="red"
+                                title={item.title}
+                                sx={
+                                  item.label == "خروج"
+                                    ? {
+                                        background: "#ff1744",
+                                      }
+                                    : {}
+                                }
+                              >
+                                <ListItemText
+                                  primary={item.label}
+                                  primaryTypographyProps={{
+                                    fontSize: 14,
+                                    fontWeight: "bold",
+                                  }}
+                                />
+                              </ListItemButton>
+                            </div>
                           ))}
                         </Suspense>
                       </Box>
@@ -161,35 +267,74 @@ export default function Sidebar({ loggedin }) {
             </div>
           ) : (
             <div>
-              <nav className="bg-gray-900 border-gray-700 fixed top-0 left-0 w-screen">
-                <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                  <Link href="/" className="flex items-center">
-                    <Image
-                      src={Mapna}
-                      height={45}
-                      alt="MAPNA"
-                      className="p-0 m-0"
-                      loading="lazy"
-                    />
-                  </Link>
-
-                  <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 bg-gray-900 border-gray-900">
-                    {links.map((item) => (
-                      <li
-                        title={item.title}
-                        className={`text-gray-500 dark:text-gray-400 text-xl ${
-                          item.link != "/user/login"
-                            ? "hover:underline"
-                            : "hover:text-red-500"
-                        } digikala`}
-                      >
-                        <Link onClick={item.onClick} href={item.link}>
+              <nav className="bg-gray-900 fixed top-0 left-0 w-screen h-16 flex flex-row space-x-[180px] justify-center">
+                <Link href="/" className="p-2">
+                  <Image
+                    src={Mapna}
+                    height={45}
+                    alt="mapna logo"
+                    loading="lazy"
+                  />
+                </Link>
+                {/* <div className=" flex items-center justify-between mx-auto"> */}
+                <ul className="flex flex-row font-medium space-x-5 p-5">
+                  {links.map((item) => (
+                    <li
+                      title={item.title}
+                      className="text-gray-500 text-xl digikala w-32 text-center"
+                    >
+                      {item.dropdown ? (
+                        <div
+                          className=""
+                          onMouseOver={item.onMouseOver}
+                          onMouseLeave={item.onMouseLeave}
+                        >
+                          <div
+                            onClick={item.onClick}
+                            onMouseOver={item.onMouseOver}
+                            onMouseLeave={item.onMouseLeave}
+                            href={item.link}
+                            className={`cursor-pointer hover:underline hover:text-gray-300 ${
+                              item.useStateName ? "text-gray-300" : ""
+                            }`}
+                          >
+                            {item.label}
+                          </div>
+                          {item.useStateName ? (
+                            <div className="">
+                              {item.items.map((link) => (
+                                <div className="flex flex-col text-center">
+                                  <Link
+                                    href={link.link}
+                                    title={link.title}
+                                    className="hover:underline text-gray-300 hover:text-white"
+                                  >
+                                    {link.label}
+                                  </Link>
+                                </div>
+                              ))}
+                            </div>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
+                      ) : (
+                        <Link
+                          onClick={item.onClick}
+                          href={item.link}
+                          className={`hover:underline  ${
+                            item.link != "/user/login"
+                              ? "hover:text-gray-300"
+                              : "hover:text-red-500"
+                          }`}
+                        >
                           {item.label}
                         </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+                {/* </div> */}
               </nav>
             </div>
           )}

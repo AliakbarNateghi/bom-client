@@ -262,6 +262,25 @@ export default function Sidebar({ loggedin }) {
                                           fontWeight: "bold",
                                         }}
                                       />
+                                      {item.dropdown ? (
+                                        <svg
+                                          class="w-2.5 h-2.5 ml-2.5"
+                                          aria-hidden="true"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          fill="none"
+                                          viewBox="0 0 6 10"
+                                        >
+                                          <path
+                                            stroke="currentColor"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="m1 9 4-4-4-4"
+                                          />
+                                        </svg>
+                                      ) : (
+                                        ""
+                                      )}
                                     </ListItemButton>
                                   </Box>
                                 </Paper>
@@ -307,7 +326,7 @@ export default function Sidebar({ loggedin }) {
           ) : (
             <div>
               <nav className="bg-gray-900 fixed top-0 left-0 w-screen h-16 flex flex-row space-x-[180px] justify-center">
-                <Link href="/" className="p-2">
+                <Link href="/" className="p-3">
                   <Image
                     src={Mapna}
                     height={45}
@@ -323,7 +342,7 @@ export default function Sidebar({ loggedin }) {
                     >
                       {item.dropdown ? (
                         <div
-                          className=""
+                          className="bg-gray-900"
                           onMouseOver={item.onMouseOver}
                           onMouseLeave={item.onMouseLeave}
                         >
@@ -345,7 +364,7 @@ export default function Sidebar({ loggedin }) {
                                   <Link
                                     href={link.link}
                                     title={link.title}
-                                    className="hover:underline text-gray-300 hover:text-white"
+                                    className="hover:underline text-gray-300 hover:text-white pt-1 pb-1"
                                   >
                                     {link.label}
                                   </Link>

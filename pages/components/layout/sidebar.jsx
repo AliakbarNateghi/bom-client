@@ -10,11 +10,7 @@ import { styled, ThemeProvider, createTheme } from "@mui/material/styles";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Paper from "@mui/material/Paper";
-import CircularIndeterminate from "./loading";
 import Mapna from "@/public/logos/LogoMapna1.png";
-import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import Dropdown from "react-bootstrap/Dropdown";
 
 export default function Sidebar({ loggedin }) {
   const router = useRouter();
@@ -342,7 +338,7 @@ export default function Sidebar({ loggedin }) {
                     >
                       {item.dropdown ? (
                         <div
-                          className="bg-gray-900"
+                          className="bg-gray-900 rounded-sm"
                           onMouseOver={item.onMouseOver}
                           onMouseLeave={item.onMouseLeave}
                         >

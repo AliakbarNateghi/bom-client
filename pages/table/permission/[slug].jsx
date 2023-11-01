@@ -493,7 +493,8 @@ export default function PermissionRoot({
   ];
 
   const scope = [
-    createObject("original_report_id", "ID", 100, false),
+    createObject("id", "id", 100, false),
+    createObject("original_report_id", "ID", 130, "boolean", true),
     createObject("fig_no", "Fig. No.", 130, "boolean", true),
     createObject("item_no", "Item No.", 130, "boolean", true),
     createObject("module", "Module", 130, "boolean", true),

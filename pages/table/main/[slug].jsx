@@ -709,7 +709,8 @@ export default function TableRoot({ components, hiddencols, page, slug }) {
   ];
 
   const baseArr = [
-    createObject("id", "ID", 100, false, undefined),
+    createObject("id", "id", 100, false),
+    createObject("original_report_id", "ID", 100, false, true),
     createObject("fig_no", "Fig. No.", 130, true),
     createObject("item_no", "Item No.", 130, true),
     createObject("module", "Module", 130, true),

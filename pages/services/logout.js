@@ -10,6 +10,5 @@ export default async function Logout() {
   // await cookie.remove("refresh_token");
   Api.init();
   const res = await Api.post("logout");
-  // console.log("res :", res);
   return res;
 }

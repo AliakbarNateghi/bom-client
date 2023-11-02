@@ -279,6 +279,11 @@ export default function PermissionData({
       <DataGrid
         rows={editables}
         // rows={querysets}
+        initialState={{
+          sorting: {
+            sortModel: [{ field: "id", sort: "asc" }],
+          },
+        }}
         columns={columns}
         processRowUpdate={(updatedRow, originalRow) =>
           saveOnServer(updatedRow, originalRow)

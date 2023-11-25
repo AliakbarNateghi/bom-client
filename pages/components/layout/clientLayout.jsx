@@ -5,7 +5,7 @@ import {Provider} from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
 import {ToastContainer} from "react-toastify";
 
-export function ClientLayout({children}) {
+export default function ClientLayout({children}) {
     return (
         <Provider store={store}>
             {children}

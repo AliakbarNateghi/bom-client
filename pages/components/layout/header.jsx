@@ -3,12 +3,12 @@
 // import "@/styles/globals.css";
 import Link from "next/link";
 import Image from "next/image";
-import { userInfo } from "@/pages/redux/slices/userinfo";
+import { userInfo } from "@/redux/slices/userinfo";
 import { useSelector, useDispatch } from "react-redux";
 import logo from "@/public/logos/white-logo.png";
 import React, { useState, useEffect } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
-import Logout from "@/pages/services/logout";
+import Logout from "@/services/logout";
 import { useRouter } from "next/router";
 
 export default function Header({ loggedin }) {

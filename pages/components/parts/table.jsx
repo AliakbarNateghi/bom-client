@@ -1,9 +1,9 @@
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { GridFilterPanel } from "@mui/x-data-grid";
 import { Modal, Box } from "@mui/material";
-import Api from "@/pages/services/api";
+import Api from "@/services/api";
 import React, { useState, useCallback } from "react";
-import { successToast, errorToast, warningToast } from "@/pages/services/toast";
+import { successToast, errorToast, warningToast } from "@/services/toast";
 import { useRouter } from "next/router";
 import GuideModal from "./modal/guidemodal";
 import BasePagination from "./pagination";

@@ -1,4 +1,4 @@
-import Api from "../../services/api";
+import Api from "../../../services/api";
 import Cookies from "universal-cookie";
 import { useRouter } from "next/router";
 import MoreLess from "@/pages/filters/moreless";

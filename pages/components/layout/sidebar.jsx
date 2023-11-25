@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback, Suspense } from "react";
 import Link from "next/link";
-import Logout from "@/pages/services/logout";
+import Logout from "@/services/logout";
 import Image from "next/image";
-import { userInfo } from "@/pages/redux/slices/userinfo";
+import { userInfo } from "@/redux/slices/userinfo";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import Box from "@mui/material/Box";

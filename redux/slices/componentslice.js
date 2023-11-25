@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import Api from "@/pages/services/api";
+import Api from "@/services/api";
 
 export const componentslice = createAsyncThunk(
   "saveOnServer",

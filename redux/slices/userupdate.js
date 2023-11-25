@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import Api from "@/pages/services/api";
-import { setUser } from "@/pages/services/localStorage";
+import Api from "@/services/api";
+import { setUser } from "@/services/localStorage";
 export const userUpdate = createAsyncThunk(
   "user-info",
   async (payload, thunkAPI) => {
@@ -34,7 +34,8 @@ export const userUpdateSlice = createSlice({
       })
       .addCase(userUpdate.rejected, (state, action) => {
         state.loading = "idle";
-        state.error = action.payload && action.payload.error ? action.payload.error : "";
+        state.error =
+          action.payload && action.payload.error ? action.payload.error : "";
       });
   },
 });

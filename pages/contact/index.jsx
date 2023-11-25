@@ -1,4 +1,4 @@
-import { userInfo } from "@/pages/redux/slices/userinfo";
+import { userInfo } from "@/redux/slices/userinfo";
 import { useSelector, useDispatch } from "react-redux";
 import background from "@/public/logos/background.jpg";
 import back1 from "@/public/logos/back1.jpg";
@@ -27,8 +27,8 @@ export default function Contact({}) {
         }}
       >
         <p className="digikala text-2xl text-center">
-          برای گزارش باگ ب شماره واتساپ زیر باگ خود را بفرستید یا ب اکانت
-          تلگرام زیر پیام دهید
+          برای گزارش باگ ب شماره واتساپ زیر باگ خود را بفرستید یا ب اکانت تلگرام
+          زیر پیام دهید
         </p>
         <br />
         <div className="flex justify-between m-5">

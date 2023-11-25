@@ -1,5 +1,5 @@
 import { DataGrid } from "@mui/x-data-grid";
-import Api from "@/pages/services/api";
+import Api from "@/services/api";
 import React, { useState, useCallback, useMemo } from "react";
 import Image from "next/image";
 import verify from "@/public/logos/permission.png";

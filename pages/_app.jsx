@@ -1,6 +1,6 @@
 import "../styles/globals.css";
 import { Provider } from "react-redux";
-import { store } from "./redux/store/clientStore";
+import store from "../redux/store/clientStore";
 import { useRouter } from "next/router";
 import { useEffect, useState, Suspense, lazy } from "react";
 import { ToastContainer } from "react-toastify";

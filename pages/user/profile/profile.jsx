@@ -4,9 +4,9 @@ import Image from "next/image";
 import openEye from "@/public/logos/open-eye.png";
 import closeEye from "@/public/logos/close-eye.png";
 import React, { useState, useEffect, useCallback } from "react";
-import { errorToast, successToast, warningToast } from "@/pages/services/toast";
+import { errorToast, successToast, warningToast } from "@/services/toast";
 import { Modal, Button, Box } from "@mui/material";
-import Api from "@/pages/services/api";
+import Api from "@/services/api";
 import BaseModal from "@/pages/components/parts/modal/basemodal";
 
 export default function Profile({ user }) {

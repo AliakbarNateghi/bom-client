@@ -2,9 +2,8 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/router";
-import { errorToast, successToast, warningToast } from "@/pages/services/toast";
 import { Modal, Button, Box, Typography } from "@mui/material";
-import Api from "@/pages/services/api";
+import Api from "@/services/api";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";

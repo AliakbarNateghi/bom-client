@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import Api from "../../services/api";
+import Api from "../../../services/api";
 import Cookies from "universal-cookie";
 import Image from "next/image";
 import deletelogo from "@/public/logos/delete.png";

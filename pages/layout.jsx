@@ -1,9 +1,8 @@
-import "../styles/globals.css";
 import { Inter } from "next/font/google";
 import Header from "./components/layout/header";
 import Footer from "@/pages/components/layout/footer";
 const inter = Inter({ subsets: ["latin"] });
-import { ClientLayout } from "@/pages/components/layout/clientLayout";
+import ClientLayout from "@/pages/components/layout/clientLayout";
 
 export const metadata = {
   title: "BOM",

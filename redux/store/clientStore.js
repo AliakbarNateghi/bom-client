@@ -4,7 +4,7 @@ import userInfoReducer from "../slices/userinfo";
 import userUpdateReducer from "../slices/userupdate";
 import componentsReducer from "../slices/componentslice";
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
     user: userReducer,
     userInfo: userInfoReducer,
@@ -12,3 +12,5 @@ export const store = configureStore({
     components: componentsReducer,
   },
 });
+
+export default store;

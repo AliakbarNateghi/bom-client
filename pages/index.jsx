@@ -1,4 +1,4 @@
-import { userInfo } from "@/pages/redux/slices/userinfo";
+import { userInfo } from "@/redux/slices/userinfo";
 import { useSelector, useDispatch } from "react-redux";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";

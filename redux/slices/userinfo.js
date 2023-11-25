@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import Api from "@/pages/services/api";
-import { setUser } from "@/pages/services/localStorage";
+import Api from "@/services/api";
+import { setUser } from "@/services/localStorage";
 
 export const userInfo = createAsyncThunk(
   "user-info",

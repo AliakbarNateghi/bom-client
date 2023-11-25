@@ -25,3 +25,11 @@ export const warningToast = (text) => {
 export const defaultToast = (text) => {
   toast(text, options);
 };
+
+export default {
+  successToast,
+  errorToast,
+  infoToast,
+  warningToast,
+  defaultToast,
+};

@@ -1,4 +1,4 @@
-import Api from "@/pages/services/api";
+import Api from "@/services/api";
 import Cookies from "universal-cookie";
 import Profile from "./profile";
 

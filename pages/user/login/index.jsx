@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { login } from "@/pages/redux/slices/user";
+import { login } from "@/redux/slices/user";
 import { useRouter } from "next/router";
 import { unwrapResult } from "@reduxjs/toolkit";
-import { errorToast } from "@/pages/services/toast";
+import { errorToast } from "@/services/toast";
 
 export default function Login() {
   const [loginForm, setLoginForm] = useState({ username: "", password: "" });
@@ -15,7 +15,7 @@ export default function Login() {
     const user = localStorage.getItem("user");
     user ? router.push("/") : "";
   }, [loginForm]);
-  
+
   // useEffect(() => {}, [loginForm]);
 
   const onSubmit = async (e) => {

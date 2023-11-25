@@ -1,15 +1,17 @@
 FROM node:20
 
-WORKDIR /usr/src/app
+RUN npm install -g pnpm
+
+WORKDIR /bom-client
 
 COPY package*.json ./
 
-RUN npm ci
+RUN pnpm install
 
 COPY . .
 
-RUN npm run build
+RUN pnpm run build
 
 EXPOSE 3000
 
-RUN npm run dev
+CMD ["pnpm", "run", "dev"]

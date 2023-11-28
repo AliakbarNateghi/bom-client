@@ -1,5 +1,5 @@
 import Api from "./api";
-import { clearCookie } from "./cookie";
+// import { clearCookie } from "./cookie";
 import cookie from "js-cookie";
 
 export default async function Logout() {

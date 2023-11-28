@@ -1,6 +1,6 @@
 FROM node:20
 
-RUN npm install -g pnpm
+RUN npm install -g pnpm --legacy-peer-deps
 
 WORKDIR /bom-client
 

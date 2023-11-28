@@ -6,7 +6,7 @@ WORKDIR /bom-client
 
 COPY package*.json ./
 
-RUN pnpm install --legacy-peer-deps
+RUN pnpm install
 
 COPY . .
 

@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 
 class Api {
   static init(cookies) {
-    axios.defaults.baseURL = "http://scopematrix.uk.to/api/";
-    // axios.defaults.baseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URI;
+    // axios.defaults.baseURL = "http://scopematrix.uk.to";
+    axios.defaults.baseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URI || "http://localhost:8000";
     axios.defaults.withCredentials = true;
     axios.defaults.headers.common["Accept"] = "application/json";
     if (typeof window !== "undefined") {
